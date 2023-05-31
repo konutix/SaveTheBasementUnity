@@ -251,9 +251,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 671793482}
-  - component: {fileID: 671793484}
   - component: {fileID: 671793485}
   - component: {fileID: 671793483}
+  - component: {fileID: 671793484}
   m_Layer: 0
   m_Name: Projectile spawner
   m_TagString: Untagged
@@ -289,7 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstaclesTransform: {fileID: 334522829}
-  line: {fileID: 671793484}
+  lineBackup: {fileID: 671793484}
   maxIterations: 100
 --- !u!120 &671793484
 LineRenderer:
@@ -402,7 +402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e3e38cb22f6ba14aac6dcd57cc4ea41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 5638887483438219670, guid: 93536e6ad787960439d011ea5d1c7e3a, type: 3}
+  prefabToSpawn: {fileID: 7497032781060939480, guid: 93536e6ad787960439d011ea5d1c7e3a, type: 3}
   trajectory: {fileID: 671793483}
 --- !u!1 &1675120048
 GameObject:

@@ -5,20 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class ProjectileTrajectory : MonoBehaviour
 {
-
     Scene simulationScene;
     PhysicsScene2D physicsScene;
 
     public Transform obstaclesTransform;
 
+    Dictionary<GameObject, GameObject> dynamicObjects;
+
     void Start()
     {
         CreatePhysicsScene();
+        dynamicObjects = new Dictionary<GameObject, GameObject>();
     }
 
     void CreatePhysicsScene()
     {
-        simulationScene = SceneManager.CreateScene("Simulation", new CreateSceneParameters(LocalPhysicsMode.Physics2D));
+        simulationScene = SceneManager.CreateScene("TrajectorySimulation", new CreateSceneParameters(LocalPhysicsMode.Physics2D));
         physicsScene = simulationScene.GetPhysicsScene2D();
 
         foreach (Transform obj in obstaclesTransform)
@@ -29,7 +31,7 @@ public class ProjectileTrajectory : MonoBehaviour
         }
     }
 
-    public LineRenderer line;
+    public LineRenderer lineBackup;
     public int maxIterations = 100;
 
     public void SimulateTrajectory(Projectile projectile, Vector3 position, Vector3 velocity)
@@ -40,6 +42,12 @@ public class ProjectileTrajectory : MonoBehaviour
 
         go.Init(velocity);
 
+        LineRenderer line = projectile.GetComponent<LineRenderer>();
+        if (!line)
+        {
+            line = lineBackup;
+        }
+
         line.positionCount = maxIterations;
         for (int i = 0; i < maxIterations; i++)
         {
@@ -48,6 +56,21 @@ public class ProjectileTrajectory : MonoBehaviour
         }
 
         Destroy(go.gameObject);
+    }
+
+    public void SimulateShield(Shield shield)
+    {
+        GameObject go;
+        if (dynamicObjects.TryGetValue(shield.gameObject, out go))
+        {
+            go.transform.position = shield.transform.position;
+            go.transform.rotation = shield.transform.rotation;
+            return;
+        }
+        
+        go = Instantiate(shield, shield.transform.position, shield.transform.rotation).gameObject;
+        dynamicObjects.Add(shield.gameObject, go);
+        SceneManager.MoveGameObjectToScene(go, simulationScene);
     }
 }
 
