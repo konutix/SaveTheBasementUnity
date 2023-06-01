@@ -9,6 +9,7 @@ public class ProjectileSpawner : MonoBehaviour
     GameObject currentObject;
 
     public ProjectileTrajectory trajectory;
+    public int simulatedBouncesCount = 2;
 
 
     Vector3 spawnPoint;
@@ -40,7 +41,7 @@ public class ProjectileSpawner : MonoBehaviour
             if (projectile)
             {
                 projectile.SetDirection(spawnDir);
-                trajectory.SimulateTrajectory(projectile, spawnPoint, spawnDir);
+                trajectory.SimulateTrajectory(projectile, spawnPoint, spawnDir, simulatedBouncesCount);
             }
 
             var shield = currentObject.GetComponent<Shield>();
@@ -54,7 +55,7 @@ public class ProjectileSpawner : MonoBehaviour
                     var p = go.GetComponent<Projectile>();
                     if (p)
                     {
-                        trajectory.SimulateTrajectory(p, p.transform.position, p.direction);
+                        trajectory.SimulateTrajectory(p, p.transform.position, p.direction, simulatedBouncesCount);
                     }
                 }
             }

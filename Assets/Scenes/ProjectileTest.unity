@@ -404,6 +404,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabToSpawn: {fileID: 7497032781060939480, guid: 93536e6ad787960439d011ea5d1c7e3a, type: 3}
   trajectory: {fileID: 671793483}
+  simulatedBouncesCount: 2
 --- !u!1 &1675120048
 GameObject:
   m_ObjectHideFlags: 0

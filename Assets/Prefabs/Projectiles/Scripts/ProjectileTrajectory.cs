@@ -34,7 +34,7 @@ public class ProjectileTrajectory : MonoBehaviour
     public LineRenderer lineBackup;
     public int maxIterations = 100;
 
-    public void SimulateTrajectory(Projectile projectile, Vector3 position, Vector3 velocity)
+    public void SimulateTrajectory(Projectile projectile, Vector3 position, Vector3 velocity, int maxBounces)
     {
         var go = Instantiate(projectile, position, Quaternion.identity);
         go.GetComponent<Renderer>().enabled = false;
@@ -48,11 +48,18 @@ public class ProjectileTrajectory : MonoBehaviour
             line = lineBackup;
         }
 
-        line.positionCount = maxIterations;
+        line.positionCount = maxIterations+1;
+        line.SetPosition(0, go.transform.position);
         for (int i = 0; i < maxIterations; i++)
         {
+            if (go.bouncesCount >= maxBounces)
+            {
+                line.positionCount = Mathf.Max(i-1, 2);
+                break;
+            }
+
             physicsScene.Simulate(Time.fixedDeltaTime);
-            line.SetPosition(i, go.transform.position);
+            line.SetPosition(i+1, go.transform.position);
         }
 
         Destroy(go.gameObject);
