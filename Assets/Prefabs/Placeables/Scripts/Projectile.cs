@@ -13,22 +13,13 @@ public class Projectile : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.simulated = false;
         // rb.Sleep(); should be set to Start Asleep in inspector
-    }
-
-    public void SetDirection(Vector3 direction)
-    {
-        this.direction = direction;
     }
 
     public void Init(Vector3 direction)
     {
-        this.direction = direction;
-        Init();
-    }
-
-    public void Init()
-    {
+        rb.simulated = true;
         rb.WakeUp();
         rb.AddForce(direction * speed, ForceMode2D.Impulse);
     }

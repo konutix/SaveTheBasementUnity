@@ -38,6 +38,7 @@ public class ProjectileTrajectory : MonoBehaviour
     {
         var go = Instantiate(projectile, position, Quaternion.identity);
         go.GetComponent<Renderer>().enabled = false;
+        go.GetComponent<Collider2D>().isTrigger = false;
         SceneManager.MoveGameObjectToScene(go.gameObject, simulationScene);
 
         go.Init(velocity);
@@ -76,6 +77,7 @@ public class ProjectileTrajectory : MonoBehaviour
         }
         
         go = Instantiate(shield, shield.transform.position, shield.transform.rotation).gameObject;
+        go.GetComponent<Collider2D>().isTrigger = false;
         dynamicObjects.Add(shield.gameObject, go);
         SceneManager.MoveGameObjectToScene(go, simulationScene);
     }
