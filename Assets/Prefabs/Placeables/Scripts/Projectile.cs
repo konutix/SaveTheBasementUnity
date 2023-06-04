@@ -5,10 +5,14 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public float speed = 10.0f;
+    public int damage = 5;
     [HideInInspector] public Vector3 direction = Vector3.right;
     [HideInInspector] public int bouncesCount = 0;
 
     Rigidbody2D rb;
+
+    [HideInInspector]
+    public bool isSimulatingTrajectory = false;
 
     void Awake()
     {
@@ -27,5 +31,10 @@ public class Projectile : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         bouncesCount += 1;
+
+        if (isSimulatingTrajectory) return;
+        try {
+            collision.gameObject.GetComponent<Interactable>().OnInteractWithProjectile(this);
+        } catch { }
     }
 }

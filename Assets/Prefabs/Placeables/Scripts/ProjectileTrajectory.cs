@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,8 +15,8 @@ public class ProjectileTrajectory : MonoBehaviour
 
     void Start()
     {
-        CreatePhysicsScene();
         dynamicObjects = new Dictionary<GameObject, GameObject>();
+        CreatePhysicsScene();
     }
 
     void CreatePhysicsScene()
@@ -26,8 +27,24 @@ public class ProjectileTrajectory : MonoBehaviour
         foreach (Transform obj in obstaclesTransform)
         {
             var go = Instantiate(obj.gameObject, obj.position, obj.rotation);
-            go.GetComponent<Renderer>().enabled = false;
+
+            foreach (Renderer renderer in go.GetComponentsInChildren<Renderer>())
+            {
+                renderer.enabled = false;
+            }
+            
             SceneManager.MoveGameObjectToScene(go, simulationScene);
+
+            var combined = obj.GetComponentsInChildren<Transform>().Zip(go.GetComponentsInChildren<Transform>(), (real, fake) => (real, fake));
+
+            foreach (var child in combined)
+            {
+                if (!child.real.gameObject.isStatic)
+                {
+                    print("Adding " + child.real.gameObject.name);
+                    dynamicObjects.Add(child.real.gameObject, child.fake.gameObject);
+                }
+            }
         }
     }
 
@@ -39,6 +56,7 @@ public class ProjectileTrajectory : MonoBehaviour
         var go = Instantiate(projectile, position, Quaternion.identity);
         go.GetComponent<Renderer>().enabled = false;
         go.GetComponent<Collider2D>().isTrigger = false;
+        go.isSimulatingTrajectory = true;
         SceneManager.MoveGameObjectToScene(go.gameObject, simulationScene);
 
         go.Init(velocity);
@@ -49,9 +67,9 @@ public class ProjectileTrajectory : MonoBehaviour
             line = lineBackup;
         }
 
-        line.positionCount = maxIterations+1;
+        line.positionCount = 4*maxIterations+1;
         line.SetPosition(0, go.transform.position);
-        for (int i = 0; i < maxIterations; i++)
+        for (int i = 0; i < 4*maxIterations; i++)
         {
             if (go.bouncesCount >= maxBounces)
             {
@@ -59,7 +77,7 @@ public class ProjectileTrajectory : MonoBehaviour
                 break;
             }
 
-            physicsScene.Simulate(Time.fixedDeltaTime);
+            physicsScene.Simulate(0.25f*Time.fixedDeltaTime);
             line.SetPosition(i+1, go.transform.position);
         }
 
@@ -80,6 +98,16 @@ public class ProjectileTrajectory : MonoBehaviour
         go.GetComponent<Collider2D>().isTrigger = false;
         dynamicObjects.Add(shield.gameObject, go);
         SceneManager.MoveGameObjectToScene(go, simulationScene);
+    }
+
+    public void UpdateObject(GameObject obj)
+    {
+        GameObject go;
+        if (dynamicObjects.TryGetValue(obj, out go))
+        {
+            go.transform.position = obj.transform.position;
+            go.transform.rotation = obj.transform.rotation;
+        }
     }
 }
 
