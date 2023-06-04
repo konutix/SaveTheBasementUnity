@@ -41,7 +41,6 @@ public class ProjectileTrajectory : MonoBehaviour
             {
                 if (!child.real.gameObject.isStatic)
                 {
-                    print("Adding " + child.real.gameObject.name);
                     dynamicObjects.Add(child.real.gameObject, child.fake.gameObject);
                 }
             }

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Health : MonoBehaviour, Interactable
 {
-    public int health = 10;
+    public int maxHealth = 10;
+    public int currentHealth = 10;
 
     public void OnInteractWithProjectile(Projectile projectile)
     {
@@ -15,9 +16,12 @@ public class Health : MonoBehaviour, Interactable
     {
         print(gameObject.name + " is taking damage: " + damage);
 
-        health -= damage;
+        currentHealth -= damage;
 
-        if (health <= 0)
+        var renderer = GetComponent<SpriteRenderer>();
+        renderer.color = Color.Lerp(Color.red, Color.green, (float)currentHealth/maxHealth);
+
+        if (currentHealth <= 0)
         {
             OnDeath();
         }
@@ -26,5 +30,7 @@ public class Health : MonoBehaviour, Interactable
     void OnDeath()
     {
         print(gameObject.name + " died");
+        var renderer = GetComponent<SpriteRenderer>();
+        renderer.color = Color.black;
     }
 }

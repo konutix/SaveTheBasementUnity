@@ -6,7 +6,6 @@ public class Projectile : MonoBehaviour
 {
     public float speed = 10.0f;
     public int damage = 5;
-    [HideInInspector] public Vector3 direction = Vector3.right;
     [HideInInspector] public int bouncesCount = 0;
 
     Rigidbody2D rb;
