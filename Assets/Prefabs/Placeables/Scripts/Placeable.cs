@@ -9,7 +9,14 @@ public class Placeable : MonoBehaviour
 
     [HideInInspector]
     public Vector3 direction;
-    
+
+    [HideInInspector]
+    public bool isTriggerByDefault = false;
+
+    void Awake()
+    {
+        isTriggerByDefault = GetComponent<Collider2D>().isTrigger;
+    }
 
     public void OnStartedPlacing()
     {
@@ -31,7 +38,7 @@ public class Placeable : MonoBehaviour
         var col = GetComponent<Collider2D>();
         if (col)
         {
-            col.isTrigger = false;
+            col.isTrigger = isTriggerByDefault;
         }
     }
 

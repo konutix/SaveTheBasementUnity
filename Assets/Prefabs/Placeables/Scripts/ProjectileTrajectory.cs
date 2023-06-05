@@ -54,7 +54,7 @@ public class ProjectileTrajectory : MonoBehaviour
     {
         var go = Instantiate(projectile, position, Quaternion.identity);
         go.GetComponent<Renderer>().enabled = false;
-        go.GetComponent<Collider2D>().isTrigger = false;
+        go.GetComponent<Collider2D>().isTrigger = projectile.GetComponent<Placeable>().isTriggerByDefault;
         go.isSimulatingTrajectory = true;
         SceneManager.MoveGameObjectToScene(go.gameObject, simulationScene);
 

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float speed = 10.0f;
+    public float launchForce = 10.0f;
     public int damage = 5;
+    public int evnironmentalDamage = 1;
     [HideInInspector] public int bouncesCount = 0;
 
     Rigidbody2D rb;
@@ -24,7 +25,7 @@ public class Projectile : MonoBehaviour
     {
         rb.simulated = true;
         rb.WakeUp();
-        rb.AddForce(direction * speed, ForceMode2D.Impulse);
+        rb.AddForce(direction * launchForce, ForceMode2D.Impulse);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
