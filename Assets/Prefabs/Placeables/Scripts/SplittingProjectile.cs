@@ -6,6 +6,7 @@ public class SplittingProjectile : MonoBehaviour
 {
     public Projectile childPrefab;
     public float angle = 15.0f;
+    public float childLifeTime = 3.0f;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -33,6 +34,10 @@ public class SplittingProjectile : MonoBehaviour
         p0.Init(ref0);
         p1.Init(ref1);
         p2.Init(ref2);
+
+        Destroy(p0.gameObject, childLifeTime);
+        Destroy(p1.gameObject, childLifeTime);
+        Destroy(p2.gameObject, childLifeTime);
 
         Destroy(gameObject);
     }

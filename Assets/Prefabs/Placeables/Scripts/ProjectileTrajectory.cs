@@ -66,17 +66,19 @@ public class ProjectileTrajectory : MonoBehaviour
             line = lineBackup;
         }
 
-        line.positionCount = 4*maxIterations+1;
+        line.positionCount = maxIterations+1;
         line.SetPosition(0, go.transform.position);
-        for (int i = 0; i < 4*maxIterations; i++)
+        for (int i = 0; i < maxIterations; i++)
         {
             if (go.bouncesCount >= maxBounces)
             {
-                line.positionCount = Mathf.Max(i-1, 2);
+                int index = Mathf.Max(i-1, 1);
+                line.positionCount = index+1;
+                line.SetPosition(index, go.transform.position);
                 break;
             }
 
-            physicsScene.Simulate(0.25f*Time.fixedDeltaTime);
+            physicsScene.Simulate(Time.fixedDeltaTime);
             line.SetPosition(i+1, go.transform.position);
         }
 
@@ -106,6 +108,16 @@ public class ProjectileTrajectory : MonoBehaviour
         {
             go.transform.position = obj.transform.position;
             go.transform.rotation = obj.transform.rotation;
+        }
+    }
+
+    public void RemoveObject(GameObject obj)
+    {
+        GameObject go;
+        if (dynamicObjects.TryGetValue(obj, out go))
+        {
+            dynamicObjects.Remove(obj);
+            Destroy(go);
         }
     }
 }

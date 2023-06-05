@@ -19,6 +19,7 @@ public class ProjectileSpawner : MonoBehaviour
     public ProjectileTrajectory trajectoryManager;
     public int simulatedBouncesCount = 3;
 
+    public PlacingRange placingRange;
 
     void Start()
     {
@@ -62,7 +63,9 @@ public class ProjectileSpawner : MonoBehaviour
         }
         else
         {
-            if (Input.GetMouseButtonDown(0))
+            ghost.gameObject.SetActive(placingRange.isInRange);
+
+            if (Input.GetMouseButtonDown(0) && placingRange.isInRange)
             {
                 OnStartedPlacing();
             }
@@ -94,9 +97,10 @@ public class ProjectileSpawner : MonoBehaviour
 
     public void OnLaunched()
     {
-        foreach (var go in objectsToLaunch)
+        foreach (var placeable in objectsToLaunch)
         {
-            go.OnLaunched();
+            placeable.OnLaunched();
+            Destroy(placeable.gameObject, 5.0f);
         }
 
         objectsToLaunch = new List<Placeable>();
