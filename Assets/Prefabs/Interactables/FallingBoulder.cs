@@ -20,7 +20,7 @@ public class FallingBoulder : MonoBehaviour, Interactable
     {
         if (wasHit)
         {
-            FindObjectOfType<ProjectileTrajectory>().UpdateObject(gameObject);
+            FindObjectOfType<TrajectoryManager>().UpdateObject(gameObject);
         }
     }
 

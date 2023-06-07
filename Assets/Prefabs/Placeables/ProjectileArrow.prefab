@@ -187,6 +187,7 @@ MonoBehaviour:
   gfxMain: {fileID: 6208058742061373119}
   gfxPlacing: {fileID: 8384235971620752625}
   direction: {x: 0, y: 0, z: 0}
+  isTriggerByDefault: 0
 --- !u!114 &4172597604037525346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,7 +242,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1c002da29e963d445b896545fa0325f6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -273,7 +274,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0.041786194
-        value: 0.049991608
+        value: 0.2
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -285,8 +286,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.99607843, g: 0.42745098, b: 0.30588236, a: 0.39215687}
-      key1: {r: 1, g: 1, b: 1, a: 0.5882353}
+      key0: {r: 0.99607843, g: 0.42745098, b: 0.30588236, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 1}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -302,7 +303,7 @@ LineRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 64379
+      atime1: 65535
       atime2: 65535
       atime3: 0
       atime4: 0
@@ -311,11 +312,11 @@ LineRenderer:
       atime7: 0
       m_Mode: 0
       m_NumColorKeys: 2
-      m_NumAlphaKeys: 3
+      m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 1
     shadowBias: 0.5
     generateLightingData: 0
   m_UseWorldSpace: 1

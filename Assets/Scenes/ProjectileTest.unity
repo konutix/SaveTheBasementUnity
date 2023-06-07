@@ -718,7 +718,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 671793480}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 529045003d65da14f98d5e14cdac2be5, type: 3}
+  m_Script: {fileID: 11500000, guid: 4dd62a0b3fee4664cb97d303f7a9dcc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   obstaclesTransform: {fileID: 334522829}
@@ -744,7 +744,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1c002da29e963d445b896545fa0325f6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -818,7 +818,7 @@ LineRenderer:
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 1
     shadowBias: 0.5
     generateLightingData: 0
   m_UseWorldSpace: 1

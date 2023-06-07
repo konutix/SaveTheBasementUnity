@@ -16,7 +16,7 @@ public class ProjectileSpawner : MonoBehaviour
     bool isAiming = false;
     Vector3 mousePos = Vector3.zero;
 
-    public ProjectileTrajectory trajectoryManager;
+    public TrajectoryManager trajectoryManager;
     public int simulatedBouncesCount = 3;
 
     public PlacingRange placingRange;
@@ -104,6 +104,7 @@ public class ProjectileSpawner : MonoBehaviour
         }
 
         objectsToLaunch = new List<Placeable>();
+        GetComponent<LineRenderer>().positionCount = 0;
     }
 
     void CalculateTrajectory()

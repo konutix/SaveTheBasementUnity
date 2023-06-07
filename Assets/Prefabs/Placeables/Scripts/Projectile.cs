@@ -14,6 +14,7 @@ public class Projectile : MonoBehaviour
     [HideInInspector]
     public bool isSimulatingTrajectory = false;
 
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -32,7 +33,11 @@ public class Projectile : MonoBehaviour
     {
         bouncesCount += 1;
 
-        if (isSimulatingTrajectory) return;
+        if (isSimulatingTrajectory)
+        {
+            return;
+        }
+
         try {
             collision.gameObject.GetComponent<Interactable>().OnInteractWithProjectile(this);
         } catch { }

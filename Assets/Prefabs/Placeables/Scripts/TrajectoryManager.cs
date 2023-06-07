@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ProjectileTrajectory : MonoBehaviour
+public class TrajectoryManager : MonoBehaviour
 {
     Scene simulationScene;
     PhysicsScene2D physicsScene;
@@ -53,7 +53,7 @@ public class ProjectileTrajectory : MonoBehaviour
     public void SimulateTrajectory(Projectile projectile, Vector3 position, Vector3 velocity, int maxBounces)
     {
         var go = Instantiate(projectile, position, Quaternion.identity);
-        go.GetComponent<Renderer>().enabled = false;
+        try { go.GetComponent<Renderer>().enabled = false; } catch { }
         go.GetComponent<Collider2D>().isTrigger = projectile.GetComponent<Placeable>().isTriggerByDefault;
         go.isSimulatingTrajectory = true;
         SceneManager.MoveGameObjectToScene(go.gameObject, simulationScene);

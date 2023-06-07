@@ -21,7 +21,7 @@ public class Destroyable : MonoBehaviour, Interactable
             var col = GetComponent<Collider2D>();
             col.enabled = false;
 
-            var trajectory = FindObjectOfType<ProjectileTrajectory>();
+            var trajectory = FindObjectOfType<TrajectoryManager>();
             if (trajectory)
             {
                 trajectory.RemoveObject(gameObject);
