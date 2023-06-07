@@ -377,6 +377,7 @@ GameObject:
   m_Component:
   - component: {fileID: 13305087574292874}
   - component: {fileID: 8715409857990901174}
+  - component: {fileID: 1462088661201301445}
   m_Layer: 0
   m_Name: EffectCard
   m_TagString: Untagged
@@ -416,7 +417,20 @@ MonoBehaviour:
   CardFront: {fileID: 13305089229692688}
   CardBack: {fileID: 426813384134610544}
   targetFacePoint: {fileID: 6076603539642850041}
-  col: {fileID: 0}
+  ortoCamera: 1
+--- !u!65 &1462088661201301445
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13305087574292875}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.6, y: 2.5, z: 0.05}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &13305087799232974
 GameObject:
   m_ObjectHideFlags: 0
@@ -1594,7 +1608,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &426813384134610544
 RectTransform:
   m_ObjectHideFlags: 0
