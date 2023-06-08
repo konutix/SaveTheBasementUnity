@@ -15,7 +15,7 @@ public class Placeable : MonoBehaviour
 
     void Awake()
     {
-        isTriggerByDefault = GetComponent<Collider2D>().isTrigger;
+        isTriggerByDefault = GetComponentInChildren<Collider2D>().isTrigger;
     }
 
     public void OnStartedPlacing()
@@ -23,7 +23,7 @@ public class Placeable : MonoBehaviour
         gfxMain.SetActive(false);
         gfxPlacing.SetActive(true);
 
-        var col = GetComponent<Collider2D>();
+        var col = GetComponentInChildren<Collider2D>();
         if (col)
         {
             col.isTrigger = true;
@@ -35,7 +35,7 @@ public class Placeable : MonoBehaviour
         gfxPlacing.SetActive(false);
         gfxMain.SetActive(true);
         
-        var col = GetComponent<Collider2D>();
+        var col = GetComponentInChildren<Collider2D>();
         if (col)
         {
             col.isTrigger = isTriggerByDefault;

@@ -58,7 +58,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6208058742061373119}
   m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.17000002, y: 0, z: 0}
+  m_LocalPosition: {x: -0.15, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 4172597604037525346}
   - component: {fileID: 8047044066080009883}
   - component: {fileID: 3253528584301077200}
-  - component: {fileID: 4413715168564733530}
+  - component: {fileID: 7140910262691869772}
   m_Layer: 2
   m_Name: ProjectileArrow
   m_TagString: Untagged
@@ -321,8 +321,8 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!60 &4413715168564733530
-PolygonCollider2D:
+--- !u!58 &7140910262691869772
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -335,20 +335,8 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 1, y: 0}
-      - {x: -0.75, y: 0.5}
-      - {x: -0.75, y: -0.5}
+  serializedVersion: 2
+  m_Radius: 0.87
 --- !u!1 &8384235971620752625
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,7 +362,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8384235971620752625}
   m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.17000003, y: 0, z: 0}
+  m_LocalPosition: {x: -0.15, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

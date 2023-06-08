@@ -10,6 +10,7 @@ public class TrajectoryManager : MonoBehaviour
     PhysicsScene2D physicsScene;
 
     public Transform obstaclesTransform;
+    public LayerMask ignoreRaycast;
 
     Dictionary<GameObject, GameObject> dynamicObjects;
 
@@ -54,7 +55,7 @@ public class TrajectoryManager : MonoBehaviour
     {
         var go = Instantiate(projectile, position, Quaternion.identity);
         try { go.GetComponent<Renderer>().enabled = false; } catch { }
-        go.GetComponent<Collider2D>().isTrigger = projectile.GetComponent<Placeable>().isTriggerByDefault;
+        go.GetComponentInChildren<Collider2D>().isTrigger = projectile.GetComponent<Placeable>().isTriggerByDefault;
         go.isSimulatingTrajectory = true;
         SceneManager.MoveGameObjectToScene(go.gameObject, simulationScene);
 
@@ -68,14 +69,38 @@ public class TrajectoryManager : MonoBehaviour
 
         line.positionCount = maxIterations+1;
         line.SetPosition(0, go.transform.position);
+
+        int lastBounces = 0;
         for (int i = 0; i < maxIterations; i++)
         {
-            if (go.bouncesCount >= maxBounces)
+            if (lastBounces != go.bouncesCount)
             {
-                int index = Mathf.Max(i-1, 1);
+                lastBounces = go.bouncesCount;
+
+                int index = Mathf.Max(i, 2);
                 line.positionCount = index+1;
-                line.SetPosition(index, go.transform.position);
+                
+                Vector3 start = line.GetPosition(index-1);
+                Vector2 dir = start - line.GetPosition(index-2);
+                RaycastHit2D hit = Physics2D.Raycast(start, dir, Mathf.Infinity, ~ignoreRaycast);
+
+                if (hit.collider != null)
+                {
+                    line.SetPosition(index, hit.point);
+                }
+                else
+                {
+                    line.SetPosition(index, start);
+                }
+
                 break;
+                // if (lastBounces >= maxBounces)
+                // {
+                //     // int index = Mathf.Max(i-1, 1);
+                //     // line.positionCount = index+1;
+                //     // line.SetPosition(index, go.transform.position);
+                //     break;
+                // }
             }
 
             physicsScene.Simulate(Time.fixedDeltaTime);
@@ -96,7 +121,7 @@ public class TrajectoryManager : MonoBehaviour
         }
         
         go = Instantiate(shield, shield.transform.position, shield.transform.rotation).gameObject;
-        go.GetComponent<Collider2D>().isTrigger = false;
+        go.GetComponentInChildren<Collider2D>().isTrigger = false;
         dynamicObjects.Add(shield.gameObject, go);
         SceneManager.MoveGameObjectToScene(go, simulationScene);
     }

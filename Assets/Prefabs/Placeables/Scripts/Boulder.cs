@@ -25,6 +25,7 @@ public class Boulder : MonoBehaviour
         var destroyable = other.gameObject.GetComponent<Destroyable>();
         if (destroyable)
         {
+            GetComponent<Projectile>().bouncesCount = 9999;
             Physics2D.IgnoreCollision(other.collider, GetComponent<Collider2D>());
             rb.velocity = prevVelocity;
             rb.angularVelocity = prevAngular;

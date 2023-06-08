@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 61840991}
   - component: {fileID: 61840990}
   - component: {fileID: 61840989}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: Placing range
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -722,6 +722,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstaclesTransform: {fileID: 334522829}
+  ignoreRaycast:
+    serializedVersion: 2
+    m_Bits: 32
   lineBackup: {fileID: 671793484}
   maxIterations: 100
 --- !u!120 &671793484

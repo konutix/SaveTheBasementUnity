@@ -43,7 +43,7 @@ public class ProjectileSpawner : MonoBehaviour
             if (ghost) Destroy(ghost.gameObject);
 
             ghost = Instantiate(prefabToSpawn);
-            ghost.GetComponent<Collider2D>().enabled = false;
+            ghost.GetComponentInChildren<Collider2D>().enabled = false;
             ghost.OnStartedPlacing();
         }
 
