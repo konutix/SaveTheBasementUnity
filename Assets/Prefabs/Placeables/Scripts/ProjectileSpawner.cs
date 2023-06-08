@@ -65,9 +65,16 @@ public class ProjectileSpawner : MonoBehaviour
         {
             ghost.gameObject.SetActive(placingRange.isInRange);
 
-            if (Input.GetMouseButtonDown(0) && placingRange.isInRange)
+            if (Input.GetMouseButtonDown(0))
             {
-                OnStartedPlacing();
+                if (placingRange.isInRange)
+                {
+                    OnStartedPlacing();
+                }
+                else
+                {
+                    TryPickupPlaced();
+                }
             }
 
             if (Input.GetMouseButtonDown(1))
@@ -105,6 +112,19 @@ public class ProjectileSpawner : MonoBehaviour
 
         objectsToLaunch = new List<Placeable>();
         GetComponent<LineRenderer>().positionCount = 0;
+    }
+
+    void TryPickupPlaced()
+    {
+        foreach (var placeable in objectsToLaunch)
+        {
+            if (placeable.isMouseOver)
+            {
+                objectsToLaunch.Remove(placeable);
+                Destroy(placeable.gameObject);
+                return;
+            }
+        }
     }
 
     void CalculateTrajectory()

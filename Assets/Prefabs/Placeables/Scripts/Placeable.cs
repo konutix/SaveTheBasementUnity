@@ -13,6 +13,9 @@ public class Placeable : MonoBehaviour
     [HideInInspector]
     public bool isTriggerByDefault = false;
 
+    [HideInInspector]
+    public bool isMouseOver = false;
+
     void Awake()
     {
         isTriggerByDefault = GetComponentInChildren<Collider2D>().isTrigger;
@@ -61,5 +64,15 @@ public class Placeable : MonoBehaviour
     {
         direction = Vector3.Normalize(transform.position - aimingPos);
         transform.eulerAngles = new Vector3(0, 0, Vector3.SignedAngle(Vector3.right, direction, Vector3.forward));
+    }
+
+    private void OnMouseEnter() 
+    {
+        isMouseOver = true;
+    }
+
+    private void OnMouseExit() 
+    {
+        isMouseOver = false;
     }
 }

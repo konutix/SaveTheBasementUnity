@@ -14,7 +14,7 @@ public class Arrow : MonoBehaviour
 
     void Update() 
     {
-        if (rb.simulated)
+        if (rb.simulated && !rb.isKinematic)
         {
             handle.transform.eulerAngles = new Vector3(0, 0, Vector3.SignedAngle(Vector3.right, rb.velocity.normalized, Vector3.forward));
         }

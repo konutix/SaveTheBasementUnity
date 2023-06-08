@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3016628032797164625}
   - component: {fileID: 4769428638627266404}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: GFX Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 969314522696644918}
   - component: {fileID: 1906445315456405454}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: GFX Placing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 3574130460962684421}
   - component: {fileID: 7504907274257326846}
   - component: {fileID: 733243689988406502}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: ProjectileBoulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -240,6 +240,8 @@ MonoBehaviour:
   gfxMain: {fileID: 5375172861467986538}
   gfxPlacing: {fileID: 7558673516544708644}
   direction: {x: 0, y: 0, z: 0}
+  isTriggerByDefault: 0
+  isMouseOver: 0
 --- !u!58 &8292200332580106831
 CircleCollider2D:
   m_ObjectHideFlags: 0

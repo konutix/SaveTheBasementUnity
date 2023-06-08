@@ -18,13 +18,15 @@ public class Projectile : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.simulated = false;
-        // rb.Sleep(); should be set to Start Asleep in inspector
+        //rb.simulated = false;
+        rb.isKinematic = true;
+        //rb.Sleep(); // should be set to Start Asleep in inspector
     }
 
     public void Init(Vector3 direction)
     {
-        rb.simulated = true;
+        //rb.simulated = true;
+        rb.isKinematic = false;
         rb.WakeUp();
         rb.AddForce(direction * launchForce, ForceMode2D.Impulse);
     }

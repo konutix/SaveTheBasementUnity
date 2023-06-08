@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4265363866682933187}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: gfx holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3846690372488091780}
   - component: {fileID: 6813785321465897905}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: GFX Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 8047044066080009883}
   - component: {fileID: 3253528584301077200}
   - component: {fileID: 7140910262691869772}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: ProjectileArrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -188,6 +188,7 @@ MonoBehaviour:
   gfxPlacing: {fileID: 8384235971620752625}
   direction: {x: 0, y: 0, z: 0}
   isTriggerByDefault: 0
+  isMouseOver: 0
 --- !u!114 &4172597604037525346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,7 +348,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1282599941528151523}
   - component: {fileID: 489214900652053275}
-  m_Layer: 2
+  m_Layer: 0
   m_Name: GFX Placing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
