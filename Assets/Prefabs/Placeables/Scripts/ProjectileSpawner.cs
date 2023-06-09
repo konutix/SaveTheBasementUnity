@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,8 +6,9 @@ using UnityEngine;
 public class ProjectileSpawner : MonoBehaviour
 {
     public Placeable prefabToSpawn;
-    List<Placeable> objectsToLaunch;
     Placeable currentObject;
+    [HideInInspector]
+    public List<Placeable> objectsToLaunch;
 
     Placeable ghost;
 
@@ -20,6 +22,9 @@ public class ProjectileSpawner : MonoBehaviour
     public int simulatedBouncesCount = 3;
 
     public PlacingRange placingRange;
+
+
+    public event Action launchEvent;
 
     void Start()
     {
@@ -53,8 +58,7 @@ public class ProjectileSpawner : MonoBehaviour
         if (isAiming)
         {
             currentObject.OnAiming(mousePos);
-
-            CalculateTrajectory();
+            currentObject.CalculateTrajectory();
 
             if (Input.GetMouseButtonUp(0))
             {
@@ -107,11 +111,12 @@ public class ProjectileSpawner : MonoBehaviour
         foreach (var placeable in objectsToLaunch)
         {
             placeable.OnLaunched();
-            Destroy(placeable.gameObject, 5.0f);
         }
 
         objectsToLaunch = new List<Placeable>();
         GetComponent<LineRenderer>().positionCount = 0;
+
+        if (launchEvent != null) launchEvent();
     }
 
     void TryPickupPlaced()
@@ -123,30 +128,6 @@ public class ProjectileSpawner : MonoBehaviour
                 objectsToLaunch.Remove(placeable);
                 Destroy(placeable.gameObject);
                 return;
-            }
-        }
-    }
-
-    void CalculateTrajectory()
-    {
-        var projectile = currentObject.GetComponent<Projectile>();
-        if (projectile)
-        {
-            trajectoryManager.SimulateTrajectory(projectile, currentObject.transform.position, currentObject.direction, simulatedBouncesCount);
-        }
-
-        var shield = currentObject.GetComponent<Shield>();
-        if (shield)
-        {
-            trajectoryManager.SimulateShield(shield);
-
-            foreach (var go in objectsToLaunch)
-            {
-                var p = go.GetComponent<Projectile>();
-                if (p)
-                {
-                    trajectoryManager.SimulateTrajectory(p, go.transform.position, go.direction, simulatedBouncesCount);
-                }
             }
         }
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,8 @@ public class Health : MonoBehaviour, Interactable
 {
     public int maxHealth = 10;
     public int currentHealth = 10;
+
+    public event Action deathEvent;
 
     public void OnInteractWithProjectile(Projectile projectile)
     {
@@ -32,5 +35,7 @@ public class Health : MonoBehaviour, Interactable
         print(gameObject.name + " died");
         var renderer = GetComponent<SpriteRenderer>();
         renderer.color = Color.black;
+
+        if (deathEvent != null) deathEvent();
     }
 }

@@ -32,9 +32,7 @@ public class TrajectoryManager : MonoBehaviour
             foreach (Renderer renderer in go.GetComponentsInChildren<Renderer>())
             {
                 renderer.enabled = false;
-            }
-            
-            SceneManager.MoveGameObjectToScene(go, simulationScene);
+            } 
 
             var combined = obj.GetComponentsInChildren<Transform>().Zip(go.GetComponentsInChildren<Transform>(), (real, fake) => (real, fake));
 
@@ -44,7 +42,15 @@ public class TrajectoryManager : MonoBehaviour
                 {
                     dynamicObjects.Add(child.real.gameObject, child.fake.gameObject);
                 }
+
+                var enemy = child.fake.GetComponent<EnemyBasic>();
+                if (enemy)
+                {
+                    enemy.enabled = false;
+                }
             }
+
+            SceneManager.MoveGameObjectToScene(go, simulationScene);
         }
     }
 
@@ -70,13 +76,11 @@ public class TrajectoryManager : MonoBehaviour
         line.positionCount = maxIterations+1;
         line.SetPosition(0, go.transform.position);
 
-        int lastBounces = 0;
+        //int lastBounces = 0;
         for (int i = 0; i < maxIterations; i++)
         {
-            if (lastBounces != go.bouncesCount)
+            if (go.bouncesCount > go.simulatedBouncesCount) 
             {
-                lastBounces = go.bouncesCount;
-
                 int index = Mathf.Max(i, 2);
                 line.positionCount = index+1;
                 
@@ -94,14 +98,13 @@ public class TrajectoryManager : MonoBehaviour
                 }
 
                 break;
-                // if (lastBounces >= maxBounces)
-                // {
-                //     // int index = Mathf.Max(i-1, 1);
-                //     // line.positionCount = index+1;
-                //     // line.SetPosition(index, go.transform.position);
-                //     break;
-                // }
             }
+            // else if (go.bouncesCount != lastBounces)
+            // {
+            //     lastBounces = go.bouncesCount;
+            //      CREATE NEW LINE RENDERER ?
+            //     continue;
+            // }
 
             physicsScene.Simulate(Time.fixedDeltaTime);
             line.SetPosition(i+1, go.transform.position);

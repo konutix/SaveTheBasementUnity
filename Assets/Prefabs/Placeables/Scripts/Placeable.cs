@@ -7,6 +7,8 @@ public class Placeable : MonoBehaviour
     public GameObject gfxMain;
     public GameObject gfxPlacing;
 
+    public float lifeTime = 5.0f;
+
     [HideInInspector]
     public Vector3 direction;
 
@@ -16,9 +18,12 @@ public class Placeable : MonoBehaviour
     [HideInInspector]
     public bool isMouseOver = false;
 
+    private ProjectileSpawner projectileSpawner;
+
     void Awake()
     {
         isTriggerByDefault = GetComponentInChildren<Collider2D>().isTrigger;
+        projectileSpawner = FindObjectOfType<ProjectileSpawner>();
     }
 
     public void OnStartedPlacing()
@@ -58,12 +63,23 @@ public class Placeable : MonoBehaviour
         {
             Destroy(line);
         }
+
+        if (lifeTime > 0.0f)
+        {
+            Destroy(gameObject, lifeTime);
+        }
     }
 
     public void OnAiming(Vector3 aimingPos)
     {
         direction = Vector3.Normalize(transform.position - aimingPos);
         transform.eulerAngles = new Vector3(0, 0, Vector3.SignedAngle(Vector3.right, direction, Vector3.forward));
+    }
+
+    public void OnAiming(float angle)
+    {
+        transform.eulerAngles = new Vector3(0, 0, angle);
+        direction = transform.right;
     }
 
     private void OnMouseEnter() 
@@ -74,5 +90,31 @@ public class Placeable : MonoBehaviour
     private void OnMouseExit() 
     {
         isMouseOver = false;
+    }
+
+    public void CalculateTrajectory()
+    {
+        var trajectoryManager = projectileSpawner.trajectoryManager;
+
+        var projectile = GetComponent<Projectile>();
+        if (projectile)
+        {
+            trajectoryManager.SimulateTrajectory(projectile, transform.position, direction, projectile.simulatedBouncesCount);
+        }
+
+        var shield = GetComponent<Shield>();
+        if (shield)
+        {
+            trajectoryManager.SimulateShield(shield);
+
+            foreach (var go in projectileSpawner.objectsToLaunch)
+            {
+                var p = go.GetComponent<Projectile>();
+                if (p)
+                {
+                    trajectoryManager.SimulateTrajectory(p, go.transform.position, go.direction, p.simulatedBouncesCount);
+                }
+            }
+        }
     }
 }

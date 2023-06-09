@@ -219,10 +219,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3aebd3406c696545b839130e90b56d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  launchForce: 10
   damage: 5
+  evnironmentalDamage: 1
   bouncesCount: 0
   isSimulatingTrajectory: 0
+  simulatedBouncesCount: 0
 --- !u!114 &1699706219318538343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,7 +239,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gfxMain: {fileID: 1641463368023855513}
   gfxPlacing: {fileID: 309449597783127390}
+  lifeTime: 5
   direction: {x: 0, y: 0, z: 0}
+  isTriggerByDefault: 0
+  isMouseOver: 0
 --- !u!114 &-7144271893607343712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -251,6 +256,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   childPrefab: {fileID: 8007910211267262118, guid: 61e110c759825884d86d7dcc06979840, type: 3}
+  angle: 15
+  childLifeTime: 3
 --- !u!58 &8867012213624212846
 CircleCollider2D:
   m_ObjectHideFlags: 0

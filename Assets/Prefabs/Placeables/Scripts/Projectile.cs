@@ -13,6 +13,7 @@ public class Projectile : MonoBehaviour
 
     [HideInInspector]
     public bool isSimulatingTrajectory = false;
+    public int simulatedBouncesCount = 0;
 
 
     void Awake()

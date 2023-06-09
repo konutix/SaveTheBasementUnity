@@ -218,9 +218,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3aebd3406c696545b839130e90b56d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  direction: {x: 1, y: 0, z: 0}
+  launchForce: 10
+  damage: 5
+  evnironmentalDamage: 1
   bouncesCount: 0
+  isSimulatingTrajectory: 0
+  simulatedBouncesCount: 0
 --- !u!114 &268714616573463473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,7 +238,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gfxMain: {fileID: 210434932117416527}
   gfxPlacing: {fileID: 1182011890206887560}
+  lifeTime: 5
   direction: {x: 0, y: 0, z: 0}
+  isTriggerByDefault: 0
+  isMouseOver: 0
 --- !u!58 &8007910211267262136
 CircleCollider2D:
   m_ObjectHideFlags: 0

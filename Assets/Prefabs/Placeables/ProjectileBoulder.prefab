@@ -225,6 +225,7 @@ MonoBehaviour:
   evnironmentalDamage: 10
   bouncesCount: 0
   isSimulatingTrajectory: 0
+  simulatedBouncesCount: 0
 --- !u!114 &6990217893688177441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,6 +240,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gfxMain: {fileID: 5375172861467986538}
   gfxPlacing: {fileID: 7558673516544708644}
+  lifeTime: 5
   direction: {x: 0, y: 0, z: 0}
   isTriggerByDefault: 0
   isMouseOver: 0
