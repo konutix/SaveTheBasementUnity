@@ -378,6 +378,7 @@ GameObject:
   - component: {fileID: 13305087574292874}
   - component: {fileID: 8715409857990901174}
   - component: {fileID: 1462088661201301445}
+  - component: {fileID: 7994264110186482271}
   m_Layer: 0
   m_Name: EffectCard
   m_TagString: Untagged
@@ -431,6 +432,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.6, y: 2.5, z: 0.05}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7994264110186482271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13305087574292875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae1c7a1818d90e043b7052843180e14d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardName: {fileID: 13305088001640336}
+  type: {fileID: 13305088808330831}
+  description: {fileID: 13305089231003596}
+  mana: {fileID: 13305087174598649}
+  art: {fileID: 13305088404860111}
 --- !u!1 &13305087799232974
 GameObject:
   m_ObjectHideFlags: 0
@@ -1248,7 +1266,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &13305089229692688
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1608,7 +1626,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &426813384134610544
 RectTransform:
   m_ObjectHideFlags: 0

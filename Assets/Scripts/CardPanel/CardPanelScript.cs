@@ -34,6 +34,8 @@ public class CardPanelScript : MonoBehaviour
     //object that determines deck location
     public GameObject DeckObInScene = null;
 
+    public CardDictionary cardDictionary;
+
     public PanelState panelState;
 
     //default draw amount
@@ -135,10 +137,10 @@ public class CardPanelScript : MonoBehaviour
                 //Load deck
                 deck = new List<int>
                 {
-                    1, 1, 1, 1, 1,
-                    1, 1, 1, 1, 1,
-                    1, 1, 1, 1, 1,
-                    1, 1, 1, 1, 1,
+                    0, 1, 2, 1, 0,
+                    0, 1, 2, 1, 0,
+                    0, 1, 2, 1, 0,
+                    0, 1, 2, 1, 0,
                 };
 
                 panelState = PanelState.dealHand;
@@ -167,6 +169,12 @@ public class CardPanelScript : MonoBehaviour
 
                             cardRotation = new Vector3(0.0f,0.0f,0.0f)
                         };
+
+                        int drawnCardID = deck[0];
+                        deck.RemoveAt(0);
+
+                        drawnCard.cardInstance.GetComponent<CardSetting>()
+                            .SetupCard(cardDictionary.cardDefs[drawnCardID]);
 
                         cards.Add(drawnCard);
 
