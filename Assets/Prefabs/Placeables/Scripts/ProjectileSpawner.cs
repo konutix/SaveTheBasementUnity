@@ -19,7 +19,6 @@ public class ProjectileSpawner : MonoBehaviour
     Vector3 mousePos = Vector3.zero;
 
     public TrajectoryManager trajectoryManager;
-    public int simulatedBouncesCount = 3;
 
     public PlacingRange placingRange;
 
@@ -117,6 +116,11 @@ public class ProjectileSpawner : MonoBehaviour
         GetComponent<LineRenderer>().positionCount = 0;
 
         if (launchEvent != null) launchEvent();
+    }
+
+    public void AddPlaceable(Placeable placeable)
+    {
+        objectsToLaunch.Add(placeable);
     }
 
     void TryPickupPlaced()

@@ -76,17 +76,50 @@ public class TrajectoryManager : MonoBehaviour
         line.positionCount = maxIterations+1;
         line.SetPosition(0, go.transform.position);
 
-        //int lastBounces = 0;
+        int lastBounces = 0;
+        bool recalculateBouncePoint = false;
         for (int i = 0; i < maxIterations; i++)
         {
+            if (recalculateBouncePoint)
+            {
+                recalculateBouncePoint = false;
+
+                if (i >= 3)
+                {
+                    var v1 = line.GetPosition(i-1) - line.GetPosition(i);
+                    var v2 = line.GetPosition(i-2) - line.GetPosition(i-3);
+
+                    float dot = Vector3.Dot(v1.normalized, v2.normalized);
+                    if (Mathf.Abs(dot) < 0.99f)
+                    { 
+                        // Calculate intersection point between lines before and after bounce
+
+                        float a1 = v1.y / v1.x;
+                        float c1 = line.GetPosition(i-1).y - a1 * line.GetPosition(i-1).x;
+                        
+                        float a2 = v2.y / v2.x;
+                        float c2 = line.GetPosition(i-2).y - a2 * line.GetPosition(i-2).x;
+
+                        float x = (c2 - c1) / (a1 - a2);
+                        // float y = (c2*a1 - c1*a2) / (a1 - a2);
+                        float y = a1 * x + c1;
+                        
+                        var pos = new Vector3(x, y, 0.0f);
+                        line.SetPosition(i-1, pos);
+                    }
+                }
+            }
+
             if (go.bouncesCount > go.simulatedBouncesCount) 
             {
                 int index = Mathf.Max(i, 2);
                 line.positionCount = index+1;
+
+                // Snap last point to hit collider
                 
                 Vector3 start = line.GetPosition(index-1);
-                Vector2 dir = start - line.GetPosition(index-2);
-                RaycastHit2D hit = Physics2D.Raycast(start, dir, Mathf.Infinity, ~ignoreRaycast);
+                Vector3 dir = start - line.GetPosition(index-2);
+                RaycastHit2D hit = Physics2D.Raycast(start, dir, 1.0f, ~ignoreRaycast);
 
                 if (hit.collider != null)
                 {
@@ -94,17 +127,16 @@ public class TrajectoryManager : MonoBehaviour
                 }
                 else
                 {
-                    line.SetPosition(index, start);
+                    line.SetPosition(index, start + 0.5f*dir);
                 }
 
                 break;
             }
-            // else if (go.bouncesCount != lastBounces)
-            // {
-            //     lastBounces = go.bouncesCount;
-            //      CREATE NEW LINE RENDERER ?
-            //     continue;
-            // }
+            else if (go.bouncesCount != lastBounces)
+            {
+                lastBounces = go.bouncesCount;
+                recalculateBouncePoint = true;
+            }
 
             physicsScene.Simulate(Time.fixedDeltaTime);
             line.SetPosition(i+1, go.transform.position);

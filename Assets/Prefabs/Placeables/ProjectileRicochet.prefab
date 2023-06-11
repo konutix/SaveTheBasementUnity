@@ -223,7 +223,7 @@ MonoBehaviour:
   evnironmentalDamage: 1
   bouncesCount: 0
   isSimulatingTrajectory: 0
-  simulatedBouncesCount: 0
+  simulatedBouncesCount: 1
 --- !u!114 &268714616573463473
 MonoBehaviour:
   m_ObjectHideFlags: 0

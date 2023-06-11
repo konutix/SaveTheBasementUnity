@@ -25,21 +25,16 @@ public class EnemyBasic : MonoBehaviour
         if (!currentProjectile && health.currentHealth > 0)
         {
             currentProjectile = Instantiate(projectilePrefab, projectileSpawnPoint);
-            currentProjectile.GetComponent<Projectile>().simulatedBouncesCount = 2;
+            currentProjectile.GetComponent<Projectile>().simulatedBouncesCount = 3;
             currentProjectile.OnAiming(shootAngle);
-            currentProjectile.CalculateTrajectory();            
+            currentProjectile.CalculateTrajectory();
+            FindObjectOfType<ProjectileSpawner>().AddPlaceable(currentProjectile);
         }
     }
 
     void OnLaunch()
     {
-        if (currentProjectile)
-        {
-            currentProjectile.OnLaunched();
-            currentProjectile = null;
-        }
-
-        Invoke("PlaceProjectile", 4.0f);
+        Invoke("PlaceProjectile", 6.0f);
     }
 
     void OnDeath()

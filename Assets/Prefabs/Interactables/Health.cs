@@ -13,6 +13,7 @@ public class Health : MonoBehaviour, Interactable
     public void OnInteractWithProjectile(Projectile projectile)
     {
         TakeDamage(projectile.damage);
+        Destroy(projectile.gameObject);
     }
 
     public void TakeDamage(int damage)
