@@ -8,10 +8,20 @@ public class Health : MonoBehaviour, Interactable
     public int maxHealth = 10;
     public int currentHealth = 10;
 
+    [SerializeField] ParticleSystem gettingDamageParticles;
+
     public event Action deathEvent;
 
     public void OnInteractWithProjectile(Projectile projectile)
     {
+        if (currentHealth <= 0) return;
+
+        if (gettingDamageParticles != null)
+        {
+            gettingDamageParticles.transform.position = projectile.transform.position;
+            gettingDamageParticles.Play();
+        }
+
         TakeDamage(projectile.damage);
         Destroy(projectile.gameObject);
     }
