@@ -5,16 +5,19 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public float launchForce = 10.0f;
+    public bool usePullModifier = false;
+
+    [Space]
     public int damage = 5;
     public int evnironmentalDamage = 1;
+
+    
+    [HideInInspector] public bool isSimulatingTrajectory = false;
+    [Space]
+    public int simulatedBouncesCount = 0;
     [HideInInspector] public int bouncesCount = 0;
 
     Rigidbody2D rb;
-
-    [HideInInspector]
-    public bool isSimulatingTrajectory = false;
-    public int simulatedBouncesCount = 0;
-
 
     void Awake()
     {
@@ -29,7 +32,7 @@ public class Projectile : MonoBehaviour
         //rb.simulated = true;
         rb.isKinematic = false;
         rb.WakeUp();
-        rb.AddForce(direction * launchForce, ForceMode2D.Impulse);
+        rb.AddForce(direction * launchForce * (usePullModifier ? GetComponent<Placeable>().pull : 1.0f), ForceMode2D.Impulse);
     }
 
     void OnCollisionEnter2D(Collision2D collision)

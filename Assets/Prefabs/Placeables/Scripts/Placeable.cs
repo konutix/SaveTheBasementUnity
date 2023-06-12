@@ -20,6 +20,9 @@ public class Placeable : MonoBehaviour
 
     private ProjectileSpawner projectileSpawner;
 
+    [HideInInspector]
+    public float pull = 1.0f;
+
     void Awake()
     {
         isTriggerByDefault = GetComponentInChildren<Collider2D>().isTrigger;
@@ -72,8 +75,11 @@ public class Placeable : MonoBehaviour
 
     public void OnAiming(Vector3 aimingPos)
     {
-        direction = Vector3.Normalize(transform.position - aimingPos);
-        transform.eulerAngles = new Vector3(0, 0, Vector3.SignedAngle(Vector3.right, direction, Vector3.forward));
+        direction = transform.position - aimingPos;
+        CalculatePull(Vector3.Magnitude(direction));
+        direction = direction.normalized;
+
+        transform.eulerAngles = new Vector3(0, 0, Vector3.SignedAngle(Vector3.right, direction, Vector3.forward));        
     }
 
     public void OnAiming(float angle)
@@ -116,5 +122,17 @@ public class Placeable : MonoBehaviour
                 }
             }
         }
+    }
+
+    void CalculatePull(float distance)
+    {
+        float minPull = 0.4f;
+        float minDistance = 0.5f;
+        float maxDistance = 3.0f;
+
+        float a = (minPull - 1.0f) / (minDistance - maxDistance);
+        float c = 1 - maxDistance * a;
+
+        pull = Mathf.Clamp(distance * a + c, minPull, 1.0f);
     }
 }
