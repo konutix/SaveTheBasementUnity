@@ -183,6 +183,7 @@ GameObject:
   - component: {fileID: 8867012213624212846}
   - component: {fileID: 8867012213624212847}
   - component: {fileID: 8837653334084115173}
+  - component: {fileID: 1642449764040480535}
   m_Layer: 0
   m_Name: ProjectileSplittingRicochet
   m_TagString: Untagged
@@ -220,11 +221,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   launchForce: 10
+  usePullModifier: 0
   damage: 5
   evnironmentalDamage: 1
-  bouncesCount: 0
   isSimulatingTrajectory: 0
   simulatedBouncesCount: 0
+  bouncesCount: 0
 --- !u!114 &1699706219318538343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,6 +245,7 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   isTriggerByDefault: 0
   isMouseOver: 0
+  pull: 1
 --- !u!114 &-7144271893607343712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,3 +397,17 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &1642449764040480535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8867012213624212849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dfc11b7430fa374ea2992033f1f9e11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rendererToHighlight: {fileID: 620157521005765067}
+  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2930288333760816491}
   - component: {fileID: 8309556347256184467}
   - component: {fileID: 7142662923807884448}
+  - component: {fileID: 5573089351708359995}
   m_Layer: 0
   m_Name: ShieldBasic
   m_TagString: Untagged
@@ -48,7 +49,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3933d819b17c4442893cffca2bb3335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: {x: 1, y: 0, z: 0}
 --- !u!114 &8309556347256184467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -63,6 +63,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gfxMain: {fileID: 4886833969829367485}
   gfxPlacing: {fileID: 5220635024323847227}
+  lifeTime: 5
+  direction: {x: 0, y: 0, z: 0}
+  isTriggerByDefault: 0
+  isMouseOver: 0
+  pull: 1
 --- !u!61 &7142662923807884448
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -89,6 +94,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &5573089351708359995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2699946627023496268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dfc11b7430fa374ea2992033f1f9e11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rendererToHighlight: {fileID: 8843886391220126044}
+  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &4886833969829367485
 GameObject:
   m_ObjectHideFlags: 0

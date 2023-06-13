@@ -182,6 +182,7 @@ GameObject:
   - component: {fileID: 8007910211267262136}
   - component: {fileID: 8007910211267262137}
   - component: {fileID: -1258301266968141517}
+  - component: {fileID: 6780844077930414401}
   m_Layer: 0
   m_Name: ProjectileRicochet
   m_TagString: Untagged
@@ -219,11 +220,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   launchForce: 10
+  usePullModifier: 0
   damage: 5
   evnironmentalDamage: 1
-  bouncesCount: 0
   isSimulatingTrajectory: 0
   simulatedBouncesCount: 1
+  bouncesCount: 0
 --- !u!114 &268714616573463473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,6 +244,7 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   isTriggerByDefault: 0
   isMouseOver: 0
+  pull: 1
 --- !u!58 &8007910211267262136
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -378,3 +381,17 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &6780844077930414401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8007910211267262119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dfc11b7430fa374ea2992033f1f9e11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rendererToHighlight: {fileID: 2069129919593716253}
+  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}

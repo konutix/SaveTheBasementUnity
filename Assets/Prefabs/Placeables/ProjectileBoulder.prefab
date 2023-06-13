@@ -184,6 +184,7 @@ GameObject:
   - component: {fileID: 3574130460962684421}
   - component: {fileID: 7504907274257326846}
   - component: {fileID: 733243689988406502}
+  - component: {fileID: 5242802465471901034}
   m_Layer: 0
   m_Name: ProjectileBoulder
   m_TagString: Untagged
@@ -221,11 +222,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   launchForce: 50
+  usePullModifier: 0
   damage: 5
   evnironmentalDamage: 10
-  bouncesCount: 0
   isSimulatingTrajectory: 0
   simulatedBouncesCount: 0
+  bouncesCount: 0
 --- !u!114 &6990217893688177441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -244,6 +246,7 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   isTriggerByDefault: 0
   isMouseOver: 0
+  pull: 1
 --- !u!58 &8292200332580106831
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -404,3 +407,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 348266ab906abb84387bf16572d16ec7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5242802465471901034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8292200332580106801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dfc11b7430fa374ea2992033f1f9e11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rendererToHighlight: {fileID: 4769428638627266404}
+  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}

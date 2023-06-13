@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 7497032781060939430}
   - component: {fileID: 7497032781060939431}
   - component: {fileID: 6509973733531201088}
+  - component: {fileID: 157600687329022078}
   m_Layer: 0
   m_Name: ProjectileSimple
   m_TagString: Untagged
@@ -135,11 +136,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   launchForce: 5
+  usePullModifier: 0
   damage: 5
   evnironmentalDamage: 1
-  bouncesCount: 0
   isSimulatingTrajectory: 0
   simulatedBouncesCount: 0
+  bouncesCount: 0
 --- !u!114 &8798663612254412744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -158,6 +160,7 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   isTriggerByDefault: 0
   isMouseOver: 0
+  pull: 1
 --- !u!58 &7497032781060939430
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -292,6 +295,20 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+--- !u!114 &157600687329022078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7497032781060939480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0dfc11b7430fa374ea2992033f1f9e11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rendererToHighlight: {fileID: 6424795813594747789}
+  highlightColor: {r: 1, g: 0.78703856, b: 0, a: 1}
 --- !u!1 &8357786280997977293
 GameObject:
   m_ObjectHideFlags: 0
