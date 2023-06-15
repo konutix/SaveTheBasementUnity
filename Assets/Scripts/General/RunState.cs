@@ -13,7 +13,7 @@ public static class RunState
     
     public static int VampireFangs;
 
-    public static Map CurrentMap;
+    public static Encounter[,] CurrentMap;
     public static Encounter CurrentEncounter;
 
 }
