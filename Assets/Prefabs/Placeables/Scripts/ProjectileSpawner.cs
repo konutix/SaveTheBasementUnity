@@ -15,7 +15,8 @@ public class ProjectileSpawner : MonoBehaviour
     Placeable tempCheckPrefabChange;
 
 
-    bool isAiming = false;
+    bool isAiming  = false;
+    bool isPlacing = false;
     Vector3 mousePos = Vector3.zero;
 
     public TrajectoryManager trajectoryManager;
@@ -36,6 +37,13 @@ public class ProjectileSpawner : MonoBehaviour
 
     void Update()
     {
+        // Temporary set placing state
+        if (Input.GetKeyDown("space"))
+        {
+            isPlacing = true;
+            CreateGhost(prefabToSpawn);
+        }
+
         if (!prefabToSpawn) return;
 
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -44,11 +52,7 @@ public class ProjectileSpawner : MonoBehaviour
         if (tempCheckPrefabChange != prefabToSpawn)
         {
             tempCheckPrefabChange = prefabToSpawn;
-            if (ghost) Destroy(ghost.gameObject);
-
-            ghost = Instantiate(prefabToSpawn);
-            ghost.GetComponentInChildren<Collider2D>().enabled = false;
-            ghost.OnStartedPlacing();
+            CreateGhost(prefabToSpawn);
         }
 
         ghost.transform.position = mousePos;
@@ -66,11 +70,11 @@ public class ProjectileSpawner : MonoBehaviour
         }
         else
         {
-            ghost.gameObject.SetActive(placingRange.isInRange);
+            ghost.gameObject.SetActive(placingRange.isInRange && isPlacing);
 
             if (Input.GetMouseButtonDown(0))
             {
-                if (placingRange.isInRange)
+                if (placingRange.isInRange && isPlacing)
                 {
                     OnStartedPlacing();
                 }
@@ -89,10 +93,19 @@ public class ProjectileSpawner : MonoBehaviour
 
     public void OnStartedPlacing()
     {
+        isPlacing = false;
         isAiming = true;
         ghost.gameObject.SetActive(false);
 
-        currentObject = Instantiate(prefabToSpawn, mousePos, Quaternion.identity);
+        if (!currentObject)
+        {
+            currentObject = Instantiate(prefabToSpawn, mousePos, Quaternion.identity);
+        } 
+        else
+        {
+            currentObject.transform.position = mousePos;
+        }
+        
         currentObject.OnStartedPlacing();
         objectsToLaunch.Add(currentObject);
     }
@@ -103,6 +116,7 @@ public class ProjectileSpawner : MonoBehaviour
         ghost.gameObject.SetActive(true);
 
         currentObject.OnStoppedPlacing();
+        currentObject = null;
     }
 
     public void OnLaunched()
@@ -129,10 +143,27 @@ public class ProjectileSpawner : MonoBehaviour
         {
             if (placeable.isMouseOver)
             {
+                isPlacing = true;
+                
                 objectsToLaunch.Remove(placeable);
-                Destroy(placeable.gameObject);
+                
+                currentObject = placeable;
+                currentObject.transform.position = new Vector3(0.0f, 9999.9f, 0.0f);
+                currentObject.CalculateTrajectory();
+
+                CreateGhost(placeable);
+
                 return;
             }
         }
+    }
+
+    void CreateGhost(Placeable prefab)
+    {
+        if (ghost) Destroy(ghost.gameObject);
+
+        ghost = Instantiate(prefab);
+        ghost.GetComponentInChildren<Collider2D>().enabled = false;
+        ghost.OnStartedPlacing();
     }
 }

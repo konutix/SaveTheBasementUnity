@@ -88,14 +88,26 @@ public class Placeable : MonoBehaviour
         direction = transform.right;
     }
 
-    private void OnMouseEnter() 
+    private void OnMouseOver() 
     {
         isMouseOver = true;
+
+        var highlight = GetComponent<Highlight>();
+        if (highlight)
+        {
+            highlight.SetHighlight(true);
+        }
     }
 
     private void OnMouseExit() 
     {
         isMouseOver = false;
+
+        var highlight = GetComponent<Highlight>();
+        if (highlight)
+        {
+            highlight.SetHighlight(false);
+        }
     }
 
     public void CalculateTrajectory()

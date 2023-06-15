@@ -26,6 +26,12 @@ public class Destroyable : MonoBehaviour, Interactable
             {
                 trajectory.RemoveObject(gameObject);
             }
+
+            var cameraShake = FindObjectOfType<CameraShake>();
+            if (cameraShake)
+            {
+                cameraShake.shakeDuration = 0.2f;
+            }
         }
     }
 }
