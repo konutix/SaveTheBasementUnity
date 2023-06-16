@@ -404,7 +404,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6322951725486865227}
-  - component: {fileID: 6322951725486865228}
   - component: {fileID: 6322951725486865229}
   m_Layer: 0
   m_Name: CardPanel
@@ -432,18 +431,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6322951725486865228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6322951725486865226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80cc10d705a3907468986ce6eeee3c89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6322951725486865229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -458,18 +445,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardPrefab: {fileID: 13305087574292875, guid: e730a408c7af2b24f85b01c5167e176b, type: 3}
   DeckObInScene: {fileID: 6322951726424421619}
+  cardDictionary: {fileID: 0}
   panelState: 1
+  hovered: -1
   drawAmount: 8
   cardDist: 0.56
   cardTilt: 1.5
   bowHeight: 0.04
-  drawDelay: 0.8
-  drawEaseIn: 0.015
-  drawTimer: 0
-  drawn: 0
+  baseScale: 1
+  cardZoom: 1.5
+  hoveredHeight: -2.8
+  distFromHovered: 1
+  hoverDistMulti: 1.6
+  playHeight: -2.8
+  drawDelay: 0.2
+  drawEaseIn: 0.02
   postDrawPause: 1
-  pauseTimer: 0
-  postPause: 0
   cardsCenter: {x: 0, y: -4.75, z: 0}
   deck: 
 --- !u!1 &6322951725514127108

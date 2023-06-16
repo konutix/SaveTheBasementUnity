@@ -23,7 +23,9 @@ public enum PanelState
 public struct HandCard
 {
     public GameObject cardInstance;
-    public Vector3 cardRotation;
+    public Vector3 cardScale;
+    public bool hovered;
+    public bool selected;
 }
 
 public class CardPanelScript : MonoBehaviour
@@ -38,6 +40,11 @@ public class CardPanelScript : MonoBehaviour
 
     public PanelState panelState;
 
+    public int hovered = -1;
+
+    [Space]
+    [Space]
+
     //default draw amount
     public int drawAmount;
 
@@ -45,6 +52,16 @@ public class CardPanelScript : MonoBehaviour
     public float cardDist = 1.0f;
     public float cardTilt = 2.0f;
     public float bowHeight = 0.2f;
+
+    //select properties
+    public float baseScale = 1.0f;
+    public float cardZoom = 1.5f;
+    public float hoveredHeight = 0.0f;
+    public float distFromHovered = 0.5f;
+    public float hoverDistMulti = 1.35f;
+
+    //play properties
+    public float playHeight = -3.0f;
 
     //draw mechanics
     public float drawDelay = 0.8f;
@@ -102,18 +119,56 @@ public class CardPanelScript : MonoBehaviour
         int i = 0;
         foreach(HandCard cd in cards)
         {
+            //calc distance from hovered
+            float hovDist = 0.0f;
+
+            if (hovered != -1 && i != hovered)
+            {
+                hovDist = ((i - hovered) * distFromHovered) / Mathf.Pow((float)Mathf.Abs(i - hovered), hoverDistMulti);
+            }
+
             //position
             Vector3 cardPlace =
                 cardsCenter + new Vector3(
-                        leftDistance + (float)i * cardDist * 2.0f, 
+                        leftDistance + (float)i * cardDist * 2.0f + hovDist, 
                         Mathf.Sin((float)i / ((float)cardsCount - 0.99f) * Mathf.PI) * bowHeight * cardsCount, 
                         -(float)i + 50.0f
                     );
 
-            cd.cardInstance.transform.position += (cardPlace - cd.cardInstance.transform.position) * drawEaseIn;
+            if (cd.hovered)
+            {
+                if (cd.selected)
+                {
+                    cardPlace = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                    cardPlace.z = -500.0f;
+
+                    cd.cardInstance.transform.position += 
+                        (cardPlace - cd.cardInstance.transform.position) * drawEaseIn * 3.0f;
+                }
+                else
+                {
+                    cardPlace.y = hoveredHeight;
+                    cardPlace.z = -500.0f;
+                    cd.cardInstance.transform.position += 
+                        (cardPlace - cd.cardInstance.transform.position) * drawEaseIn * 3.0f;
+                }
+            }
+            else
+            {
+                if (cd.cardInstance.transform.position.z != cardPlace.z)
+                {
+                    Vector3 instantZ = new Vector3(
+                        cd.cardInstance.transform.position.x,
+                        cd.cardInstance.transform.position.y,
+                        cardPlace.z);
+                    cd.cardInstance.transform.position = instantZ;
+                }
+
+                cd.cardInstance.transform.position += (cardPlace - cd.cardInstance.transform.position) * drawEaseIn;
+            }
 
             //rotation
-            Vector3 targetRot = cd.cardRotation + new Vector3(0.0f, 0.0f, leftTilt - (float)i * cardTilt * 2.0f);
+            Vector3 targetRot = new Vector3(0.0f, 0.0f, leftTilt - (float)i * cardTilt * 2.0f);
 
             Vector3 currentRot = cd.cardInstance.transform.rotation.eulerAngles;
 
@@ -122,9 +177,28 @@ public class CardPanelScript : MonoBehaviour
                 currentRot.z = currentRot.z - 360.0f;
             }
 
-            currentRot += (targetRot - currentRot) * drawEaseIn;
+            if (cd.hovered)
+            {
+                currentRot = new Vector3(0,0,0);
+            }
+            else
+            {
+                currentRot += (targetRot - currentRot) * drawEaseIn;
+            }
 
             cd.cardInstance.transform.rotation = Quaternion.Euler(currentRot);
+
+            //Scale
+            if (cd.cardInstance.transform.localScale.magnitude <= cd.cardScale.magnitude)
+            {
+                cd.cardInstance.transform.localScale = cd.cardScale;
+            }
+            else
+            {
+                cd.cardInstance.transform.localScale += 
+                    (cd.cardScale - cd.cardInstance.transform.localScale) * drawEaseIn;
+            }
+
             i++;
         }
 
@@ -162,12 +236,14 @@ public class CardPanelScript : MonoBehaviour
                         HandCard drawnCard = new HandCard
                         {
                             cardInstance = Instantiate(
-                                                CardPrefab, 
-                                                DeckObInScene.transform.position + new Vector3(0.0f, 0.0f, -100.0f), 
+                                                CardPrefab,
+                                                DeckObInScene.transform.position + new Vector3(0.0f, 0.0f, -100.0f),
                                                 Quaternion.Euler(new Vector3(0.0f, 180.0f, 0.0f))
                                                 ),
 
-                            cardRotation = new Vector3(0.0f,0.0f,0.0f)
+                            cardScale = new Vector3(1.0f, 1.0f, 1.0f),
+                            hovered = false,
+                            selected = false
                         };
 
                         int drawnCardID = deck[0];
@@ -189,6 +265,7 @@ public class CardPanelScript : MonoBehaviour
                         pauseTimer = postDrawPause;
                     }
                 }
+
                 break;
 
             //Delay in card panel actions
@@ -205,14 +282,122 @@ public class CardPanelScript : MonoBehaviour
 
             //Player is picking a card (cursor is free)
             case PanelState.cardPick:
+
+                // Set Card Layer mask
+                int layerMask = 7;
+                layerMask = ~layerMask;
+
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+
+                bool ifHit = Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask);
+
+                for (int j = 0; j < cards.Count; j++)
+                {
+                    if (ifHit && cards[j].cardInstance == hit.collider.gameObject)
+                    {
+                        HandCard card = cards[j];
+                        card.cardScale = new Vector3(cardZoom, cardZoom, cardZoom);
+                        card.hovered = true;
+                        cards[j] = card;
+                        hovered = j;
+                    }
+                    else
+                    {
+                        HandCard card = cards[j];
+                        card.cardScale = new Vector3(baseScale, baseScale, baseScale);
+                        card.hovered = false;
+                        cards[j] = card;
+                    }
+                }
+
+                if (!ifHit)
+                {
+                    hovered = -1;
+                }
+
+                if (Input.GetMouseButtonDown(0) && hovered != -1)
+                {
+                    HandCard card = cards[hovered];
+                    card.selected = true;
+                    cards[hovered] = card;
+                    panelState = PanelState.dragging;
+                }
+
                 break;
 
             //Player is dragging a card
             case PanelState.dragging:
+
+                //flag to play card
+                bool ifPlay = false;
+
+                if (Input.GetMouseButtonDown(1))
+                {
+                    panelState = PanelState.cardPick;
+
+                    for (int j = 0; j < cards.Count; j++)
+                    {
+                        HandCard card = cards[j];
+                        card.cardScale = new Vector3(baseScale, baseScale, baseScale);
+                        card.hovered = false;
+                        card.selected = false;
+                        cards[j] = card;
+                    }
+                }
+
+                if (Input.GetMouseButtonDown(0))
+                {
+                    if (Camera.main.ScreenToWorldPoint(Input.mousePosition).y < playHeight)
+                    {
+                        panelState = PanelState.cardPick;
+
+                        for (int j = 0; j < cards.Count; j++)
+                        {
+                            HandCard card = cards[j];
+                            card.cardScale = new Vector3(baseScale, baseScale, baseScale);
+                            card.hovered = false;
+                            card.selected = false;
+                            cards[j] = card;
+                        }
+                    }
+                    else
+                    {
+                        ifPlay = true;
+                    }
+                }
+
+                if(Input.GetMouseButtonUp(0))
+                {
+                    if (Camera.main.ScreenToWorldPoint(Input.mousePosition).y > playHeight)
+                    {
+                        ifPlay = true;
+                    }
+                }
+
+                //play card
+                if (ifPlay)
+                {
+                    panelState = PanelState.placing;
+                    for (int j = 0; j < cards.Count; j++)
+                    {
+                        HandCard card = cards[j];
+                        if (card.selected)
+                        {
+                            card.hovered = true;
+                            card.selected = false;
+                            cards[j] = card;
+                        }
+                    }
+                }
+
                 break;
 
             //Player is placing an object
             case PanelState.placing:
+
+
+
                 break;
 
             //During simulation
