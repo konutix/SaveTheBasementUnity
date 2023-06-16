@@ -14,4 +14,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Shop.unity
     guid: bb20415100ef6544fb40a496001f908c
+  - enabled: 1
+    path: Assets/Scenes/Boss.unity
+    guid: b9a99a3b444b03d46af641ca3b16f43e
+  - enabled: 1
+    path: Assets/Scenes/Chest.unity
+    guid: a34f34b39233b53458af11ff4edef6e6
+  - enabled: 1
+    path: Assets/Scenes/MultipleEnemy.unity
+    guid: 610fae65b46515e468bb0e3ce1d19914
+  - enabled: 1
+    path: Assets/Scenes/SingleEnemy.unity
+    guid: d0e944ec1ef7b934b98ad56151d94f18
+  - enabled: 1
+    path: Assets/Scenes/Upgrade.unity
+    guid: 2423865e5d83b704d91b790966e9beeb
   m_configObjects: {}

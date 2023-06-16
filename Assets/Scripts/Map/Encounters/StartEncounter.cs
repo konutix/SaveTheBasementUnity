@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EncounterStateEnum
+public class StartEncounter : Encounter
 {
-    Incompleted,
-    Completed,
-    Failed
+    
 }

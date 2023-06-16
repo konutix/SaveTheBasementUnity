@@ -15,5 +15,10 @@ public class Encounter
         NextEncounters = new List<Encounter>();
         PreviousEncounters = new List<Encounter>();
     }
+
+    public virtual void LaunchEncounter()
+    {
+
+    }
     
 }
