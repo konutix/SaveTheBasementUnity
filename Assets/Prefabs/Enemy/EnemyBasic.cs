@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class EnemyBasic : MonoBehaviour
 {
-    public Transform projectileSpawnPoint;
-    public Placeable projectilePrefab;
+    public Transform placeableSpawnPoint;
+    public Placeable[] possiblePlaceablePrefabs;
     public float shootAngle = 180.0f;
+    public float angleRandomSpread = 3.0f;
 
     Placeable currentProjectile;
     Health health;
@@ -24,9 +25,16 @@ public class EnemyBasic : MonoBehaviour
     {       
         if (!currentProjectile && health.currentHealth > 0)
         {
-            currentProjectile = Instantiate(projectilePrefab, projectileSpawnPoint);
-            currentProjectile.GetComponent<Projectile>().simulatedBouncesCount = 3;
-            currentProjectile.OnAiming(shootAngle);
+            Placeable prefab = possiblePlaceablePrefabs[Random.Range(0, possiblePlaceablePrefabs.Length)];
+            currentProjectile = Instantiate(prefab, placeableSpawnPoint);
+
+            var projectile = currentProjectile.GetComponent<Projectile>();
+            if (projectile)
+            {
+                projectile.simulatedBouncesCount = 3;
+            }
+            
+            currentProjectile.OnAiming(shootAngle + Random.Range(-angleRandomSpread, angleRandomSpread));
             currentProjectile.CalculateTrajectory();
             FindObjectOfType<ProjectileSpawner>().AddPlaceable(currentProjectile);
         }
@@ -42,6 +50,6 @@ public class EnemyBasic : MonoBehaviour
         FindObjectOfType<ProjectileSpawner>().launchEvent -= OnLaunch;
         health.deathEvent -= OnDeath;
 
-        Destroy(currentProjectile);
+        Destroy(currentProjectile.gameObject);
     }
 }

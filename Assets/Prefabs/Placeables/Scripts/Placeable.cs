@@ -18,10 +18,15 @@ public class Placeable : MonoBehaviour
     [HideInInspector]
     public bool isMouseOver = false;
 
+    [HideInInspector]
+    public bool canBePickedUp = false;
+
     private ProjectileSpawner projectileSpawner;
 
     [HideInInspector]
     public float pull = 1.0f;
+
+    float mouseDistanceThreshold = 0.1f;
 
     void Awake()
     {
@@ -75,9 +80,11 @@ public class Placeable : MonoBehaviour
 
     public void OnAiming(Vector3 aimingPos)
     {
-        direction = transform.position - aimingPos;
-        CalculatePull(Vector3.Magnitude(direction));
-        direction = direction.normalized;
+        float mag = Vector3.Magnitude(transform.position - aimingPos);
+        if (mag < mouseDistanceThreshold) return;
+
+        direction = Vector3.Normalize(transform.position - aimingPos);
+        CalculatePull(mag);
 
         transform.eulerAngles = new Vector3(0, 0, Vector3.SignedAngle(Vector3.right, direction, Vector3.forward));        
     }
@@ -90,6 +97,8 @@ public class Placeable : MonoBehaviour
 
     private void OnMouseOver() 
     {
+        if(!canBePickedUp) return;
+
         isMouseOver = true;
 
         var highlight = GetComponent<Highlight>();
@@ -101,6 +110,8 @@ public class Placeable : MonoBehaviour
 
     private void OnMouseExit() 
     {
+        if(!canBePickedUp) return;
+
         isMouseOver = false;
 
         var highlight = GetComponent<Highlight>();

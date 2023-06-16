@@ -106,6 +106,7 @@ public class ProjectileSpawner : MonoBehaviour
             currentObject.transform.position = mousePos;
         }
         
+        currentObject.canBePickedUp = true;
         currentObject.OnStartedPlacing();
         objectsToLaunch.Add(currentObject);
     }

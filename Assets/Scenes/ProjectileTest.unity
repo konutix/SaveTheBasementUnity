@@ -638,9 +638,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4e9a787815866240ae9f238276fcfd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpawnPoint: {fileID: 247613678}
-  projectilePrefab: {fileID: 268714616573463473, guid: 61e110c759825884d86d7dcc06979840, type: 3}
+  placeableSpawnPoint: {fileID: 247613678}
+  possiblePlaceablePrefabs:
+  - {fileID: 268714616573463473, guid: 61e110c759825884d86d7dcc06979840, type: 3}
+  - {fileID: 8309556347256184467, guid: f339294abeb874949a9984751740c5a5, type: 3}
   shootAngle: 45
+  angleRandomSpread: 3
 --- !u!1 &423640370
 GameObject:
   m_ObjectHideFlags: 0
