@@ -10,12 +10,11 @@ public class EnemyBasic : MonoBehaviour
     public float angleRandomSpread = 3.0f;
 
     Placeable currentProjectile;
-    Health health;
+    BattleStats battleStats;
 
     void Start()
     {
-        health = GetComponent<Health>();
-        health.deathEvent += OnDeath;
+        battleStats = GetComponent<BattleStats>();
 
         FindObjectOfType<ProjectileSpawner>().launchEvent += OnLaunch;
         Invoke("PlaceProjectile", 0.5f);
@@ -23,10 +22,11 @@ public class EnemyBasic : MonoBehaviour
 
     void PlaceProjectile()
     {       
-        if (!currentProjectile && health.currentHealth > 0)
+        if (!currentProjectile && battleStats.currentHealth > 0)
         {
             Placeable prefab = possiblePlaceablePrefabs[Random.Range(0, possiblePlaceablePrefabs.Length)];
             currentProjectile = Instantiate(prefab, placeableSpawnPoint);
+            currentProjectile.owner = battleStats;
 
             var projectile = currentProjectile.GetComponent<Projectile>();
             if (projectile)
@@ -43,13 +43,5 @@ public class EnemyBasic : MonoBehaviour
     void OnLaunch()
     {
         Invoke("PlaceProjectile", 6.0f);
-    }
-
-    void OnDeath()
-    {
-        FindObjectOfType<ProjectileSpawner>().launchEvent -= OnLaunch;
-        health.deathEvent -= OnDeath;
-
-        Destroy(currentProjectile.gameObject);
     }
 }

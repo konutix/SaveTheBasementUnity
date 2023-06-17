@@ -23,6 +23,8 @@ public class ProjectileSpawner : MonoBehaviour
 
     public PlacingRange placingRange;
 
+    public BattleStats player;
+
 
     public event Action launchEvent;
 
@@ -100,6 +102,7 @@ public class ProjectileSpawner : MonoBehaviour
         if (!currentObject)
         {
             currentObject = Instantiate(prefabToSpawn, mousePos, Quaternion.identity);
+            currentObject.owner = player;
         } 
         else
         {

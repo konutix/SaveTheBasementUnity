@@ -28,6 +28,8 @@ public class Placeable : MonoBehaviour
 
     float mouseDistanceThreshold = 0.1f;
 
+    public BattleStats owner;
+
     void Awake()
     {
         isTriggerByDefault = GetComponentInChildren<Collider2D>().isTrigger;

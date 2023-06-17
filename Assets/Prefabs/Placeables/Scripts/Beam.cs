@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class Beam : MonoBehaviour
 {
+    public int weakAmount = 2;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (GetComponent<Projectile>().isSimulatingTrajectory) return;
         
-        print(gameObject.name + " passing over " + other.gameObject.name);
+        
+        var stats = other.GetComponent<BattleStats>();
+        if (stats)
+        {
+            print(gameObject.name + " weakening " + other.gameObject.name);
+            stats.weak += weakAmount;
+        }
     }
 }
