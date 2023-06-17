@@ -48,6 +48,12 @@ public class TrajectoryManager : MonoBehaviour
                 {
                     enemy.enabled = false;
                 }
+
+                var canvas = child.fake.GetComponent<Canvas>();
+                if (canvas)
+                {
+                    canvas.enabled = false;
+                }
             }
 
             SceneManager.MoveGameObjectToScene(go, simulationScene);

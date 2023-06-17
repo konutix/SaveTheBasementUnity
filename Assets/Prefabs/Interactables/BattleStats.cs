@@ -6,6 +6,7 @@ public class BattleStats : MonoBehaviour, Interactable
 {
     public int maxHealth = 10;
     public int currentHealth = 10;
+    public HealthController healthController;
 
     [Space]
     public int strength = 0;
@@ -14,6 +15,16 @@ public class BattleStats : MonoBehaviour, Interactable
     public int vulnerable = 0;
     public float vulnerableMultiplier = 1.5f;
 
+    [Space]
+    [SerializeField] ParticleSystem gettingDamageParticles;
+
+    void Start()
+    {
+        if (healthController)
+        {
+            healthController.UpdateHealth(this);
+        }
+    }
 
     public void OnInteractWithProjectile(Projectile projectile)
     {
@@ -31,7 +42,17 @@ public class BattleStats : MonoBehaviour, Interactable
         int damage = (int)((projectile.damage + source.strength) * multiplier);
 
         currentHealth -= damage;
-
         print(gameObject.name + " is taking damage: " + damage);
+
+        if (healthController)
+        {
+            healthController.UpdateHealth(this);
+        }
+
+        if (gettingDamageParticles != null)
+        {
+            gettingDamageParticles.transform.position = projectile.transform.position;
+            gettingDamageParticles.Play();
+        }
     }
 }
