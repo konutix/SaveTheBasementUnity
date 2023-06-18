@@ -14,6 +14,10 @@ public class HealthController : MonoBehaviour
     [SerializeField] TMP_Text weakText;
     [SerializeField] TMP_Text vulnerableText;
 
+    [Space]
+    [SerializeField] ParticleSystem powerUpParticles;
+    [SerializeField] ParticleSystem powerDownParticles;
+
     float targetFillAmount = 1.0f;
 
     public void UpdateHealth(BattleStats stats)
@@ -32,6 +36,9 @@ public class HealthController : MonoBehaviour
 
         vulnerableText.text = stats.vulnerable.ToString();
         vulnerableText.transform.parent.gameObject.SetActive(stats.vulnerable != 0);
+
+        if (modifier.strengthAmount > 0) powerUpParticles.Play();
+        if (modifier.weakAmount > 0 || modifier.vulnerableAmount > 0) powerDownParticles.Play();
     }
 
     void Update()
