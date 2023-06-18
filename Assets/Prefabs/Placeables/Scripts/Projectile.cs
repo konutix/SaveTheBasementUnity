@@ -17,7 +17,11 @@ public class Projectile : MonoBehaviour
     public int simulatedBouncesCount = 0;
     [HideInInspector] public int bouncesCount = 0;
 
+    [Space]
+    public bool shouldDestroyOnHit = true;
+
     Rigidbody2D rb;
+    bool wasLaunched = false;
 
     void Awake()
     {
@@ -33,17 +37,25 @@ public class Projectile : MonoBehaviour
         rb.isKinematic = false;
         rb.WakeUp();
         rb.AddForce(direction * launchForce * (usePullModifier ? GetComponent<Placeable>().pull : 1.0f), ForceMode2D.Impulse);
+
+        wasLaunched = true;
     }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
         bouncesCount += 1;
 
-        if (isSimulatingTrajectory)
-        {
-            return;
-        }
+        if (isSimulatingTrajectory || !wasLaunched) return;
 
+        try {
+            collision.gameObject.GetComponent<Interactable>().OnInteractWithProjectile(this);
+        } catch { }
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (isSimulatingTrajectory || !wasLaunched) return;
+        
         try {
             collision.gameObject.GetComponent<Interactable>().OnInteractWithProjectile(this);
         } catch { }

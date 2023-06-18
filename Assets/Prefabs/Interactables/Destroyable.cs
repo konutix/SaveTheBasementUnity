@@ -8,7 +8,7 @@ public class Destroyable : MonoBehaviour, Interactable
 
     public void OnInteractWithProjectile(Projectile projectile)
     {
-        if (evnironmentalHealth == 0) return; 
+        if (evnironmentalHealth == 0 || projectile.evnironmentalDamage < 1) return; 
 
         evnironmentalHealth -= projectile.evnironmentalDamage;
         evnironmentalHealth = Mathf.Clamp(evnironmentalHealth, 0, 1230213);

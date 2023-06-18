@@ -222,11 +222,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   launchForce: 10
   usePullModifier: 0
-  damage: 5
-  evnironmentalDamage: 1
+  damage: 0
+  evnironmentalDamage: 0
   isSimulatingTrajectory: 0
   simulatedBouncesCount: 0
   bouncesCount: 0
+  shouldDestroyOnHit: 0
 --- !u!114 &2507393177547858306
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,7 +246,9 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   isTriggerByDefault: 0
   isMouseOver: 0
+  canBePickedUp: 0
   pull: 1
+  owner: {fileID: 0}
 --- !u!114 &2440138649065969179
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,6 +261,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d90e0bdb329ca84fb93c5842da1a53e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weakAmount: 2
+  vulnerableAmount: 0
+  strengthAmount: 0
 --- !u!50 &5645096804701019274
 Rigidbody2D:
   serializedVersion: 4
