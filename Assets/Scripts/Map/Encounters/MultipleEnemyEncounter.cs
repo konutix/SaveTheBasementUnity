@@ -8,6 +8,6 @@ public class MultipleEnemyEncounter : Encounter
     public override void LaunchEncounter()
     {
         base.LaunchEncounter();
-        SceneManager.LoadScene("MultipleEnemy");
+        SceneManager.LoadScene("WholeLevelTest");
     }
 }

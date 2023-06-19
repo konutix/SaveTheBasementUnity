@@ -13,7 +13,7 @@ public class CardSetting : MonoBehaviour
 
     public Image art;
 
-    public void SetupCard(Card card)
+    public virtual void SetupCard(Card card)
     {
         cardName.text = card.cardName;
         type.text = card.type;

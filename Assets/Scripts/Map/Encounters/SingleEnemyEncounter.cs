@@ -8,6 +8,6 @@ public class SingleEnemyEncounter : Encounter
     public override void LaunchEncounter()
     {
         base.LaunchEncounter();
-        SceneManager.LoadScene("SingleEnemy");
+        SceneManager.LoadScene("WholeLevelTest");
     }
 }

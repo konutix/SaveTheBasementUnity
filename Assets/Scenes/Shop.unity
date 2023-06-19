@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &66477854 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1618846977041305271, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
+  m_PrefabInstance: {fileID: 70823118453406311}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a414af1c99e467b46b5ab0e33cb67637, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &72743696
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,7 +335,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &362002624
 GameObject:
@@ -557,6 +568,108 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1402026883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1402026885}
+  - component: {fileID: 1402026884}
+  - component: {fileID: 1402026886}
+  m_Layer: 0
+  m_Name: ShopPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!212 &1402026884
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1402026883}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Color: {r: 0.5943396, g: 0.2534358, b: 0.02616584, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &1402026885
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1402026883}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
+  m_LocalScale: {x: 15, y: 7, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1402026886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1402026883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07c1add16ad79754eb9686eeeebdbf99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardDictionary: {fileID: 11400000, guid: 0ea9b28efd82b804da4a64cad9370766, type: 2}
+  cardPrefab: {fileID: 13305087574292875, guid: 5290d636ffcf73f4eada83aa8c196da7, type: 3}
+  shopPanel: {fileID: 1402026883}
+  cardToBuyAmount: 3
+  vampireFangsGO: {fileID: 66477854}
 --- !u!1 &1904006538
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,21 +778,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 484956224099970804, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2071199516293310704, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
+      propertyPath: m_Layer
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4017132758189367544, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4017132758189367544, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1376
+      value: 8.77
       objectReference: {fileID: 0}
     - target: {fileID: 4017132758189367544, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 112
+      value: -3.3
       objectReference: {fileID: 0}
     - target: {fileID: 4017132758189367544, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1191.2147
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4017132758189367544, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
       propertyPath: m_LocalRotation.w
@@ -716,6 +837,10 @@ PrefabInstance:
     - target: {fileID: 7713205343176399199, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
       propertyPath: m_Name
       value: VampireFangsIcon
+      objectReference: {fileID: 0}
+    - target: {fileID: 8680574028856143439, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
+      propertyPath: m_Layer
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
