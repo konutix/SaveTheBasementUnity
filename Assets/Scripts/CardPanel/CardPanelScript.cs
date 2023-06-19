@@ -80,9 +80,6 @@ public class CardPanelScript : MonoBehaviour
     //cards in hand
     public List<HandCard> cards;
 
-    //deck card ids
-    public List<int> deck;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -101,7 +98,16 @@ public class CardPanelScript : MonoBehaviour
         postPause = PanelState.inactive;
 
         //deck card ids
-        deck = new List<int>();
+        if(RunState.deck == null)
+        {
+            RunState.deck = new List<int>
+            {
+                0,1,2,1,0,
+                0,1,2,1,0,
+                0,1,2,1,0,
+                0,1,2,1,0
+            };
+        }
 
         //cards in hand
         cards = new List<HandCard>();
@@ -209,13 +215,7 @@ public class CardPanelScript : MonoBehaviour
             case PanelState.setup:
 
                 //Load deck
-                deck = new List<int>
-                {
-                    0, 1, 2, 1, 0,
-                    0, 1, 2, 1, 0,
-                    0, 1, 2, 1, 0,
-                    0, 1, 2, 1, 0,
-                };
+                RunState.deck = new List<int>();
 
                 panelState = PanelState.dealHand;
                 drawn = 0;
@@ -246,11 +246,10 @@ public class CardPanelScript : MonoBehaviour
                             selected = false
                         };
 
-                        int drawnCardID = deck[0];
-                        deck.RemoveAt(0);
-
+                        int drawnCardID = RunState.deck[0];
+                        RunState.deck.RemoveAt(0);
                         drawnCard.cardInstance.GetComponent<CardSetting>()
-                            .SetupCard(cardDictionary.cardDefs[drawnCardID]);
+                            .SetupCard(cardDictionary.GetCard(drawnCardID));
 
                         cards.Add(drawnCard);
 

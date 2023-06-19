@@ -38,7 +38,7 @@ public class Map : MonoBehaviour
 
     void Start()
     {
-        if(RunState.CurrentMap == null)
+        if(RunState.currentMap == null)
         {
             GenerateMap();
         }
@@ -291,14 +291,14 @@ public class Map : MonoBehaviour
             }
         }
 
-        RunState.CurrentMap = MapLayout;
+        RunState.currentMap = MapLayout;
         CheckCurrentEncounter(MapLayout[0,0]);
         ShowMap();
     }
 
     public void LoadMap()
     {
-        MapLayout = RunState.CurrentMap;
+        MapLayout = RunState.currentMap;
         MapHeight = MapLayout.GetLength(0);
         ShowMap();
     }
@@ -369,7 +369,7 @@ public class Map : MonoBehaviour
 
     public void CheckCurrentEncounter(Encounter NewCurrentEncounter)
     {
-        Encounter CurrentEncounter = RunState.CurrentEncounter;
+        Encounter CurrentEncounter = RunState.currentEncounter;
         if (CurrentEncounter != null)
         {
             CurrentEncounter.EncounterState = EncounterStateEnum.Completed;
@@ -378,7 +378,7 @@ public class Map : MonoBehaviour
                 Enc.EncounterState = EncounterStateEnum.Incompleted;
             }
         }
-        RunState.CurrentEncounter = NewCurrentEncounter;
+        RunState.currentEncounter = NewCurrentEncounter;
 
         NewCurrentEncounter.EncounterState = EncounterStateEnum.Completed;
         foreach (Encounter Enc in NewCurrentEncounter.NextEncounters)
@@ -391,6 +391,6 @@ public class Map : MonoBehaviour
     [ContextMenu("Reset Map")]
     void ResetMap()
     {
-        RunState.CurrentMap = null;
+        RunState.currentMap = null;
     }
 }
