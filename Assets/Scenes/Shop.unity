@@ -183,8 +183,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Button
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 2e498d1c8094910479dc3e1b768306a4, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: fa1efb8369862c445a52d3c02bbe54dd, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: fa1efb8369862c445a52d3c02bbe54dd, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -362,9 +362,9 @@ RectTransform:
   m_Father: {fileID: 1904006542}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -655, y: -351}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 80, y: 15}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &362002626
@@ -658,3 +658,64 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1001 &70823118453406311
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4017132758189367544, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4017132758189367544, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1376
+      objectReference: {fileID: 0}
+    - target: {fileID: 4017132758189367544, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 4017132758189367544, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1191.2147
+      objectReference: {fileID: 0}
+    - target: {fileID: 4017132758189367544, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4017132758189367544, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4017132758189367544, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4017132758189367544, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4017132758189367544, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4017132758189367544, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4017132758189367544, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6845397734865602973, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 852243323}
+    - target: {fileID: 7713205343176399199, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
+      propertyPath: m_Name
+      value: VampireFangsIcon
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 91211cfe7ae929947a8282be89f40815, type: 3}

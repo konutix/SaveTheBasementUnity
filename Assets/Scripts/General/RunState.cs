@@ -12,7 +12,7 @@ public static class RunState
     public static List<int> deck;
     public static int cardsDrawn;
     
-    public static int vampireFangs;
+    public static int vampireFangs = 10;
 
     public static Encounter[,] currentMap;
     public static Encounter currentEncounter;

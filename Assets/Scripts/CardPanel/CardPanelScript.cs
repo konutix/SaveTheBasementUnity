@@ -240,7 +240,7 @@ public class CardPanelScript : MonoBehaviour
                         0, 1, 2, 1, 0,
                     };
                 }
-                currentDeck = RunState.deck;
+                currentDeck.AddRange(RunState.deck);
                 panelState = PanelState.dealHand;
                 drawn = 0;
 
