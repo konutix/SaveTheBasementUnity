@@ -110,19 +110,6 @@ public class CardPanelScript : MonoBehaviour
         //set default post pause state
         postPause = PanelState.inactive;
 
-        //deck card ids
-        if(RunState.deck == null)
-        {
-            RunState.deck = new List<int>
-            {
-                0,1,2,1,0,
-                0,1,2,1,0,
-                0,1,2,1,0,
-                0,1,2,1,0
-            };
-        }
-        currentDeck = RunState.deck;
-
         //cards in hand
         cards = new List<HandCard>();
 
@@ -242,8 +229,7 @@ public class CardPanelScript : MonoBehaviour
         {
             //Setup the card panel
             case PanelState.setup:
-                print("das");
-                if (currentDeck == null)
+                if (RunState.deck == null)
                 {
                     //Load deck
                     RunState.deck = new List<int>

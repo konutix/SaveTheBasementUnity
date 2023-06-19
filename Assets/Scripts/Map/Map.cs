@@ -385,9 +385,8 @@ public class Map : MonoBehaviour
         {
             Enc.EncounterState = EncounterStateEnum.Ready;
         }
-        
+     
     }
-
     [ContextMenu("Reset Map")]
     void ResetMap()
     {
