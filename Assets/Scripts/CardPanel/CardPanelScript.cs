@@ -88,9 +88,6 @@ public class CardPanelScript : MonoBehaviour
     public List<HandCard> cards;
 
     //deck card ids
-    public List<int> deck;
-
-    //deck card ids
     public List<int> discarded;
 
     // Start is called before the first frame update
@@ -111,7 +108,16 @@ public class CardPanelScript : MonoBehaviour
         postPause = PanelState.inactive;
 
         //deck card ids
-        deck = new List<int>();
+        if(RunState.deck == null)
+        {
+            RunState.deck = new List<int>
+            {
+                0,1,2,1,0,
+                0,1,2,1,0,
+                0,1,2,1,0,
+                0,1,2,1,0
+            };
+        }
 
         //cards in hand
         cards = new List<HandCard>();
@@ -233,15 +239,17 @@ public class CardPanelScript : MonoBehaviour
             //Setup the card panel
             case PanelState.setup:
 
-                //Randomize deck
-                deck = new List<int>
+                if (RunState.deck == null)
                 {
-                    0, 1, 2, 3, 0,
-                    0, 1, 2, 3, 0,
-                    0, 1, 2, 3, 0,
-                    0, 1, 2, 3, 0,
-                };
-
+                    //Load deck
+                    RunState.deck = new List<int>
+                    {
+                        0, 1, 2, 1, 0,
+                        0, 1, 2, 1, 0,
+                        0, 1, 2, 1, 0,
+                        0, 1, 2, 1, 0,
+                    };
+                }
                 panelState = PanelState.dealHand;
                 drawn = 0;
 
@@ -259,13 +267,13 @@ public class CardPanelScript : MonoBehaviour
                     //draw cards
                     if (drawn < drawAmount)
                     {
-                        if (deck.Count <= 0)
+                        if (RunState.deck.Count <= 0)
                         {
                             while(discarded.Count > 0) 
                             {
                                 int k = (int)Random.Range(0.0f, (float)discarded.Count - 0.001f);
 
-                                deck.Add(discarded[k]);
+                                RunState.deck.Add(discarded[k]);
                                 discarded.RemoveAt(k);
                             }
                         }
@@ -283,15 +291,13 @@ public class CardPanelScript : MonoBehaviour
                             selected = false
                         };
 
-                        int drawnCardID = deck[0];
-                        deck.RemoveAt(0);
-
-                        drawnCard.baseId = drawnCardID;
+                        int drawnCardID = RunState.deck[0];
+                        RunState.deck.RemoveAt(0);
 
                         drawnCard.cardInstance.GetComponent<CardSetting>()
-                            .SetupCard(cardDictionary.cardDefs[drawnCardID]);
+                            .SetupCard(cardDictionary.GetCard(drawnCardID));
 
-                        drawnCard.effectPrefab = cardDictionary.cardDefs[drawnCardID].effectPrefab;
+                        drawnCard.effectPrefab = cardDictionary.GetCard(drawnCardID).effectPrefab;
 
                         cards.Add(drawnCard);
 

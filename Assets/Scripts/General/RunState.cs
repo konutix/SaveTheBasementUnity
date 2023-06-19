@@ -4,16 +4,17 @@ using UnityEngine;
 
 public static class RunState
 {
-    public static float MaxPlayerHealth;
-    public static float CurrentPlayerHealth;
+    public static float maxPlayerHealth;
+    public static float currentPlayerHealth;
 
     public static int Mana;
 
-    public static int CardsDrawn;
+    public static List<int> deck;
+    public static int cardsDrawn;
     
-    public static int VampireFangs;
+    public static int vampireFangs;
 
-    public static Encounter[,] CurrentMap;
-    public static Encounter CurrentEncounter;
+    public static Encounter[,] currentMap;
+    public static Encounter currentEncounter;
 
 }
