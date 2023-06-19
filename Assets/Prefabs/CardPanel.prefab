@@ -446,7 +446,7 @@ MonoBehaviour:
   CardPrefab: {fileID: 13305087574292875, guid: e730a408c7af2b24f85b01c5167e176b, type: 3}
   DeckObInScene: {fileID: 6322951726424421619}
   DiscardObInScene: {fileID: 6322951726879654624}
-  cardDictionary: {fileID: 0}
+  cardDictionary: {fileID: 11400000, guid: 0ea9b28efd82b804da4a64cad9370766, type: 2}
   projSpawner: {fileID: 0}
   panelState: 1
   hovered: -1
@@ -464,7 +464,7 @@ MonoBehaviour:
   drawEaseIn: 0.02
   postDrawPause: 1
   cardsCenter: {x: 0, y: -4.75, z: 0}
-  deck: 
+  currentDeck: 
   discarded: 
 --- !u!1 &6322951725514127108
 GameObject:

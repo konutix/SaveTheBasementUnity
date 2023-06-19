@@ -84,6 +84,9 @@ public class CardPanelScript : MonoBehaviour
     //where should cards be placed
     public Vector3 cardsCenter;
 
+    //cards in deck during play
+    public List<int> currentDeck;
+
     //cards in hand
     public List<HandCard> cards;
 
@@ -118,6 +121,7 @@ public class CardPanelScript : MonoBehaviour
                 0,1,2,1,0
             };
         }
+        currentDeck = RunState.deck;
 
         //cards in hand
         cards = new List<HandCard>();
@@ -238,8 +242,8 @@ public class CardPanelScript : MonoBehaviour
         {
             //Setup the card panel
             case PanelState.setup:
-
-                if (RunState.deck == null)
+                print("das");
+                if (currentDeck == null)
                 {
                     //Load deck
                     RunState.deck = new List<int>
@@ -250,6 +254,7 @@ public class CardPanelScript : MonoBehaviour
                         0, 1, 2, 1, 0,
                     };
                 }
+                currentDeck = RunState.deck;
                 panelState = PanelState.dealHand;
                 drawn = 0;
 
@@ -267,13 +272,13 @@ public class CardPanelScript : MonoBehaviour
                     //draw cards
                     if (drawn < drawAmount)
                     {
-                        if (RunState.deck.Count <= 0)
+                        if (currentDeck.Count <= 0)
                         {
                             while(discarded.Count > 0) 
                             {
                                 int k = (int)Random.Range(0.0f, (float)discarded.Count - 0.001f);
 
-                                RunState.deck.Add(discarded[k]);
+                                currentDeck.Add(discarded[k]);
                                 discarded.RemoveAt(k);
                             }
                         }
@@ -291,8 +296,8 @@ public class CardPanelScript : MonoBehaviour
                             selected = false
                         };
 
-                        int drawnCardID = RunState.deck[0];
-                        RunState.deck.RemoveAt(0);
+                        int drawnCardID = currentDeck[0];
+                        currentDeck.RemoveAt(0);
 
                         drawnCard.cardInstance.GetComponent<CardSetting>()
                             .SetupCard(cardDictionary.GetCard(drawnCardID));
@@ -522,5 +527,10 @@ public class CardPanelScript : MonoBehaviour
 
                 break;
         }
+    }
+    [ContextMenu("Reset Deck")]
+    void ResetDeck()
+    {
+        RunState.deck = null;
     }
 }
