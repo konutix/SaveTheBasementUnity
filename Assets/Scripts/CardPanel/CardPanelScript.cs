@@ -252,6 +252,17 @@ public class CardPanelScript : MonoBehaviour
                     //draw cards
                     if (drawn < drawAmount)
                     {
+                        if (deck.Count <= 0)
+                        {
+                            while(discarded.Count > 0) 
+                            {
+                                int k = (int)Random.Range(0.0f, (float)discarded.Count - 0.001f);
+
+                                deck.Add(discarded[k]);
+                                discarded.RemoveAt(k);
+                            }
+                        }
+
                         HandCard drawnCard = new HandCard
                         {
                             cardInstance = Instantiate(
