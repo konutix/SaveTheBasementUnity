@@ -40,11 +40,22 @@ public class BattleStats : MonoBehaviour, Interactable
 
     void TakeDamage(Projectile projectile)
     {
+        if (gettingDamageParticles != null)
+        {
+            gettingDamageParticles.transform.position = projectile.transform.position;
+            gettingDamageParticles.Play();
+        }
+
         BattleStats source = projectile.GetComponent<Placeable>().owner;
 
         float multiplier = ((vulnerable > 0) ? vulnerableMultiplier : 1.0f) * ((source.weak > 0) ? source.weakMultiplier : 1.0f);
         int damage = (int)((projectile.damage + source.strength) * multiplier);
 
+        TakeDamage(damage);
+    }
+
+    public void TakeDamage(int damage)
+    {
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth);
         print(gameObject.name + " is taking damage: " + damage);
 
@@ -53,16 +64,16 @@ public class BattleStats : MonoBehaviour, Interactable
             healthController.UpdateHealth(this);
         }
 
-        if (gettingDamageParticles != null)
-        {
-            gettingDamageParticles.transform.position = projectile.transform.position;
-            gettingDamageParticles.Play();
-        }
-
         var cameraShake = FindObjectOfType<CameraShake>();
         if (cameraShake)
         {
             cameraShake.shakeDuration = 0.1f;
+        }
+
+        if (currentHealth <= 0)
+        {
+            // on death
+            Destroy(gameObject, 0.2f);
         }
     }
 

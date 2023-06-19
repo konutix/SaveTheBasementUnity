@@ -44,4 +44,10 @@ public class EnemyBasic : MonoBehaviour
     {
         Invoke("PlaceProjectile", 6.0f);
     }
+
+    private void OnDestroy()
+    {
+        var ps = FindObjectOfType<ProjectileSpawner>();
+        if (ps) ps.launchEvent -= OnLaunch;
+    }
 }

@@ -43,10 +43,17 @@ public class TrajectoryManager : MonoBehaviour
                     dynamicObjects.Add(child.real.gameObject, child.fake.gameObject);
                 }
 
+                // THIS IS AWFUL
                 var enemy = child.fake.GetComponent<EnemyBasic>();
                 if (enemy)
                 {
                     enemy.enabled = false;
+                }
+
+                var enemyE = child.fake.GetComponent<EnemyExplode>();
+                if (enemyE)
+                {
+                    enemyE.enabled = false;
                 }
 
                 var canvas = child.fake.GetComponent<Canvas>();

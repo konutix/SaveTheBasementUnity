@@ -20,6 +20,9 @@ public class Projectile : MonoBehaviour
     [Space]
     public bool shouldDestroyOnHit = true;
 
+    [Space]
+    public ParticleSystem ricochetParticles;
+
     Rigidbody2D rb;
     bool wasLaunched = false;
 
@@ -47,9 +50,17 @@ public class Projectile : MonoBehaviour
 
         if (isSimulatingTrajectory || !wasLaunched) return;
 
-        try {
-            collision.gameObject.GetComponent<Interactable>().OnInteractWithProjectile(this);
-        } catch { }
+        var interaction = collision.gameObject.GetComponent<Interactable>();
+        if (interaction != null)
+        {
+            interaction.OnInteractWithProjectile(this);
+        }
+        else if (ricochetParticles != null)
+        {
+            if (rb.velocity.magnitude < 1.618f) return;
+            var particles = Instantiate(ricochetParticles, transform.position, Quaternion.identity);
+            particles.Play();
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)

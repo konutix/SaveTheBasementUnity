@@ -175,6 +175,8 @@ MonoBehaviour:
   isSimulatingTrajectory: 0
   simulatedBouncesCount: 0
   bouncesCount: 0
+  shouldDestroyOnHit: 1
+  ricochetParticles: {fileID: 2503900592838952298, guid: bb91d7d040040ea468f4f05f84452661, type: 3}
 --- !u!114 &9060461344441102324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,7 +195,9 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 0}
   isTriggerByDefault: 0
   isMouseOver: 0
+  canBePickedUp: 0
   pull: 1
+  owner: {fileID: 0}
 --- !u!114 &4172597604037525346
 MonoBehaviour:
   m_ObjectHideFlags: 0
