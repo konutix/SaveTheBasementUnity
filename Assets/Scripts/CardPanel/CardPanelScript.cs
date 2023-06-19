@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public enum PanelState
 {
@@ -27,6 +28,7 @@ public struct HandCard
     public Vector3 cardScale;
     public bool hovered;
     public bool selected;
+    public Placeable effectPrefab;
 }
 
 public class CardPanelScript : MonoBehaviour
@@ -40,6 +42,8 @@ public class CardPanelScript : MonoBehaviour
     public GameObject DiscardObInScene = null;
 
     public CardDictionary cardDictionary;
+
+    public ProjectileSpawner projSpawner = null;
 
     public PanelState panelState;
 
@@ -114,6 +118,8 @@ public class CardPanelScript : MonoBehaviour
 
         //cards in hand
         discarded = new List<int>();
+
+        projSpawner = FindObjectOfType<ProjectileSpawner>();
     }
 
     // Update is called once per frame
@@ -227,17 +233,18 @@ public class CardPanelScript : MonoBehaviour
             //Setup the card panel
             case PanelState.setup:
 
-                //Load deck
+                //Randomize deck
                 deck = new List<int>
                 {
-                    0, 1, 2, 1, 0,
-                    0, 1, 2, 1, 0,
-                    0, 1, 2, 1, 0,
-                    0, 1, 2, 1, 0,
+                    0, 1, 2, 3, 0,
+                    0, 1, 2, 3, 0,
+                    0, 1, 2, 3, 0,
+                    0, 1, 2, 3, 0,
                 };
 
                 panelState = PanelState.dealHand;
                 drawn = 0;
+
                 break;
 
             //Setup the card panel
@@ -284,6 +291,8 @@ public class CardPanelScript : MonoBehaviour
                         drawnCard.cardInstance.GetComponent<CardSetting>()
                             .SetupCard(cardDictionary.cardDefs[drawnCardID]);
 
+                        drawnCard.effectPrefab = cardDictionary.cardDefs[drawnCardID].effectPrefab;
+
                         cards.Add(drawnCard);
 
                         drawn++;
@@ -328,6 +337,11 @@ public class CardPanelScript : MonoBehaviour
                         card.hovered = false;
                         card.selected = false;
                         cards[j] = card;
+                    }
+
+                    if (projSpawner.CanLaunch())
+                    {
+                        projSpawner.OnLaunched();
                     }
                 }
 
@@ -426,6 +440,8 @@ public class CardPanelScript : MonoBehaviour
                 //play card
                 if (ifPlay)
                 {
+                    Placeable toPlace = null;
+
                     panelState = PanelState.placing;
                     for (int j = 0; j < cards.Count; j++)
                     {
@@ -435,8 +451,12 @@ public class CardPanelScript : MonoBehaviour
                             card.hovered = true;
                             card.selected = false;
                             cards[j] = card;
+
+                            toPlace = card.effectPrefab;
                         }
                     }
+
+                    projSpawner.StartPlacing(toPlace);
                 }
 
                 break;

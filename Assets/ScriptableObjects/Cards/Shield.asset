@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3962a36c7710e64bac40dfc63af6045, type: 3}
-  m_Name: VampirismCard
+  m_Name: Shield
   m_EditorClassIdentifier: 
-  id: 2
-  cardName: Vampirism
-  description: heal 2 on hit this turn
-  type: Effect
-  art: {fileID: 21300000, guid: 09b846dc10c1bc6479af27d7a8066661, type: 3}
+  id: 3
+  cardName: Shield
+  description: Place a destructable shield that blocks all projectiles
+  type: Placeable
+  art: {fileID: 21300000, guid: 727f08f62e2597747a6b46bb922cb880, type: 3}
   manaCost: 2
-  effectPrefab: {fileID: 2507393177547858306, guid: 70280e8a85d03d44894637461904d4e5, type: 3}
+  effectPrefab: {fileID: 8309556347256184467, guid: f339294abeb874949a9984751740c5a5, type: 3}

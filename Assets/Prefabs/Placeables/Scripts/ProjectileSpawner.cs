@@ -39,13 +39,6 @@ public class ProjectileSpawner : MonoBehaviour
 
     void Update()
     {
-        // Temporary set placing state
-        if (Input.GetKeyDown("space"))
-        {
-            isPlacing = true;
-            CreateGhost(prefabToSpawn);
-        }
-
         if (!prefabToSpawn) return;
 
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -84,11 +77,6 @@ public class ProjectileSpawner : MonoBehaviour
                 {
                     TryPickupPlaced();
                 }
-            }
-
-            if (Input.GetMouseButtonDown(1))
-            {
-                OnLaunched();
             }
         }
     }
@@ -169,5 +157,17 @@ public class ProjectileSpawner : MonoBehaviour
         ghost = Instantiate(prefab);
         ghost.GetComponentInChildren<Collider2D>().enabled = false;
         ghost.OnStartedPlacing();
+    }
+
+    public bool CanLaunch()
+    {
+        return (!isAiming && !isPlacing);
+    }
+
+    public void StartPlacing(Placeable placeable)
+    {
+        prefabToSpawn = placeable;
+        isPlacing = true;
+        CreateGhost(prefabToSpawn);
     }
 }

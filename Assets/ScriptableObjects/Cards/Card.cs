@@ -14,4 +14,5 @@ public class Card : ScriptableObject
 
     public int manaCost;
 
+    public Placeable effectPrefab;
 }
