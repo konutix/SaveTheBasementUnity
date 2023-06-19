@@ -22,6 +22,7 @@ public enum PanelState
 
 public struct HandCard
 {
+    public int baseId;
     public GameObject cardInstance;
     public Vector3 cardScale;
     public bool hovered;
@@ -35,6 +36,8 @@ public class CardPanelScript : MonoBehaviour
 
     //object that determines deck location
     public GameObject DeckObInScene = null;
+
+    public GameObject DiscardObInScene = null;
 
     public CardDictionary cardDictionary;
 
@@ -80,6 +83,9 @@ public class CardPanelScript : MonoBehaviour
     //cards in hand
     public List<HandCard> cards;
 
+    //deck card ids
+    public List<int> discarded;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -111,6 +117,9 @@ public class CardPanelScript : MonoBehaviour
 
         //cards in hand
         cards = new List<HandCard>();
+
+        //cards in hand
+        discarded = new List<int>();
     }
 
     // Update is called once per frame
@@ -125,21 +134,31 @@ public class CardPanelScript : MonoBehaviour
         int i = 0;
         foreach(HandCard cd in cards)
         {
-            //calc distance from hovered
-            float hovDist = 0.0f;
+            //default
+            Vector3 cardPlace = new Vector3(0,0,0);
 
-            if (hovered != -1 && i != hovered)
+            if (panelState != PanelState.simulation)
             {
-                hovDist = ((i - hovered) * distFromHovered) / Mathf.Pow((float)Mathf.Abs(i - hovered), hoverDistMulti);
-            }
+                //calc distance from hovered
+                float hovDist = 0.0f;
 
-            //position
-            Vector3 cardPlace =
-                cardsCenter + new Vector3(
-                        leftDistance + (float)i * cardDist * 2.0f + hovDist, 
-                        Mathf.Sin((float)i / ((float)cardsCount - 0.99f) * Mathf.PI) * bowHeight * cardsCount, 
-                        -(float)i + 50.0f
-                    );
+                if (hovered != -1 && i != hovered)
+                {
+                    hovDist = ((i - hovered) * distFromHovered) / Mathf.Pow((float)Mathf.Abs(i - hovered), hoverDistMulti);
+                }
+
+                //position
+                cardPlace =
+                    cardsCenter + new Vector3(
+                            leftDistance + (float)i * cardDist * 2.0f + hovDist,
+                            Mathf.Sin((float)i / ((float)cardsCount - 0.99f) * Mathf.PI) * bowHeight * cardsCount,
+                            -(float)i + 50.0f
+                        );
+            }
+            else
+            {
+                cardPlace = DiscardObInScene.transform.position;
+            }
 
             if (cd.hovered)
             {
@@ -233,6 +252,17 @@ public class CardPanelScript : MonoBehaviour
                     //draw cards
                     if (drawn < drawAmount)
                     {
+                        if (RunState.deck.Count <= 0)
+                        {
+                            while(discarded.Count > 0) 
+                            {
+                                int k = (int)Random.Range(0.0f, (float)discarded.Count - 0.001f);
+
+                                RunState.deck.Add(discarded[k]);
+                                discarded.RemoveAt(k);
+                            }
+                        }
+
                         HandCard drawnCard = new HandCard
                         {
                             cardInstance = Instantiate(
@@ -248,6 +278,7 @@ public class CardPanelScript : MonoBehaviour
 
                         int drawnCardID = RunState.deck[0];
                         RunState.deck.RemoveAt(0);
+
                         drawnCard.cardInstance.GetComponent<CardSetting>()
                             .SetupCard(cardDictionary.GetCard(drawnCardID));
 
@@ -262,6 +293,7 @@ public class CardPanelScript : MonoBehaviour
                         panelState = PanelState.pause;
                         postPause = PanelState.cardPick;
                         pauseTimer = postDrawPause;
+                        drawn = 0;
                     }
                 }
 
@@ -281,6 +313,21 @@ public class CardPanelScript : MonoBehaviour
 
             //Player is picking a card (cursor is free)
             case PanelState.cardPick:
+
+                //end turn
+                if (Input.GetMouseButtonDown(2))
+                {
+                    panelState = PanelState.simulation;
+
+                    for (int j = 0; j < cards.Count; j++)
+                    {
+                        HandCard card = cards[j];
+                        card.cardScale = new Vector3(baseScale, baseScale, baseScale);
+                        card.hovered = false;
+                        card.selected = false;
+                        cards[j] = card;
+                    }
+                }
 
                 // Set Card Layer mask
                 int layerMask = 7;
@@ -395,12 +442,56 @@ public class CardPanelScript : MonoBehaviour
             //Player is placing an object
             case PanelState.placing:
 
+                //release
+                if (Input.GetMouseButtonDown(1))
+                {
+                    panelState = PanelState.cardPick;
 
+                    for (int j = 0; j < cards.Count; j++)
+                    {
+                        HandCard card = cards[j];
+                        card.cardScale = new Vector3(baseScale, baseScale, baseScale);
+                        card.hovered = false;
+                        card.selected = false;
+                        cards[j] = card;
+                    }
+                }
 
                 break;
 
             //During simulation
             case PanelState.simulation:
+
+                if (cards.Count > 0)
+                {
+                    //add cards to discard pile
+                    List<HandCard> leftCards = new List<HandCard>();
+
+                    for (int j = 0; j < cards.Count; j++)
+                    {
+                        HandCard card = cards[j];
+
+                        if (card.cardInstance != null)
+                        {
+                            if ((card.cardInstance.transform.position -
+                                DiscardObInScene.transform.position).magnitude < 0.5f)
+                            {
+                                discarded.Add(card.baseId);
+                                Destroy(card.cardInstance);
+                            }
+                            else
+                            {
+                                leftCards.Add(card);
+                            }
+                        }
+                    }
+                    cards = leftCards;
+                }
+                else
+                {
+                    panelState = PanelState.dealHand;
+                }
+
                 break;
         }
     }

@@ -445,6 +445,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CardPrefab: {fileID: 13305087574292875, guid: e730a408c7af2b24f85b01c5167e176b, type: 3}
   DeckObInScene: {fileID: 6322951726424421619}
+  DiscardObInScene: {fileID: 6322951726879654624}
   cardDictionary: {fileID: 0}
   panelState: 1
   hovered: -1
@@ -453,9 +454,9 @@ MonoBehaviour:
   cardTilt: 1.5
   bowHeight: 0.04
   baseScale: 1
-  cardZoom: 1.5
-  hoveredHeight: -2.8
-  distFromHovered: 1
+  cardZoom: 1.2
+  hoveredHeight: -3.5
+  distFromHovered: 0.8
   hoverDistMulti: 1.6
   playHeight: -2.8
   drawDelay: 0.2
