@@ -21,7 +21,7 @@ public enum PanelState
     simulation
 }
 
-public struct HandCard
+public class HandCard
 {
     public int baseId;
     public GameObject cardInstance;
@@ -29,6 +29,7 @@ public struct HandCard
     public bool hovered;
     public bool selected;
     public Placeable effectPrefab;
+    public Placeable spawnedPlaceableInstance;
 }
 
 public class CardPanelScript : MonoBehaviour
@@ -48,6 +49,7 @@ public class CardPanelScript : MonoBehaviour
     public PanelState panelState;
 
     public int hovered = -1;
+    int lastSelectedIndex = -1;
 
     [Space]
     [Space]
@@ -120,7 +122,7 @@ public class CardPanelScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         //recalculate card positions
         int cardsCount = cards.Count;
@@ -279,7 +281,8 @@ public class CardPanelScript : MonoBehaviour
 
                             cardScale = new Vector3(1.0f, 1.0f, 1.0f),
                             hovered = false,
-                            selected = false
+                            selected = false,
+                            spawnedPlaceableInstance = null                                
                         };
 
                         int drawnCardID = currentDeck[0];
@@ -368,6 +371,15 @@ public class CardPanelScript : MonoBehaviour
                         card.hovered = false;
                         cards[j] = card;
                     }
+
+                    if (cards[j].spawnedPlaceableInstance != null)
+                    {
+                        var highlight = cards[j].spawnedPlaceableInstance.GetComponent<Highlight>();
+                        if (highlight)
+                        {
+                            highlight.SetHighlight(cards[j].hovered);
+                        }
+                    }
                 }
 
                 if (!ifHit)
@@ -375,12 +387,20 @@ public class CardPanelScript : MonoBehaviour
                     hovered = -1;
                 }
 
-                if (Input.GetMouseButtonDown(0) && hovered != -1)
+                //get hovered card, select only if wasnt already played
+                if (Input.GetMouseButtonDown(0) && hovered != -1 && cards[hovered].spawnedPlaceableInstance == null)
                 {
                     HandCard card = cards[hovered];
                     card.selected = true;
                     cards[hovered] = card;
                     panelState = PanelState.dragging;
+                }
+
+                //cancel hovered, played card
+                if (Input.GetMouseButtonDown(1) && hovered != -1 && cards[hovered].spawnedPlaceableInstance != null)
+                {
+                    projSpawner.RemovePlaceable(cards[hovered].spawnedPlaceableInstance);
+                    CancelPlayedCard(cards[hovered].spawnedPlaceableInstance);
                 }
 
                 break;
@@ -450,6 +470,7 @@ public class CardPanelScript : MonoBehaviour
                             cards[j] = card;
 
                             toPlace = card.effectPrefab;
+                            lastSelectedIndex = j;
                         }
                     }
 
@@ -460,6 +481,13 @@ public class CardPanelScript : MonoBehaviour
 
             //Player is placing an object
             case PanelState.placing:
+
+                // instance was placed -> release card
+                if (lastSelectedIndex != -1)
+                {
+                    if (cards[lastSelectedIndex].spawnedPlaceableInstance != null)
+                        panelState = PanelState.cardPick;
+                }
 
                 //release
                 if (Input.GetMouseButtonDown(1))
@@ -474,6 +502,8 @@ public class CardPanelScript : MonoBehaviour
                         card.selected = false;
                         cards[j] = card;
                     }
+
+                    projSpawner.OnCancelPlacing();
                 }
 
                 break;
@@ -518,5 +548,30 @@ public class CardPanelScript : MonoBehaviour
     void ResetDeck()
     {
         RunState.deck = null;
+    }
+
+    public void AssignInstanceToCurrentCard(Placeable placeable)
+    {
+        if (lastSelectedIndex == -1) return;
+
+        var card = cards[lastSelectedIndex];
+        if (card.spawnedPlaceableInstance == null)
+        {
+            card.spawnedPlaceableInstance = placeable;
+            card.cardInstance.GetComponent<CardSetting>().SetOpacity(0.5f);
+        }       
+    }
+
+    public void CancelPlayedCard(Placeable placeable)
+    {
+        for (int j = 0; j < cards.Count; j++)
+        {
+            var card = cards[j];
+            if (card.spawnedPlaceableInstance == placeable)
+            {
+                card.spawnedPlaceableInstance = null;
+                card.cardInstance.GetComponent<CardSetting>().SetOpacity(1.0f);
+            }
+        }
     }
 }

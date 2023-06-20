@@ -34,6 +34,7 @@ public class Placeable : MonoBehaviour
     {
         isTriggerByDefault = GetComponentInChildren<Collider2D>().isTrigger;
         projectileSpawner = FindObjectOfType<ProjectileSpawner>();
+        direction = Vector3.right;
     }
 
     public void OnStartedPlacing()
@@ -58,10 +59,14 @@ public class Placeable : MonoBehaviour
         {
             col.isTrigger = isTriggerByDefault;
         }
+
+        OnMouseExit();
     }
 
     public void OnLaunched()
     {
+        canBePickedUp = false;
+
         var projectile = GetComponent<Projectile>();
         if (projectile)
         {
@@ -99,27 +104,27 @@ public class Placeable : MonoBehaviour
 
     private void OnMouseOver() 
     {
-        if(!canBePickedUp) return;
+        if(!canBePickedUp || !projectileSpawner.CanLaunch()) return;
 
         isMouseOver = true;
 
         var highlight = GetComponent<Highlight>();
         if (highlight)
         {
-            highlight.SetHighlight(true);
+            highlight.SetHighlightAndResize(true, 10);
         }
     }
 
     private void OnMouseExit() 
     {
-        if(!canBePickedUp) return;
+        if(!canBePickedUp || !projectileSpawner.CanLaunch()) return;
 
         isMouseOver = false;
 
         var highlight = GetComponent<Highlight>();
         if (highlight)
         {
-            highlight.SetHighlight(false);
+            highlight.SetHighlightAndResize(false, 10);
         }
     }
 

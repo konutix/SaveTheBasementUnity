@@ -70,10 +70,13 @@ public class BattleStats : MonoBehaviour, Interactable
             cameraShake.shakeDuration = 0.1f;
         }
 
+        // On Death
         if (currentHealth <= 0)
         {
-            // on death
-            Destroy(gameObject, 0.2f);
+            var traj = FindObjectOfType<TrajectoryManager>();
+            if (traj) traj.RemoveObject(gameObject);
+
+            Destroy(gameObject, 0.4f);
         }
     }
 

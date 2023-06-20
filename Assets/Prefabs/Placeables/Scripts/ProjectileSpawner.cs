@@ -15,8 +15,8 @@ public class ProjectileSpawner : MonoBehaviour
     Placeable tempCheckPrefabChange;
 
 
-    bool isAiming  = false;
-    bool isPlacing = false;
+    [HideInInspector] public bool isAiming  = false;
+    [HideInInspector] public bool isPlacing = false;
     Vector3 mousePos = Vector3.zero;
 
     public TrajectoryManager trajectoryManager;
@@ -27,14 +27,13 @@ public class ProjectileSpawner : MonoBehaviour
 
 
     public event Action launchEvent;
+    
+    CardPanelScript cardPanel;
 
     void Start()
     {
         objectsToLaunch = new List<Placeable>();
-
-        print("Left click & drag: spawn object");
-        print("Right click: launch projectiles");
-        print("To change object type, select prefab in Projectile Spawner");
+        cardPanel = FindObjectOfType<CardPanelScript>();
     }
 
     void Update()
@@ -51,7 +50,7 @@ public class ProjectileSpawner : MonoBehaviour
         }
 
         ghost.transform.position = mousePos;
-
+        ghost.gameObject.SetActive(placingRange.isInRange && isPlacing);
 
         if (isAiming)
         {
@@ -65,8 +64,6 @@ public class ProjectileSpawner : MonoBehaviour
         }
         else
         {
-            ghost.gameObject.SetActive(placingRange.isInRange && isPlacing);
-
             if (Input.GetMouseButtonDown(0))
             {
                 if (placingRange.isInRange && isPlacing)
@@ -78,6 +75,11 @@ public class ProjectileSpawner : MonoBehaviour
                     TryPickupPlaced();
                 }
             }
+
+            if (Input.GetMouseButtonDown(1))
+            {
+                TryCancelPlaced();
+            }
         }
     }
 
@@ -85,7 +87,6 @@ public class ProjectileSpawner : MonoBehaviour
     {
         isPlacing = false;
         isAiming = true;
-        ghost.gameObject.SetActive(false);
 
         if (!currentObject)
         {
@@ -107,8 +108,23 @@ public class ProjectileSpawner : MonoBehaviour
         isAiming = false;
         ghost.gameObject.SetActive(true);
 
+        if (cardPanel) cardPanel.AssignInstanceToCurrentCard(currentObject);
+
         currentObject.OnStoppedPlacing();
         currentObject = null;
+    }
+    
+    public void OnCancelPlacing()
+    {
+        isPlacing = false;
+        isAiming = false;
+
+        if (currentObject)
+        {
+            objectsToLaunch.Remove(currentObject);
+            Destroy(currentObject.gameObject);
+            currentObject = null;
+        }
     }
 
     public void OnLaunched()
@@ -124,13 +140,33 @@ public class ProjectileSpawner : MonoBehaviour
         if (launchEvent != null) launchEvent();
     }
 
+    public bool CanLaunch()
+    {
+        return (!isAiming && !isPlacing);
+    }
+
+    public void StartPlacing(Placeable placeable)
+    {
+        prefabToSpawn = placeable;
+        isPlacing = true;
+        CreateGhost(prefabToSpawn);
+    }
+
     public void AddPlaceable(Placeable placeable)
     {
         objectsToLaunch.Add(placeable);
     }
 
+    public void RemovePlaceable(Placeable placeable)
+    {
+        objectsToLaunch.Remove(placeable);
+        Destroy(placeable.gameObject);
+    }
+
     void TryPickupPlaced()
     {
+        if (!CanLaunch()) return;
+
         foreach (var placeable in objectsToLaunch)
         {
             if (placeable.isMouseOver)
@@ -150,6 +186,41 @@ public class ProjectileSpawner : MonoBehaviour
         }
     }
 
+    void TryCancelPlaced()
+    {
+        if (isPlacing)
+        {
+            if (currentObject)
+            {
+                if (cardPanel != null) cardPanel.CancelPlayedCard(currentObject);
+                
+                objectsToLaunch.Remove(currentObject);
+                Destroy(currentObject.gameObject);
+                
+                currentObject = null;
+
+                isPlacing = false;
+            }
+
+            return;
+        }
+
+        foreach (var placeable in objectsToLaunch)
+        {
+            if (placeable.isMouseOver)
+            {
+                if (cardPanel != null) cardPanel.CancelPlayedCard(placeable);
+                
+                objectsToLaunch.Remove(placeable);
+                Destroy(placeable.gameObject);
+                
+                currentObject = null;
+
+                return;
+            }
+        }
+    }
+
     void CreateGhost(Placeable prefab)
     {
         if (ghost) Destroy(ghost.gameObject);
@@ -157,17 +228,5 @@ public class ProjectileSpawner : MonoBehaviour
         ghost = Instantiate(prefab);
         ghost.GetComponentInChildren<Collider2D>().enabled = false;
         ghost.OnStartedPlacing();
-    }
-
-    public bool CanLaunch()
-    {
-        return (!isAiming && !isPlacing);
-    }
-
-    public void StartPlacing(Placeable placeable)
-    {
-        prefabToSpawn = placeable;
-        isPlacing = true;
-        CreateGhost(prefabToSpawn);
     }
 }

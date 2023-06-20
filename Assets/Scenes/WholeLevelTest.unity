@@ -843,7 +843,7 @@ MonoBehaviour:
   possiblePlaceablePrefabs:
   - {fileID: 268714616573463473, guid: 61e110c759825884d86d7dcc06979840, type: 3}
   - {fileID: 8309556347256184467, guid: f339294abeb874949a9984751740c5a5, type: 3}
-  shootAngle: 45
+  shootAngle: 40
   angleRandomSpread: 3
 --- !u!114 &376459433
 MonoBehaviour:
@@ -1193,6 +1193,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabToSpawn: {fileID: 8798663612254412744, guid: 93536e6ad787960439d011ea5d1c7e3a, type: 3}
   objectsToLaunch: []
+  isAiming: 0
+  isPlacing: 0
   trajectoryManager: {fileID: 671793483}
   placingRange: {fileID: 61840989}
   player: {fileID: 908398708}
