@@ -463,6 +463,7 @@ MonoBehaviour:
   drawDelay: 0.2
   drawEaseIn: 0.02
   postDrawPause: 1
+  simulationPause: 5
   cardsCenter: {x: 0, y: -4.75, z: 0}
   currentDeck: 
   discarded: 
