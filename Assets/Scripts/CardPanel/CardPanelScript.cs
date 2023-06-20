@@ -78,8 +78,12 @@ public class CardPanelScript : MonoBehaviour
     float drawTimer = 0.0f;
     int drawn;
 
+    //simulation
+    public float simulationTimer;
+
     //pause mechanics for delays in panel actions
     public float postDrawPause = 1.0f;
+    public float simulationPause = 5.0f;
     float pauseTimer = 0.0f;
     PanelState postPause;
 
@@ -119,6 +123,8 @@ public class CardPanelScript : MonoBehaviour
         discarded = new List<int>();
 
         projSpawner = FindObjectOfType<ProjectileSpawner>();
+
+        simulationTimer = 0.0f;
     }
 
     // Update is called once per frame
@@ -243,6 +249,22 @@ public class CardPanelScript : MonoBehaviour
                     };
                 }
                 currentDeck.AddRange(RunState.deck);
+
+                //shuffle
+                discarded.AddRange(currentDeck);
+                currentDeck.Clear();
+
+                if (currentDeck.Count <= 0)
+                {
+                    while (discarded.Count > 0)
+                    {
+                        int k = (int)Random.Range(0.0f, (float)discarded.Count - 0.001f);
+
+                        currentDeck.Add(discarded[k]);
+                        discarded.RemoveAt(k);
+                    }
+                }
+
                 panelState = PanelState.dealHand;
                 drawn = 0;
 
@@ -293,6 +315,8 @@ public class CardPanelScript : MonoBehaviour
 
                         drawnCard.effectPrefab = cardDictionary.GetCard(drawnCardID).effectPrefab;
 
+                        drawnCard.baseId = drawnCardID;
+
                         cards.Add(drawnCard);
 
                         drawn++;
@@ -325,8 +349,19 @@ public class CardPanelScript : MonoBehaviour
             //Player is picking a card (cursor is free)
             case PanelState.cardPick:
 
+                bool simultaing = true;
+
+                if(simulationTimer >= 0.0f)
+                {
+                    simulationTimer -= Time.deltaTime;
+                }
+                else
+                {
+                    simultaing = false;
+                }
+
                 //end turn
-                if (Input.GetMouseButtonDown(2))
+                if (Input.GetMouseButtonDown(2) && !simultaing)
                 {
                     panelState = PanelState.simulation;
 
@@ -388,7 +423,7 @@ public class CardPanelScript : MonoBehaviour
                 }
 
                 //get hovered card, select only if wasnt already played
-                if (Input.GetMouseButtonDown(0) && hovered != -1 && cards[hovered].spawnedPlaceableInstance == null)
+                if (Input.GetMouseButtonDown(0) && hovered != -1 && cards[hovered].spawnedPlaceableInstance == null && !simultaing)
                 {
                     HandCard card = cards[hovered];
                     card.selected = true;
@@ -397,7 +432,7 @@ public class CardPanelScript : MonoBehaviour
                 }
 
                 //cancel hovered, played card
-                if (Input.GetMouseButtonDown(1) && hovered != -1 && cards[hovered].spawnedPlaceableInstance != null)
+                if (Input.GetMouseButtonDown(1) && hovered != -1 && cards[hovered].spawnedPlaceableInstance != null && !simultaing)
                 {
                     projSpawner.RemovePlaceable(cards[hovered].spawnedPlaceableInstance);
                     CancelPlayedCard(cards[hovered].spawnedPlaceableInstance);
@@ -539,6 +574,7 @@ public class CardPanelScript : MonoBehaviour
                 else
                 {
                     panelState = PanelState.dealHand;
+                    simulationTimer = simulationPause;
                 }
 
                 break;
