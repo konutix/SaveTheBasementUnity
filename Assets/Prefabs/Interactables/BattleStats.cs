@@ -76,6 +76,9 @@ public class BattleStats : MonoBehaviour, Interactable
             var traj = FindObjectOfType<TrajectoryManager>();
             if (traj) traj.RemoveObject(gameObject);
 
+            var objective = GetComponent<LevelObjective>();
+            if (objective) objective.Complete();
+
             Destroy(gameObject, 0.4f);
         }
     }
