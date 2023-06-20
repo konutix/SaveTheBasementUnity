@@ -192,7 +192,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Button
+  m_text: Back to Map
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fa1efb8369862c445a52d3c02bbe54dd, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: fa1efb8369862c445a52d3c02bbe54dd, type: 2}
@@ -670,6 +670,7 @@ MonoBehaviour:
   shopPanel: {fileID: 1402026883}
   cardToBuyAmount: 3
   vampireFangs: {fileID: 66477854}
+  stopPresentingRewards: 0
 --- !u!1 &1904006538
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,7 +13,14 @@ public class CardSettingShop : CardSetting
     {
         base.SetupCard(card);
         cardCost = Random.Range(card.minShopCost, card.maxShopCost + 1);
-        print(cardCost);
         shopCost.text = cardCost.ToString();
+        RunState.shopRewards.Add(new ShopReward(cardID, cardCost));
+    }
+
+    public void SetupCard(Card card, int cardCost)
+    {
+        base.SetupCard(card);
+        this.cardCost = cardCost;
+        shopCost.text = this.cardCost.ToString();
     }
 }

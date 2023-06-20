@@ -365,6 +365,7 @@ public class Map : MonoBehaviour
                 }
             }
         }
+        MapLayout[MapHeight - 1, 0].Node.gameObject.GetComponent<LineRenderer>().positionCount = 0;
     }
 
     public void CheckCurrentEncounter(Encounter NewCurrentEncounter)

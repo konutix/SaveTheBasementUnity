@@ -1,6 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+public struct SavedReward
+{
+    public ShopReward shopReward;
+    public bool isAssigned;
+    public bool isAdditionalReward;
+    public int shopCardArrayIndex;
+
+    public SavedReward(int shopRewardID, int shopRewardCost, int shopCardArrayIndex)
+    {
+        shopReward = new ShopReward(shopRewardID, shopRewardCost);
+        isAssigned = true;
+        isAdditionalReward = false;
+        this.shopCardArrayIndex = shopCardArrayIndex;
+    }
+}
+
+public struct ShopReward
+{
+    public int shopRewardID;
+    public int shopRewardCost;
+
+    public ShopReward(int shopRewardID, int shopRewardCost)
+    {
+        this.shopRewardID = shopRewardID;
+        this.shopRewardCost = shopRewardCost;
+    }
+}
 
 public static class RunState
 {
@@ -16,5 +43,8 @@ public static class RunState
 
     public static Encounter[,] currentMap;
     public static Encounter currentEncounter;
+
+    public static List<ShopReward> shopRewards;
+    public static SavedReward savedReward;
 
 }
