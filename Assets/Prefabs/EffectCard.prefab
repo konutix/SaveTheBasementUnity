@@ -449,6 +449,7 @@ MonoBehaviour:
   description: {fileID: 13305089231003596}
   mana: {fileID: 13305087174598649}
   art: {fileID: 13305088404860111}
+  canvasGroup: {fileID: 2564155751138558014}
 --- !u!1 &13305087799232974
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,6 +951,7 @@ GameObject:
   - component: {fileID: 13305088464414886}
   - component: {fileID: 13305088464414887}
   - component: {fileID: 13305088464414884}
+  - component: {fileID: 2564155751138558014}
   m_Layer: 0
   m_Name: Canvas
   m_TagString: Untagged
@@ -1039,6 +1041,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &2564155751138558014
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13305088464414890}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &13305088808330829
 GameObject:
   m_ObjectHideFlags: 0

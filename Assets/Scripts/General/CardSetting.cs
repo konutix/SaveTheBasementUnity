@@ -14,6 +14,8 @@ public class CardSetting : MonoBehaviour
 
     public Image art;
 
+    public CanvasGroup canvasGroup;
+
     public virtual void SetupCard(Card card)
     {
         cardID = card.id;
@@ -24,5 +26,10 @@ public class CardSetting : MonoBehaviour
         mana.text = card.manaCost.ToString();
 
         art.sprite = card.art;
+    }
+
+    public void SetOpacity(float alpha)
+    {
+        canvasGroup.alpha = alpha;
     }
 }

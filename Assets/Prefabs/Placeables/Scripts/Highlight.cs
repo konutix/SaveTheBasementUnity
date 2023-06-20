@@ -10,15 +10,33 @@ public class Highlight : MonoBehaviour
     Color defaultColor;
     Vector3 defaultScale;
 
+    int maxPriority = 0;
+
     void Start()
     {
         defaultColor = rendererToHighlight.color;
         defaultScale = rendererToHighlight.transform.localScale;
     }
 
-    public void SetHighlight(bool highlight)
+    void LateUpdate()
     {
+        maxPriority = 0;
+    }
+
+    public void SetHighlight(bool highlight, int priority = 0)
+    {   
+        if (priority < maxPriority) return;
+        maxPriority = priority;
+
         rendererToHighlight.color = highlight ? highlightColor : defaultColor;
-        rendererToHighlight.transform.localScale = defaultScale * (highlight ? 1.5f : 1.0f);
+    }
+
+    public void SetHighlightAndResize(bool highlight, int priority = 0)
+    {
+        if (priority < maxPriority) return;
+        maxPriority = priority;
+
+        rendererToHighlight.color = highlight ? highlightColor : defaultColor;
+        rendererToHighlight.transform.localScale = defaultScale * (highlight ? 1.4f : 1.0f);
     }
 }
