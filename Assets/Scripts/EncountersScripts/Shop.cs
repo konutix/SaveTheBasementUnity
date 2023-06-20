@@ -8,7 +8,7 @@ public class Shop : MonoBehaviour
     [SerializeField] GameObject cardPrefab;
     [SerializeField] GameObject shopPanel;
     [SerializeField] int cardToBuyAmount;
-    [SerializeField] VampireFangs vampireFangsGO;
+    [SerializeField] VampireFangs vampireFangs;
 
     List<GameObject> cards;
     bool stopRotating;
@@ -20,12 +20,12 @@ public class Shop : MonoBehaviour
 
         SpriteRenderer shopPanelSR = shopPanel.GetComponent<SpriteRenderer>();
         float shopPanelCardDistance = shopPanelSR.bounds.size.x / (cardToBuyAmount+1);
-        print(shopPanelSR.bounds.size.x);
         for (int i = 0; i < cardToBuyAmount; i++)
         {
             Card card = cardDictionary.cardDefs[Random.Range(0, cardDictionary.cardDefs.Count)].card;
             cards.Add(Instantiate(cardPrefab, shopPanel.transform.position + new Vector3(shopPanelSR.bounds.min.x + (i+1) * shopPanelCardDistance, 0.0f, 0.0f), Quaternion.Euler(new Vector3(0.0f, 180.0f, 0.0f))));
-            cardPrefab.GetComponent<CardSettingShop>().SetupCard(card);
+            cards[i].GetComponent<CardSettingShop>().SetupCard(card);
+            cards[i].GetComponent<CardSettingShop>().shop = this;
         }
     }
 
@@ -63,5 +63,16 @@ public class Shop : MonoBehaviour
     void ShowPrice(GameObject card)
     {
         card.GetComponent<CardSettingShop>().shopCostPanel.SetActive(true);
+    }
+
+    public void UpdateVampireFangsAmount()
+    {
+        vampireFangs.TextLoad();
+    }
+
+    [ContextMenu("Reset Vampire Fangs")]
+    void ResetVampireFangs()
+    {
+        RunState.vampireFangs = 10;
     }
 }

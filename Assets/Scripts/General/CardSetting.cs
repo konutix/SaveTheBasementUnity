@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class CardSetting : MonoBehaviour
 {
+    public int cardID;
     public TextMeshProUGUI cardName;
     public TextMeshProUGUI type;
     public TextMeshProUGUI description;
@@ -15,6 +16,7 @@ public class CardSetting : MonoBehaviour
 
     public virtual void SetupCard(Card card)
     {
+        cardID = card.id;
         cardName.text = card.cardName;
         type.text = card.type;
         description.text = card.description;

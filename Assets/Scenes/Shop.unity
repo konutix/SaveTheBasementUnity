@@ -669,7 +669,7 @@ MonoBehaviour:
   cardPrefab: {fileID: 13305087574292875, guid: 5290d636ffcf73f4eada83aa8c196da7, type: 3}
   shopPanel: {fileID: 1402026883}
   cardToBuyAmount: 3
-  vampireFangsGO: {fileID: 66477854}
+  vampireFangs: {fileID: 66477854}
 --- !u!1 &1904006538
 GameObject:
   m_ObjectHideFlags: 0
