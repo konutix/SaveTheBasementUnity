@@ -32,17 +32,21 @@ public class Shop : MonoBehaviour
             for (int i = 0; i < cardToBuyAmount; i++)
             {
                 Card card = cardDictionary.cardDefs[Random.Range(0, cardDictionary.cardDefs.Count)].card;
-                cards.Add(Instantiate(cardPrefab, shopPanel.transform.position + new Vector3(shopPanelSR.bounds.min.x + (i + 1) * shopPanelCardDistance, 0.0f, 0.0f), Quaternion.Euler(new Vector3(0.0f, 180.0f, 0.0f))));
-                cards[i].GetComponent<CardSettingShop>().SetupCard(card);
-                cards[i].GetComponent<CardSettingShop>().shop = this;
+                GameObject newCard = Instantiate(cardPrefab, shopPanel.transform.position + new Vector3(shopPanelSR.bounds.min.x + (i + 1) * shopPanelCardDistance, 0.0f, 0.0f), Quaternion.Euler(new Vector3(0.0f, 180.0f, 0.0f)));
+                cards.Add(newCard);
+                newCard.GetComponent<CardSettingShop>().SetupCard(card);
+                newCard.GetComponent<CardSettingShop>().shop = this;
             }
             if (RunState.savedReward.isAssigned && RunState.savedReward.isAdditionalReward)
             {
                 Card card = cardDictionary.cardDefs[RunState.savedReward.shopReward.shopRewardID].card;
-                cards.Add(Instantiate(cardPrefab, shopPanel.transform.position + new Vector3(shopPanelSR.bounds.min.x + (cardToBuyAmount + 1) * shopPanelCardDistance, 0.0f, 0.0f), Quaternion.Euler(new Vector3(0.0f, 180.0f, 0.0f))));
-                cards[cardToBuyAmount].GetComponent<CardSettingShop>().SetupCard(card, RunState.savedReward.shopReward.shopRewardCost);
-                cards[cardToBuyAmount].GetComponent<CardSettingShop>().shop = this;
-                savedReward = cards[RunState.shopRewards.Count];
+                GameObject newCard = Instantiate(cardPrefab, shopPanel.transform.position + new Vector3(shopPanelSR.bounds.min.x + (cardToBuyAmount + 1) * shopPanelCardDistance, 0.0f, 0.0f), Quaternion.Euler(new Vector3(0.0f, 0.0f, 0.0f)));
+                cards.Add(newCard);
+                newCard.GetComponent<CardSettingShop>().SetupCard(card, RunState.savedReward.shopReward.shopRewardCost);
+                newCard.GetComponent<CardSettingShop>().shop = this;
+                newCard.GetComponent<ChooseShopReward>().SavedImage.enabled = true;
+                ShowPrice(newCard);
+                savedReward = newCard;
             }
         }
         else
@@ -56,18 +60,21 @@ public class Shop : MonoBehaviour
             for (int i = 0; i < RunState.shopRewards.Count; i++)
             {
                 Card card = cardDictionary.cardDefs[RunState.shopRewards[i].shopRewardID].card;
-                cards.Add(Instantiate(cardPrefab, shopPanel.transform.position + new Vector3(shopPanelSR.bounds.min.x + (i + 1) * shopPanelCardDistanceLoaded, 0.0f, 0.0f), Quaternion.Euler(new Vector3(0.0f, 180.0f, 0.0f))));
-                cards[i].GetComponent<CardSettingShop>().SetupCard(card, RunState.shopRewards[i].shopRewardCost);
-                cards[i].GetComponent<CardSettingShop>().shop = this;
+                GameObject newCard = Instantiate(cardPrefab, shopPanel.transform.position + new Vector3(shopPanelSR.bounds.min.x + (i + 1) * shopPanelCardDistanceLoaded, 0.0f, 0.0f), Quaternion.Euler(new Vector3(0.0f, 180.0f, 0.0f)));
+                cards.Add(newCard);
+                newCard.GetComponent<CardSettingShop>().SetupCard(card, RunState.shopRewards[i].shopRewardCost);
+                newCard.GetComponent<CardSettingShop>().shop = this;
             }
             if (RunState.savedReward.isAssigned && RunState.savedReward.isAdditionalReward)
             {
                 Card card = cardDictionary.cardDefs[RunState.savedReward.shopReward.shopRewardID].card;
-                cards.Add(Instantiate(cardPrefab, shopPanel.transform.position + new Vector3(shopPanelSR.bounds.min.x + (RunState.shopRewards.Count + 1) * shopPanelCardDistanceLoaded, 0.0f, 0.0f), Quaternion.Euler(new Vector3(0.0f, 0.0f, 0.0f))));
-                cards[RunState.shopRewards.Count].GetComponent<CardSettingShop>().SetupCard(card, RunState.savedReward.shopReward.shopRewardCost);
-                cards[RunState.shopRewards.Count].GetComponent<CardSettingShop>().shop = this;
-                cards[RunState.shopRewards.Count].GetComponent<ChooseShopReward>().SavedImage.enabled = true;
-                savedReward = cards[RunState.shopRewards.Count];
+                GameObject newCard = Instantiate(cardPrefab, shopPanel.transform.position + new Vector3(shopPanelSR.bounds.min.x + (RunState.shopRewards.Count + 1) * shopPanelCardDistanceLoaded, 0.0f, 0.0f), Quaternion.Euler(new Vector3(0.0f, 0.0f, 0.0f)));
+                cards.Add(newCard);
+                newCard.GetComponent<CardSettingShop>().SetupCard(card, RunState.savedReward.shopReward.shopRewardCost);
+                newCard.GetComponent<CardSettingShop>().shop = this;
+                newCard.GetComponent<ChooseShopReward>().SavedImage.enabled = true;
+                ShowPrice(newCard);
+                savedReward = newCard;
             }
             else if (RunState.savedReward.isAssigned && !RunState.savedReward.isAdditionalReward)
             {
@@ -140,7 +147,7 @@ public class Shop : MonoBehaviour
         if(savedReward != null)
         {
             savedReward.GetComponent<ChooseShopReward>().SavedImage.enabled = false;
-            if(cards.IndexOf(savedReward) == -1)
+            if(cards.Count > cardToBuyAmount && cards.IndexOf(savedReward) == cardToBuyAmount)
             {
                 cards.Remove(savedReward);
                 Destroy(savedReward);

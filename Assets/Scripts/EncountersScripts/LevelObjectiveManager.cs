@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class LevelObjectiveManager : MonoBehaviour
 {
     List<LevelObjective> levelObjectivesToComplete;
+    [SerializeField] CardPanelScript cardPanel;
     int objectivesCount;
 
     bool alreadyCompleted = false;
@@ -34,7 +35,8 @@ public class LevelObjectiveManager : MonoBehaviour
     public void OnObjectiveFailed()
     {
         alreadyCompleted = true;
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("LoseScene", LoadSceneMode.Additive);
+        cardPanel.panelState = PanelState.inactive;
     }
 
     void OnAllObjectivesCompleted()
@@ -42,6 +44,7 @@ public class LevelObjectiveManager : MonoBehaviour
         if (alreadyCompleted) return;
 
         alreadyCompleted = true;
-        SceneManager.LoadScene("EncounterReward");
+        SceneManager.LoadScene("WinScene", LoadSceneMode.Additive);
+        cardPanel.panelState = PanelState.inactive;
     }
 }

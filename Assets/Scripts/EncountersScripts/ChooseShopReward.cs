@@ -22,12 +22,12 @@ public class ChooseShopReward : ChooseCardReward
     {
     }
 
-    public override void AddCardToDeck()
+    public override void AddCardToDeck(GameObject gameObject)
     {
         CardSettingShop shopSetting = (CardSettingShop)cardSetting;
         if(shopSetting.cardCost <= RunState.vampireFangs && shopSetting.shop.stopPresentingRewards)
         {
-            base.AddCardToDeck();
+            base.AddCardToDeck(gameObject);
             RunState.vampireFangs -= shopSetting.cardCost;
             shopSetting.shop.UpdateVampireFangsAmount();
             RunState.shopRewards.Remove(

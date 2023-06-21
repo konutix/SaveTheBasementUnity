@@ -8,6 +8,7 @@ public class SingleEnemyEncounter : Encounter
     public override void LaunchEncounter()
     {
         base.LaunchEncounter();
-        SceneManager.LoadScene("WholeLevelTest");
+        int level = Random.Range(1, 3);
+        SceneManager.LoadScene("Enc_easy_" + level);
     }
 }

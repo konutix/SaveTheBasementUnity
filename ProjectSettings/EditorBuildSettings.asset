@@ -38,4 +38,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EncounterReward.unity
     guid: 9274ec7a70b81d34b887b172064cd9c5
+  - enabled: 1
+    path: Assets/Scenes/WInScene.unity
+    guid: 8c88da82b98a75147866dea872d3181c
+  - enabled: 1
+    path: Assets/Scenes/LoseScene.unity
+    guid: e627af60d02746a4cadef78dbf0c2cd3
+  - enabled: 1
+    path: Assets/Scenes/encounters/Enc_easy_1.unity
+    guid: b880d783b703c134381d73baf35d5976
+  - enabled: 1
+    path: Assets/Scenes/encounters/Enc_easy_2.unity
+    guid: d88a8b32572f953459e152d245aea6f8
+  - enabled: 1
+    path: Assets/Scenes/encounters/Enc_med_1.unity
+    guid: 5650973d1325272459748a11df6fa4f1
+  - enabled: 1
+    path: Assets/Scenes/encounters/Enc_med_2.unity
+    guid: 1175b27ea01fb214b943e8aaff77058d
   m_configObjects: {}
