@@ -444,6 +444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae1c7a1818d90e043b7052843180e14d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardID: 0
   cardName: {fileID: 13305088001640336}
   type: {fileID: 13305088808330831}
   description: {fileID: 13305089231003596}
@@ -999,7 +1000,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &13305088464414887
 MonoBehaviour:

@@ -20,6 +20,6 @@ public class PlaceableInfo : MonoBehaviour
 
     public void HideInfo()
     {
-        text.transform.parent.position = new Vector3(10000, 0, 0);
+        text.transform.parent.position = new Vector3(100000, 100000, 0);
     }
 }
