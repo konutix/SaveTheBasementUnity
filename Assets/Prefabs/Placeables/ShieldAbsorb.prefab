@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7142662923807884448}
   - component: {fileID: 5573089351708359995}
   m_Layer: 0
-  m_Name: ShieldBasic
+  m_Name: ShieldAbsorb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,8 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3933d819b17c4442893cffca2bb3335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shouldDestroyProjectile: 0
-  evnironmentalHealth: 1
+  shouldDestroyProjectile: 1
+  evnironmentalHealth: 2
 --- !u!114 &8309556347256184467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,7 +186,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.3820755, g: 0.47479105, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -270,7 +270,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.39215687}
+  m_Color: {r: 0.38431373, g: 0.47843137, b: 1, a: 0.39215687}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

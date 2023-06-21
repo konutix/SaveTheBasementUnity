@@ -47,7 +47,13 @@ public class Projectile : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         bouncesCount += 1;
-        if (collision.gameObject.GetComponent<BattleStats>()) bouncesCount = 9999;
+
+        var bs = collision.gameObject.GetComponent<BattleStats>();
+        var shield = collision.gameObject.GetComponent<Shield>();
+        if (bs || (shield && shield.shouldDestroyProjectile))
+        {
+            bouncesCount = 9999;
+        } 
 
         if (isSimulatingTrajectory || !wasLaunched) return;
 

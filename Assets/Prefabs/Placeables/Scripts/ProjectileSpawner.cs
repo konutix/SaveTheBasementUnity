@@ -261,6 +261,13 @@ public class ProjectileSpawner : MonoBehaviour
 
         simulationEndedEarly = true;
 
+        foreach (var placeable in objectsToLaunch)
+        {
+            if (placeable)
+            {
+                Destroy(placeable.gameObject);
+            }
+        }
         objectsToLaunch = new List<Placeable>();
 
         cardPanel.simulationTimer = 0.2f;

@@ -85,7 +85,7 @@ public class CardPanelScript : MonoBehaviour
 
     //pause mechanics for delays in panel actions
     public float postDrawPause = 1.0f;
-    public float simulationPause = 5.0f;
+    public float simulationPause = 6.0f;
     float pauseTimer = 0.0f;
     PanelState postPause;
 
@@ -244,9 +244,9 @@ public class CardPanelScript : MonoBehaviour
                     //Load deck
                     RunState.deck = new List<int>
                     {
+                        3, 3, 3, 3, 3,
                         0, 1, 2, 1, 0,
-                        0, 1, 2, 1, 0,
-                        0, 1, 2, 1, 0,
+                        4, 4, 4, 4, 4,
                         0, 1, 2, 1, 0,
                     };
                 }
