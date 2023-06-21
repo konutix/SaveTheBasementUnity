@@ -28,6 +28,11 @@ public class StartSimulationButton : MonoBehaviour
 
     public void OnSimulationEnd()
     {
+        Invoke("Animation", 0.5f);
+    }
+
+    void Animation()
+    {
         canPress = true;
         buttonText.text = "Start";
     }

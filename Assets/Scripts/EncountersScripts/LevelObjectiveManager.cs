@@ -5,15 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class LevelObjectiveManager : MonoBehaviour
 {
-    List<LevelObjective> levelObjectives;
+    List<LevelObjective> levelObjectivesToComplete;
     int objectivesCount;
 
     bool alreadyCompleted = false;
 
     void Awake()
     {
-        levelObjectives = new List<LevelObjective>(FindObjectsOfType<LevelObjective>());
-        objectivesCount = levelObjectives.Count;
+        levelObjectivesToComplete = new List<LevelObjective>(FindObjectsOfType<LevelObjective>());
+        levelObjectivesToComplete = levelObjectivesToComplete.FindAll(obj => !obj.failOnComplete);
+        objectivesCount = levelObjectivesToComplete.Count;
 
         if (objectivesCount <= 0)
         {
@@ -30,8 +31,16 @@ public class LevelObjectiveManager : MonoBehaviour
         }
     }
 
+    public void OnObjectiveFailed()
+    {
+        alreadyCompleted = true;
+        SceneManager.LoadScene("Menu");
+    }
+
     void OnAllObjectivesCompleted()
     {
+        if (alreadyCompleted) return;
+
         alreadyCompleted = true;
         SceneManager.LoadScene("EncounterReward");
     }

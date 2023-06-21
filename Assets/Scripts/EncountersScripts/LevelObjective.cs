@@ -4,8 +4,17 @@ using UnityEngine;
 
 public class LevelObjective : MonoBehaviour
 {
+    public bool failOnComplete = false;
+
     public void Complete()
     {
-        FindObjectOfType<LevelObjectiveManager>().OnObjectiveCompleted();
+        print(gameObject.name);
+        if (failOnComplete)
+        {
+            FindObjectOfType<LevelObjectiveManager>().OnObjectiveFailed();
+        }
+        {
+            FindObjectOfType<LevelObjectiveManager>().OnObjectiveCompleted();
+        }
     }
 }

@@ -402,6 +402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510e8d4b6a1e8e24696fda0d5bf340b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  failOnComplete: 0
 --- !u!4 &142572142 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8096920794373385489, guid: 8ffa6ced5ffb83447b52fdbc604945e4, type: 3}
@@ -892,6 +893,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 510e8d4b6a1e8e24696fda0d5bf340b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  failOnComplete: 0
 --- !u!1 &423640370
 GameObject:
   m_ObjectHideFlags: 0
@@ -1538,6 +1540,7 @@ GameObject:
   - component: {fileID: 908398709}
   - component: {fileID: 908398708}
   - component: {fileID: 908398707}
+  - component: {fileID: 908398710}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1660,6 +1663,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &908398710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908398705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 510e8d4b6a1e8e24696fda0d5bf340b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  failOnComplete: 1
 --- !u!1 &925139042
 GameObject:
   m_ObjectHideFlags: 0
