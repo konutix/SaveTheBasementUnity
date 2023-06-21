@@ -184,6 +184,7 @@ GameObject:
   - component: {fileID: 5764391882672818944}
   - component: {fileID: 1424790654439578167}
   - component: {fileID: 660527726784633859}
+  - component: {fileID: 5814249338670762476}
   m_Layer: 0
   m_Name: ProjectileBeam
   m_TagString: Untagged
@@ -425,3 +426,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rendererToHighlight: {fileID: 4450014896828936238}
   highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+--- !u!114 &5814249338670762476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5645096804701019284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08ffb5a79e19c044d8af4da0ec725526, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 3
   cardName: Shield
-  description: Place a destructable shield that blocks all projectiles
+  description: Place a shield that reflects 1 projectile.
   type: Placeable
   art: {fileID: 21300000, guid: 727f08f62e2597747a6b46bb922cb880, type: 3}
   manaCost: 2

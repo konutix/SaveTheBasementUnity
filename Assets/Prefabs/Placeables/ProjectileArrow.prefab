@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 3253528584301077200}
   - component: {fileID: 7140910262691869772}
   - component: {fileID: 745514858144496269}
+  - component: {fileID: 8963888062766540440}
   m_Layer: 0
   m_Name: ProjectileArrow
   m_TagString: Untagged
@@ -374,6 +375,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rendererToHighlight: {fileID: 6813785321465897905}
   highlightColor: {r: 1, g: 0.84751457, b: 0, a: 1}
+--- !u!114 &8963888062766540440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8047044066080009956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0ab3be8f65f87c4c92763e1b303425e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8384235971620752625
 GameObject:
   m_ObjectHideFlags: 0

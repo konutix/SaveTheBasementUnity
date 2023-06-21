@@ -26,12 +26,16 @@ public class Projectile : MonoBehaviour
     Rigidbody2D rb;
     bool wasLaunched = false;
 
+    BattleStats stats;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         //rb.simulated = false;
         rb.isKinematic = true;
         //rb.Sleep(); // should be set to Start Asleep in inspector
+
+        stats = GetComponent<Placeable>().owner;
     }
 
     public void Init(Vector3 direction)
@@ -42,6 +46,16 @@ public class Projectile : MonoBehaviour
         rb.AddForce(direction * launchForce * (usePullModifier ? GetComponent<Placeable>().pull : 1.0f), ForceMode2D.Impulse);
 
         wasLaunched = true;
+    }
+
+    public int CalculateDamage()
+    {
+        if (stats)
+        {
+            return (int)((this.damage + stats.strength) * ((stats.weak > 0) ? stats.weakMultiplier : 1.0f));
+        }
+
+        return damage;
     }
 
     void OnCollisionEnter2D(Collision2D collision)

@@ -102,6 +102,17 @@ public class Placeable : MonoBehaviour
         direction = transform.right;
     }
 
+    private void OnMouseEnter()
+    {
+        if (!projectileSpawner.CanLaunch()) return;
+
+        var description = GetComponent<PlaceableDescription>();
+        if (description != null)
+        {
+            description.Display(true);
+        }
+    }
+
     private void OnMouseOver() 
     {
         if(!canBePickedUp || !projectileSpawner.CanLaunch()) return;
@@ -117,6 +128,12 @@ public class Placeable : MonoBehaviour
 
     private void OnMouseExit() 
     {
+        var description = GetComponent<PlaceableDescription>();
+        if (description != null)
+        {
+            description.Display(false);
+        }
+        
         if(!canBePickedUp || !projectileSpawner.CanLaunch()) return;
 
         isMouseOver = false;

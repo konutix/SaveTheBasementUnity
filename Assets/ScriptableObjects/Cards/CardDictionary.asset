@@ -21,3 +21,5 @@ MonoBehaviour:
     card: {fileID: 11400000, guid: 84c1476ef6c0bbc4c85d1898d508db1d, type: 2}
   - id: 3
     card: {fileID: 11400000, guid: 7a187d446002d244aa72e912296265a1, type: 2}
+  - id: 4
+    card: {fileID: 11400000, guid: ede033cd3bdfea94a9dc3e2a10056727, type: 2}
