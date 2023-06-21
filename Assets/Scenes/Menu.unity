@@ -442,6 +442,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deck: {fileID: 11400000, guid: 133a42923f384dc4db4ac19bce1fe6de, type: 2}
+  continueButton: {fileID: 248401621}
 --- !u!1 &491101303
 GameObject:
   m_ObjectHideFlags: 0

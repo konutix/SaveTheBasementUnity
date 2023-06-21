@@ -47,4 +47,18 @@ public static class RunState
     public static List<ShopReward> shopRewards;
     public static SavedReward savedReward;
 
+    public static void ResetData()
+    {
+        maxPlayerHealth = 0;
+        currentPlayerHealth = 0;
+        Mana = 0;
+        deck = null;
+        cardsDrawn = 0;
+        vampireFangs = 10;
+        currentMap = null;
+        currentEncounter = null;
+        shopRewards = null;
+        savedReward.isAssigned = false;
+    }
+
 }

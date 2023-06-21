@@ -1,11 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MenuScript : MonoBehaviour
 {
     [SerializeField] CardDeck deck;
+    [SerializeField] Button continueButton;
+
+    private void Start()
+    {
+        if(RunState.currentMap == null)
+        {
+            continueButton.interactable = false;
+        }
+        else
+        {
+            continueButton.interactable = true;
+        }
+    }
+
     public void StartNewRun(string sceneName)
     {
         RunState.currentMap = null;

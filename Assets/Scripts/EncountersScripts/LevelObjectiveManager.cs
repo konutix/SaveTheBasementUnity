@@ -35,8 +35,9 @@ public class LevelObjectiveManager : MonoBehaviour
     public void OnObjectiveFailed()
     {
         alreadyCompleted = true;
-        SceneManager.LoadScene("LoseScene", LoadSceneMode.Additive);
+        RunState.ResetData();
         cardPanel.panelState = PanelState.inactive;
+        SceneManager.LoadScene("LoseScene", LoadSceneMode.Additive);
     }
 
     void OnAllObjectivesCompleted()
@@ -44,7 +45,15 @@ public class LevelObjectiveManager : MonoBehaviour
         if (alreadyCompleted) return;
 
         alreadyCompleted = true;
-        SceneManager.LoadScene("WinScene", LoadSceneMode.Additive);
         cardPanel.panelState = PanelState.inactive;
+        if (RunState.currentEncounter.GetType() == typeof(BossEncounter))
+        {
+            RunState.ResetData();
+            SceneManager.LoadScene("BossWinScene", LoadSceneMode.Additive);
+        }
+        else
+        {
+            SceneManager.LoadScene("WinScene", LoadSceneMode.Additive);
+        }
     }
 }
