@@ -13,6 +13,7 @@ public class HealthController : MonoBehaviour
     [SerializeField] TMP_Text strengthText;
     [SerializeField] TMP_Text weakText;
     [SerializeField] TMP_Text vulnerableText;
+    [SerializeField] TMP_Text vampirismText;
 
     [Space]
     [SerializeField] ParticleSystem powerUpParticles;
@@ -36,6 +37,9 @@ public class HealthController : MonoBehaviour
 
         vulnerableText.text = stats.vulnerable.ToString();
         vulnerableText.transform.parent.gameObject.SetActive(stats.vulnerable != 0);
+
+        vampirismText.text = stats.vampirism.ToString();
+        vampirismText.transform.parent.gameObject.SetActive(stats.vampirism != 0);
 
         if (modifier.strengthAmount > 0) powerUpParticles.Play();
         if (modifier.weakAmount > 0 || modifier.vulnerableAmount > 0) powerDownParticles.Play();

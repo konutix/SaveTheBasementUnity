@@ -15,6 +15,7 @@ public class BattleStats : MonoBehaviour, Interactable
     public float weakMultiplier = 0.75f;
     public int vulnerable = 0;
     public float vulnerableMultiplier = 1.5f;
+    public int vampirism = 0;
 
     [Space]
     [SerializeField] ParticleSystem gettingDamageParticles;
@@ -54,6 +55,8 @@ public class BattleStats : MonoBehaviour, Interactable
         float multiplier = ((vulnerable > 0) ? vulnerableMultiplier : 1.0f) * ((source.weak > 0) ? source.weakMultiplier : 1.0f);
         int damage = (int)((projectile.damage + source.strength) * multiplier);
 
+        source.UseVampirism(damage);
+
         TakeDamage(damage);
     }
 
@@ -88,11 +91,23 @@ public class BattleStats : MonoBehaviour, Interactable
         }
     }
 
-    void ApplyModifiers(ApplyStatsModifier statsModifier)
+    void UseVampirism(int damageDealt)
+    {
+        if (vampirism < 1) return;
+
+        currentHealth = Mathf.Clamp((int)(damageDealt * 0.5f) + currentHealth, 0, maxHealth);
+        if (healthController)
+        {
+            healthController.UpdateHealth(this);
+        }
+    }
+
+    public void ApplyModifiers(ApplyStatsModifier statsModifier)
     {
         weak += statsModifier.weakAmount;
         vulnerable += statsModifier.vulnerableAmount;
         strength += statsModifier.strengthAmount;
+        vampirism += statsModifier.vampirismAmount;
 
         if (healthController)
         {

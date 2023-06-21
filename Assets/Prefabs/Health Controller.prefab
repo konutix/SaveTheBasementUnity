@@ -1629,6 +1629,7 @@ MonoBehaviour:
   strengthText: {fileID: 7468116032478624829}
   weakText: {fileID: 1919731784468949359}
   vulnerableText: {fileID: 7046509127644676355}
+  vampirismText: {fileID: 5412558641844873148}
   powerUpParticles: {fileID: 1774053864711774992}
   powerDownParticles: {fileID: 4914537999674794417}
 --- !u!1 &8096920794944741147

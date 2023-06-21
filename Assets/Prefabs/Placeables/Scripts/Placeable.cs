@@ -73,6 +73,12 @@ public class Placeable : MonoBehaviour
         {
             projectile.Init(direction);
         }
+        
+        var buff = GetComponent<Buff>();
+        if (buff)
+        {
+            buff.Init();
+        }
 
         var line = GetComponent<LineRenderer>();
         if (line)
