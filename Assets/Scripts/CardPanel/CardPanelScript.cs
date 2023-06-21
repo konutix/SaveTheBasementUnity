@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Playables;
 
@@ -24,6 +25,7 @@ public enum PanelState
 public class HandCard
 {
     public int baseId;
+    public int manaCost;
     public GameObject cardInstance;
     public Vector3 cardScale;
     public bool hovered;
@@ -37,6 +39,8 @@ public class CardPanelScript : MonoBehaviour
 {
     //default cart template
     public GameObject CardPrefab = null;
+
+    public TextMeshProUGUI manaText;
 
     //object that determines deck location
     public GameObject DeckObInScene = null;
@@ -54,6 +58,10 @@ public class CardPanelScript : MonoBehaviour
 
     [Space]
     [Space]
+
+    //mana
+    public int maxMana = 4;
+    public int currentMana = 0;
 
     //default draw amount
     public int drawAmount;
@@ -127,11 +135,25 @@ public class CardPanelScript : MonoBehaviour
         projSpawner = FindObjectOfType<ProjectileSpawner>();
 
         simulationTimer = 0.0f;
+
+        currentMana = maxMana;
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
+        //calculate mana
+        currentMana = maxMana;
+        foreach(HandCard cd in cards)
+        {
+            if (cd.played)
+            {
+                currentMana -= cd.manaCost;
+            }
+        }
+
+        manaText.text = "" + currentMana + "/" + maxMana;
+
         //recalculate card positions
         int cardsCount = cards.Count;
         float leftDistance = -cardDist * (float)cardsCount + cardDist;
@@ -317,6 +339,7 @@ public class CardPanelScript : MonoBehaviour
                             .SetupCard(cardDictionary.GetCard(drawnCardID));
 
                         drawnCard.effectPrefab = cardDictionary.GetCard(drawnCardID).effectPrefab;
+                        drawnCard.manaCost = cardDictionary.GetCard(drawnCardID).manaCost;
 
                         drawnCard.baseId = drawnCardID;
 
@@ -352,8 +375,8 @@ public class CardPanelScript : MonoBehaviour
             //Player is picking a card (cursor is free)
             case PanelState.cardPick:
 
+                //check if simultaing
                 bool simultaing = true;
-
                 if(simulationTimer >= 0.0f)
                 {
                     simulationTimer -= Time.deltaTime;
@@ -427,7 +450,8 @@ public class CardPanelScript : MonoBehaviour
                 }
 
                 //get hovered card, select only if wasnt already played
-                if (Input.GetMouseButtonDown(0) && hovered != -1 && !cards[hovered].played && !simultaing)
+                if (Input.GetMouseButtonDown(0) && hovered != -1 && 
+                    !cards[hovered].played && !simultaing && cards[hovered].manaCost <= currentMana)
                 {
                     HandCard card = cards[hovered];
                     card.selected = true;
