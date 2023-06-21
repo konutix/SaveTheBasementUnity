@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class EnemyBasic : MonoBehaviour
 {
-    public Transform placeableSpawnPoint;
+    public Transform shieldSpawnPoints;
+    public Transform projectileSpawnPoints;
     public Placeable[] possiblePlaceablePrefabs;
-    public float shootAngle = 180.0f;
-    public float angleRandomSpread = 3.0f;
 
     Placeable currentProjectile;
     BattleStats battleStats;
+
+    int prefabIndex;
 
     void Start()
     {
@@ -19,14 +20,50 @@ public class EnemyBasic : MonoBehaviour
         FindObjectOfType<ProjectileSpawner>().launchEvent += OnLaunch;
         FindObjectOfType<ProjectileSpawner>().simulationStopEvent += OnFinish;
         Invoke("PlaceProjectile", 0.5f);
+
+        prefabIndex = Random.Range(0, possiblePlaceablePrefabs.Length);
     }
 
     void PlaceProjectile()
     {       
         if (!currentProjectile && battleStats.currentHealth > 0)
         {
-            Placeable prefab = possiblePlaceablePrefabs[Random.Range(0, possiblePlaceablePrefabs.Length)];
-            currentProjectile = Instantiate(prefab, placeableSpawnPoint);
+            Placeable prefab = possiblePlaceablePrefabs[prefabIndex];
+            prefabIndex = (prefabIndex + 1) % possiblePlaceablePrefabs.Length;
+
+            Transform spawnPointTransform = null;
+            float shootAngle = 0.0f, randomAngleSpread = 0.0f;
+            if (prefab.GetComponent<Projectile>())
+            {
+                int randomChildIndex = Random.Range(0, projectileSpawnPoints.childCount);
+                var child = projectileSpawnPoints.GetChild(randomChildIndex);
+                var spawnPoint = child.GetComponent<EnemyPlaceableSpawnPoint>();
+                if (spawnPoint)
+                {
+                    spawnPointTransform = child;
+                    shootAngle = spawnPoint.angle;
+                    randomAngleSpread = spawnPoint.angleRandomSpread;
+                }
+            }
+            else if (prefab.GetComponent<Shield>())
+            {
+                int randomChildIndex = Random.Range(0, shieldSpawnPoints.childCount);
+                var child = shieldSpawnPoints.GetChild(randomChildIndex);
+                var spawnPoint = child.GetComponent<EnemyPlaceableSpawnPoint>();
+                if (spawnPoint)
+                {
+                    spawnPointTransform = child;
+                    shootAngle = spawnPoint.angle;
+                    randomAngleSpread = spawnPoint.angleRandomSpread;
+                }
+            }
+
+            if (spawnPointTransform == null)
+            {
+                print(gameObject.name + "No spawn points");
+            }
+
+            currentProjectile = Instantiate(prefab, spawnPointTransform);
             currentProjectile.owner = battleStats;
 
             var projectile = currentProjectile.GetComponent<Projectile>();
@@ -35,7 +72,7 @@ public class EnemyBasic : MonoBehaviour
                 projectile.simulatedBouncesCount = 3;
             }
             
-            currentProjectile.OnAiming(shootAngle + Random.Range(-angleRandomSpread, angleRandomSpread));
+            currentProjectile.OnAiming(shootAngle + Random.Range(-randomAngleSpread, randomAngleSpread));
             currentProjectile.CalculateTrajectory();
             FindObjectOfType<ProjectileSpawner>().AddPlaceable(currentProjectile);
         }
