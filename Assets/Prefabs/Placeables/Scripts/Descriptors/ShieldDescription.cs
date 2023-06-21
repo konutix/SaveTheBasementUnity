@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
 
-public class ShieldDescription : MonoBehaviour, PlaceableDescription
+public class ShieldDescription : MonoBehaviour, ObjectDescription
 {
     Shield shield;
 

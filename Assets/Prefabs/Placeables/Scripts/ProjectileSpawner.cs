@@ -211,7 +211,7 @@ public class ProjectileSpawner : MonoBehaviour
             if (currentObject)
             {
                 if (cardPanel != null) cardPanel.CancelPlayedCard(currentObject);
-                
+
                 objectsToLaunch.Remove(currentObject);
                 Destroy(currentObject.gameObject);
                 
@@ -229,6 +229,7 @@ public class ProjectileSpawner : MonoBehaviour
             {
                 if (cardPanel != null) cardPanel.CancelPlayedCard(placeable);
                 
+                placeable.OnRemove();
                 objectsToLaunch.Remove(placeable);
                 Destroy(placeable.gameObject);
                 

@@ -32,7 +32,7 @@ public class FallingBoulder : MonoBehaviour, Interactable
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        var health = collision.gameObject.GetComponent<Health>();
+        var health = collision.gameObject.GetComponent<BattleStats>();
         if (health)
         {
             health.TakeDamage(damage);

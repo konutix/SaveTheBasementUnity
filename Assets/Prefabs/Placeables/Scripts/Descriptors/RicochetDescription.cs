@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RicochetDescription : MonoBehaviour, PlaceableDescription
+public class RicochetDescription : MonoBehaviour, ObjectDescription
 {
     Projectile projectile;
 

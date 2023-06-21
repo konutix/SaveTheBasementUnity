@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,8 @@ public class BattleStats : MonoBehaviour, Interactable
 
     [Space]
     [SerializeField] ParticleSystem gettingDamageParticles;
+
+    public event Action onDeathEvent;
 
     void Start()
     {
@@ -78,6 +81,8 @@ public class BattleStats : MonoBehaviour, Interactable
 
             var objective = GetComponent<LevelObjective>();
             if (objective) objective.Complete();
+
+            if (onDeathEvent != null) onDeathEvent();
 
             Destroy(gameObject, 0.4f);
         }

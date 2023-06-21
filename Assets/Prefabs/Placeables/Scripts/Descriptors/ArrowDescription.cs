@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArrowDescription : MonoBehaviour, PlaceableDescription
+public class ArrowDescription : MonoBehaviour, ObjectDescription
 {
     Projectile projectile;
     

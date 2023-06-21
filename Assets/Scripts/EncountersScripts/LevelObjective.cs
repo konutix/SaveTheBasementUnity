@@ -8,7 +8,6 @@ public class LevelObjective : MonoBehaviour
 
     public void Complete()
     {
-        print(gameObject.name);
         if (failOnComplete)
         {
             FindObjectOfType<LevelObjectiveManager>().OnObjectiveFailed();

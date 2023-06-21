@@ -7,13 +7,18 @@ public class Shield : MonoBehaviour, Interactable
     public bool shouldDestroyProjectile = false;
     public int evnironmentalHealth = 1;
 
-    private void OnDestroy()
+    public void Remove()
     {
         var trajectory = FindObjectOfType<TrajectoryManager>();
         if (trajectory)
         {
             trajectory.RemoveObject(gameObject);
         }
+    }
+
+    private void OnDestroy()
+    {
+        Remove();
     }
 
     public void OnInteractWithProjectile(Projectile projectile)

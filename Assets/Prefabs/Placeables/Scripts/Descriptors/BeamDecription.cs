@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BeamDecription : MonoBehaviour, PlaceableDescription
+public class BeamDecription : MonoBehaviour, ObjectDescription
 {
     ApplyStatsModifier statsModifier;
     

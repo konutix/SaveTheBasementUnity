@@ -21,7 +21,8 @@ public class Placeable : MonoBehaviour
     [HideInInspector]
     public bool canBePickedUp = false;
 
-    private ProjectileSpawner projectileSpawner;
+    [HideInInspector]
+    public ProjectileSpawner projectileSpawner;
 
     [HideInInspector]
     public float pull = 1.0f;
@@ -102,11 +103,32 @@ public class Placeable : MonoBehaviour
         direction = transform.right;
     }
 
+    public void OnRemove()
+    {
+        OnMouseExit();
+
+        var shield = GetComponent<Shield>();
+        if (shield)
+        {
+            shield.Remove();
+
+            var trajectoryManager = projectileSpawner.trajectoryManager;
+            foreach (var go in projectileSpawner.objectsToLaunch)
+            {
+                var p = go.GetComponent<Projectile>();
+                if (p)
+                {
+                    trajectoryManager.SimulateTrajectory(p, go.transform.position, go.direction, p.simulatedBouncesCount);
+                }
+            }
+        }
+    }
+
     private void OnMouseEnter()
     {
         if (!projectileSpawner.CanLaunch()) return;
 
-        var description = GetComponent<PlaceableDescription>();
+        var description = GetComponent<ObjectDescription>();
         if (description != null)
         {
             description.Display(true);
@@ -128,7 +150,7 @@ public class Placeable : MonoBehaviour
 
     private void OnMouseExit() 
     {
-        var description = GetComponent<PlaceableDescription>();
+        var description = GetComponent<ObjectDescription>();
         if (description != null)
         {
             description.Display(false);

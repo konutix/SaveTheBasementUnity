@@ -54,7 +54,10 @@ public class EnemyBasic : MonoBehaviour
             currentProjectile = null;
         }
 
-        Invoke("PlaceProjectile", 0.5f);
+        if (battleStats.currentHealth > 0)
+        {
+            Invoke("PlaceProjectile", 0.5f);
+        }
     }
 
     private void OnDestroy()
