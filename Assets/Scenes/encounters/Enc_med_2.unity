@@ -906,6 +906,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed89452f1ab801f468da4e20c52ef2e4, type: 3}
+--- !u!114 &569136119 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6322951725486865229, guid: ed89452f1ab801f468da4e20c52ef2e4, type: 3}
+  m_PrefabInstance: {fileID: 569136118}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e035135d4081d2941b2e938d37dddcff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &574761362
 GameObject:
   m_ObjectHideFlags: 0
@@ -935,7 +946,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04936dca4191ad9489d0c598ee3361d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPanel: {fileID: 0}
+  cardPanel: {fileID: 569136119}
 --- !u!4 &574761364
 Transform:
   m_ObjectHideFlags: 0
