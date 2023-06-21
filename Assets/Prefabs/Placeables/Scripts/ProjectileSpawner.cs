@@ -25,10 +25,12 @@ public class ProjectileSpawner : MonoBehaviour
 
     public BattleStats player;
 
+    CardPanelScript cardPanel;
 
     public event Action launchEvent;
+    public event Action simulationStopEvent;
     
-    CardPanelScript cardPanel;
+    bool simulationEndedEarly = false;
 
     void Start()
     {
@@ -81,6 +83,27 @@ public class ProjectileSpawner : MonoBehaviour
                 TryCancelPlaced();
             }
         }
+
+        if (!simulationEndedEarly && cardPanel.simulationTimer > 0.0f)
+        {
+            CheckEarlySimulationEnd();
+        }
+        else if (cardPanel.simulationTimer <= 0.0f)
+        {
+            simulationEndedEarly = false;
+        }
+    }
+
+    public void StartPlacing(Placeable placeable)
+    {
+        prefabToSpawn = placeable;
+        isPlacing = true;
+        CreateGhost(prefabToSpawn);
+    }
+
+    public void StartSimulation()
+    {
+        cardPanel.StartSimulation();
     }
 
     public void OnStartedPlacing()
@@ -134,7 +157,7 @@ public class ProjectileSpawner : MonoBehaviour
             placeable.OnLaunched();
         }
 
-        objectsToLaunch = new List<Placeable>();
+        //objectsToLaunch = new List<Placeable>();
         GetComponent<LineRenderer>().positionCount = 0;
 
         if (launchEvent != null) launchEvent();
@@ -143,13 +166,6 @@ public class ProjectileSpawner : MonoBehaviour
     public bool CanLaunch()
     {
         return (!isAiming && !isPlacing);
-    }
-
-    public void StartPlacing(Placeable placeable)
-    {
-        prefabToSpawn = placeable;
-        isPlacing = true;
-        CreateGhost(prefabToSpawn);
     }
 
     public void AddPlaceable(Placeable placeable)
@@ -162,7 +178,7 @@ public class ProjectileSpawner : MonoBehaviour
         objectsToLaunch.Remove(placeable);
         Destroy(placeable.gameObject);
     }
-
+    
     void TryPickupPlaced()
     {
         if (!CanLaunch()) return;
@@ -228,5 +244,24 @@ public class ProjectileSpawner : MonoBehaviour
         ghost = Instantiate(prefab);
         ghost.GetComponentInChildren<Collider2D>().enabled = false;
         ghost.OnStartedPlacing();
+    }
+
+    void CheckEarlySimulationEnd()
+    {
+        foreach (var placeable in objectsToLaunch)
+        {
+            if (placeable && placeable.GetComponent<Projectile>())
+            {
+                // print("im still standing");
+                return;
+            }
+        }
+
+        simulationEndedEarly = true;
+
+        objectsToLaunch = new List<Placeable>();
+
+        cardPanel.simulationTimer = 0.2f;
+        if (simulationStopEvent != null) simulationStopEvent();
     }
 }

@@ -17,6 +17,7 @@ public class EnemyBasic : MonoBehaviour
         battleStats = GetComponent<BattleStats>();
 
         FindObjectOfType<ProjectileSpawner>().launchEvent += OnLaunch;
+        FindObjectOfType<ProjectileSpawner>().simulationStopEvent += OnFinish;
         Invoke("PlaceProjectile", 0.5f);
     }
 
@@ -42,7 +43,18 @@ public class EnemyBasic : MonoBehaviour
 
     void OnLaunch()
     {
-        Invoke("PlaceProjectile", 6.0f);
+        
+    }
+
+    void OnFinish()
+    {
+        if (currentProjectile)
+        {
+            Destroy(currentProjectile.gameObject);
+            currentProjectile = null;
+        }
+
+        Invoke("PlaceProjectile", 0.5f);
     }
 
     private void OnDestroy()

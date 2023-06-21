@@ -80,6 +80,7 @@ public class CardPanelScript : MonoBehaviour
 
     //simulation
     public float simulationTimer;
+    bool shouldStartSimulation = false;
 
     //pause mechanics for delays in panel actions
     public float postDrawPause = 1.0f;
@@ -361,8 +362,9 @@ public class CardPanelScript : MonoBehaviour
                 }
 
                 //end turn
-                if (Input.GetMouseButtonDown(2) && !simultaing)
+                if (shouldStartSimulation && !simultaing)
                 {
+                    shouldStartSimulation = false;
                     panelState = PanelState.simulation;
 
                     for (int j = 0; j < cards.Count; j++)
@@ -609,5 +611,10 @@ public class CardPanelScript : MonoBehaviour
                 card.cardInstance.GetComponent<CardSetting>().SetOpacity(1.0f);
             }
         }
+    }
+
+    public void StartSimulation()
+    {
+        shouldStartSimulation = true;
     }
 }
