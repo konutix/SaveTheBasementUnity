@@ -197,6 +197,8 @@ public class ProjectileSpawner : MonoBehaviour
 
                 CreateGhost(placeable);
 
+                cardPanel.PickupPlayedCard(placeable);
+
                 return;
             }
         }

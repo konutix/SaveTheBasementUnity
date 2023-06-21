@@ -30,6 +30,7 @@ public class HandCard
     public bool selected;
     public Placeable effectPrefab;
     public Placeable spawnedPlaceableInstance;
+    public bool played;
 }
 
 public class CardPanelScript : MonoBehaviour
@@ -305,7 +306,8 @@ public class CardPanelScript : MonoBehaviour
                             cardScale = new Vector3(1.0f, 1.0f, 1.0f),
                             hovered = false,
                             selected = false,
-                            spawnedPlaceableInstance = null                                
+                            spawnedPlaceableInstance = null,
+                            played = false                              
                         };
 
                         int drawnCardID = currentDeck[0];
@@ -425,7 +427,7 @@ public class CardPanelScript : MonoBehaviour
                 }
 
                 //get hovered card, select only if wasnt already played
-                if (Input.GetMouseButtonDown(0) && hovered != -1 && cards[hovered].spawnedPlaceableInstance == null && !simultaing)
+                if (Input.GetMouseButtonDown(0) && hovered != -1 && !cards[hovered].played && !simultaing)
                 {
                     HandCard card = cards[hovered];
                     card.selected = true;
@@ -434,7 +436,7 @@ public class CardPanelScript : MonoBehaviour
                 }
 
                 //cancel hovered, played card
-                if (Input.GetMouseButtonDown(1) && hovered != -1 && cards[hovered].spawnedPlaceableInstance != null && !simultaing)
+                if (Input.GetMouseButtonDown(1) && hovered != -1 && cards[hovered].played && !simultaing)
                 {
                     projSpawner.RemovePlaceable(cards[hovered].spawnedPlaceableInstance);
                     CancelPlayedCard(cards[hovered].spawnedPlaceableInstance);
@@ -597,6 +599,7 @@ public class CardPanelScript : MonoBehaviour
         {
             card.spawnedPlaceableInstance = placeable;
             card.cardInstance.GetComponent<CardSetting>().SetOpacity(0.5f);
+            card.played = true;
         }       
     }
 
@@ -609,6 +612,28 @@ public class CardPanelScript : MonoBehaviour
             {
                 card.spawnedPlaceableInstance = null;
                 card.cardInstance.GetComponent<CardSetting>().SetOpacity(1.0f);
+                card.played = false;
+                
+                return;
+            }
+        }
+    }
+
+    public void PickupPlayedCard(Placeable placeable)
+    {
+        for (int j = 0; j < cards.Count; j++)
+        {
+            var card = cards[j];
+            if (card.spawnedPlaceableInstance == placeable)
+            {
+                lastSelectedIndex = j;
+                
+                card.spawnedPlaceableInstance = null;
+                card.hovered = true;
+
+                panelState = PanelState.placing;
+
+                return;
             }
         }
     }
