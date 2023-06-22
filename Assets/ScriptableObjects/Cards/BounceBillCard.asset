@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   cardName: Bounce Bill
-  description: Gravity defying bullet that can ricochet
-  type: Placeable
-  art: {fileID: 21300000, guid: 37d807d04b3a4be46ac1f06cef78c0fe, type: 3}
+  description: Gravity defying bullet that can ricochet, deals 5 dmg
+  type: Weapon
+  art: {fileID: 21300000, guid: 230caa021f482b141a3c3f34ccda8658, type: 3}
   manaCost: 1
   effectPrefab: {fileID: 268714616573463473, guid: 61e110c759825884d86d7dcc06979840, type: 3}
   minShopCost: 1

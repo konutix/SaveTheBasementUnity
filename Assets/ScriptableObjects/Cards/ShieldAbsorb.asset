@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 4
   cardName: Absorb Shield
-  description: Place a  shield that destroys up to 2 projectiles.
-  type: Placeable
-  art: {fileID: 21300000, guid: b1901c0fad1fe0b4d8af34f28d593766, type: 3}
+  description: Place a  shield that absorbs up to 2 projectiles
+  type: Structure
+  art: {fileID: 21300000, guid: b98c447e316ddb14883759a21de63c1a, type: 3}
   manaCost: 2
   effectPrefab: {fileID: 8309556347256184467, guid: 41512dbeaab4b7c46bb74d1934302d62, type: 3}
   minShopCost: 3
