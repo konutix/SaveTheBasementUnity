@@ -83,7 +83,7 @@ public class CardPanelScript : MonoBehaviour
 
     //draw mechanics
     public float drawDelay = 0.8f;
-    public float drawEaseIn = 0.02f;
+    public float baseDrawEaseIn = 0.02f;
     float drawTimer = 0.0f;
     int drawn;
 
@@ -142,6 +142,9 @@ public class CardPanelScript : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
+        //basing card speed on delta time
+        float drawEaseIn = baseDrawEaseIn * Time.deltaTime * 300.0f;
+
         //calculate mana
         currentMana = maxMana;
         foreach(HandCard cd in cards)
