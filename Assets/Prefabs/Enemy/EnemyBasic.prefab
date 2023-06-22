@@ -10,8 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5089030625839534999}
   - component: {fileID: 8480073901080288419}
-  - component: {fileID: 7482827095078132036}
-  - component: {fileID: 6926854028230185648}
   m_Layer: 0
   m_Name: EnemySprite
   m_TagString: Untagged
@@ -86,41 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7482827095078132036
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5215650635876043581}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 673ec8a5927d1da4aa1d27ce53fec3fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 10
-  currentHealth: 10
-  healthController: {fileID: 0}
-  strength: 0
-  weak: 0
-  weakMultiplier: 0.75
-  vulnerable: 0
-  vulnerableMultiplier: 1.5
-  vampirism: 0
-  gettingDamageParticles: {fileID: 0}
---- !u!114 &6926854028230185648
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5215650635876043581}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 510e8d4b6a1e8e24696fda0d5bf340b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  failOnComplete: 0
 --- !u!1 &6022634542882166316
 GameObject:
   m_ObjectHideFlags: 0
