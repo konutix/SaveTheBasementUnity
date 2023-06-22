@@ -212,6 +212,7 @@ public class ProjectileSpawner : MonoBehaviour
             {
                 if (cardPanel != null) cardPanel.CancelPlayedCard(currentObject);
 
+                currentObject.OnRemove();
                 objectsToLaunch.Remove(currentObject);
                 Destroy(currentObject.gameObject);
                 

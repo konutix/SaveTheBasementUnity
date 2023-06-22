@@ -653,9 +653,9 @@ public class CardPanelScript : MonoBehaviour
             var card = cards[j];
             if (card.spawnedPlaceableInstance == placeable)
             {
-                lastSelectedIndex = j;
+                lastSelectedIndex = -1;
                 
-                card.spawnedPlaceableInstance = null;
+                // card.spawnedPlaceableInstance = null;
                 card.hovered = true;
 
                 panelState = PanelState.placing;

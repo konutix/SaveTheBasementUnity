@@ -18,7 +18,7 @@ public class StartSimulationButton : MonoBehaviour
 
     public void OnButtonClick()
     {
-        if (canPress)
+        if (canPress && projectileSpawner.CanLaunch())
         {
             canPress = false;
             buttonText.text = "Playing...";
