@@ -11,6 +11,7 @@ public class SplittingProjectile : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (GetComponent<Projectile>().isSimulatingTrajectory) return;
+        var placeable = GetComponent<Placeable>();
 
         Vector2 velocity = GetComponent<Rigidbody2D>().velocity.normalized;
         Vector2 normal = collision.GetContact(0).normal;
@@ -30,6 +31,16 @@ public class SplittingProjectile : MonoBehaviour
         Physics2D.IgnoreCollision(col0, col1);
         Physics2D.IgnoreCollision(col0, col2);
         Physics2D.IgnoreCollision(col1, col2);
+
+        var owner = placeable.owner;
+        p0.GetComponent<Placeable>().owner = owner;
+        p1.GetComponent<Placeable>().owner = owner;
+        p2.GetComponent<Placeable>().owner = owner;
+
+        var projectileSpawner = placeable.projectileSpawner;
+        projectileSpawner.AddPlaceable(p0.GetComponent<Placeable>());
+        projectileSpawner.AddPlaceable(p1.GetComponent<Placeable>());
+        projectileSpawner.AddPlaceable(p2.GetComponent<Placeable>());
 
         p0.Init(ref0);
         p1.Init(ref1);

@@ -1212,7 +1212,7 @@ MonoBehaviour:
   hoverDistMulti: 1.6
   playHeight: -2.8
   drawDelay: 0.2
-  drawEaseIn: 0.02
+  baseDrawEaseIn: 0.02
   simulationTimer: 0
   postDrawPause: 1
   simulationPause: 5
@@ -2027,14 +2027,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6322951726232336296}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.7336, z: 100}
-  m_LocalScale: {x: 17.972193, y: 1.2152649, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0.01, y: -2.82, z: 100}
+  m_LocalScale: {x: 0.12013257, y: 0.3989645, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6322951725486865227}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!212 &6322951726232336298
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2076,7 +2076,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9a92679275c26864197eeead12bbfafe, type: 3}
   m_Color: {r: 0.49056602, g: 0.27007946, b: 0.18280526, a: 1}
   m_FlipX: 0
   m_FlipY: 0

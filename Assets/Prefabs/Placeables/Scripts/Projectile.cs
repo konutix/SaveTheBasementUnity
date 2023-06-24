@@ -23,6 +23,8 @@ public class Projectile : MonoBehaviour
     [Space]
     public ParticleSystem ricochetParticles;
 
+    TrailRenderer trailRenderer;
+
     Rigidbody2D rb;
     bool wasLaunched = false;
 
@@ -36,10 +38,20 @@ public class Projectile : MonoBehaviour
         //rb.Sleep(); // should be set to Start Asleep in inspector
 
         stats = GetComponent<Placeable>().owner;
+
+        trailRenderer = GetComponent<TrailRenderer>();
+        if (trailRenderer)
+        {
+            trailRenderer.enabled = false;
+        }
     }
 
     public void Init(Vector3 direction)
     {
+        if (trailRenderer)
+        {
+            trailRenderer.enabled = true;
+        }
         //rb.simulated = true;
         rb.isKinematic = false;
         rb.WakeUp();

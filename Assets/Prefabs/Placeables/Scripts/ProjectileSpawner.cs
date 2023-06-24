@@ -256,8 +256,12 @@ public class ProjectileSpawner : MonoBehaviour
         {
             if (placeable && placeable.GetComponent<Projectile>())
             {
-                // print("im still standing");
-                return;
+                var rb = placeable.GetComponent<Rigidbody2D>();
+                if (!rb || rb.simulated)
+                {
+                    // print("im still standing");
+                    return;
+                }
             }
         }
 

@@ -271,8 +271,8 @@ public class CardPanelScript : MonoBehaviour
                     {
                         3, 3, 3, 3, 3,
                         0, 1, 2, 1, 0,
-                        4, 4, 4, 4, 4,
-                        0, 1, 2, 1, 0,
+                        6, 6, 6, 6, 6,
+                        5, 5, 5, 5, 5,
                     };
                 }
                 currentDeck.AddRange(RunState.deck);
@@ -653,9 +653,9 @@ public class CardPanelScript : MonoBehaviour
             var card = cards[j];
             if (card.spawnedPlaceableInstance == placeable)
             {
-                lastSelectedIndex = -1;
+                // lastSelectedIndex = -1;
                 
-                // card.spawnedPlaceableInstance = null;
+                card.spawnedPlaceableInstance = null;
                 card.hovered = true;
 
                 panelState = PanelState.placing;
