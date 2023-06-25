@@ -1,17 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
-public class EnouncterReward : MonoBehaviour
+public class EncounterReward : MonoBehaviour
 {
     [SerializeField] CardDictionary cardDictionary;
     [SerializeField] GameObject cardPrefab;
     [SerializeField] GameObject rewardPanel;
     [SerializeField] int cardsToChoose;
+    [SerializeField] Button vampireButton;
+    [SerializeField] Button returnButton;
+    [SerializeField] TextMeshProUGUI BannerText;
     List<GameObject> cards;
     // Start is called before the first frame update
     void Start()
     {
+        returnButton.interactable = false;
+        BannerText.text = "You got "+ RunState.currentEncounter.vampireFangsReward +"  <sprite index=0> \n Choose Your Reward";
+
         cards = new List<GameObject>();
         SpriteRenderer rewardPanelSR = rewardPanel.GetComponent<SpriteRenderer>();
         int divider = cardsToChoose + 1;
@@ -23,7 +31,6 @@ public class EnouncterReward : MonoBehaviour
             cards[i].GetComponent<CardSetting>().SetupCard(card);
             cards[i].GetComponent<ChooseCardReward>().onRewardGet += RemoveOtherCards;
         }
-
     }
 
     void RemoveOtherCards(GameObject gameObject)
@@ -38,9 +45,26 @@ public class EnouncterReward : MonoBehaviour
         cards.Clear();
 
         RunState.shopRewards = null;
-        RunState.currentEncounter.EncounterState = EncounterStateEnum.Completed;
-        RunState.vampireFangs += 3;
+        RunState.currentEncounter.encounterState = EncounterStateEnum.Completed;
+        RunState.vampireFangs += RunState.currentEncounter.vampireFangsReward;
         RunState.savedReward.isAdditionalReward = true;
+        returnButton.interactable = true;
+        Destroy(vampireButton.gameObject);
+    }
+
+    public void ChooseMoreFangs()
+    {
+        foreach (GameObject card in cards)
+        {
+            Destroy(card);
+        }
+        cards.Clear();
+        RunState.shopRewards = null;
+        RunState.currentEncounter.encounterState = EncounterStateEnum.Completed;
+        RunState.vampireFangs += RunState.currentEncounter.vampireFangsReward * 2;
+        RunState.savedReward.isAdditionalReward = true;
+        returnButton.interactable = true;
+        Destroy(vampireButton.gameObject);
     }
 
 }

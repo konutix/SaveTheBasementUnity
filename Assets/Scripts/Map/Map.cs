@@ -19,6 +19,11 @@ public class Map : MonoBehaviour
     [SerializeField] GameObject MultipleEnemyEncounterObject;
     [SerializeField] GameObject BossEncounterObject;
     [Space]
+    [SerializeField] int SingleEnemyMinFangs;
+    [SerializeField] int SingleEnemyMaxFangs;
+    [SerializeField] int MultipleEnemyMinFangs;
+    [SerializeField] int MultipleEnemyMaxFangs;
+    [Space]
     [SerializeField] GameObject UpgradeEncounterObject;
     [SerializeField] int MinUpgradeNumber;
     [SerializeField] int MaxUpgradeNumber;
@@ -74,10 +79,12 @@ public class Map : MonoBehaviour
                 if (EncounterType == 0)
                 {
                     MapLayout[i, EncounterIndex] = new SingleEnemyEncounter();
+                    MapLayout[i, EncounterIndex].vampireFangsReward = Random.Range(SingleEnemyMinFangs, SingleEnemyMaxFangs+1);
                 }
                 else if(EncounterType == 1)
                 {
                     MapLayout[i, EncounterIndex] = new MultipleEnemyEncounter();
+                    MapLayout[i, EncounterIndex].vampireFangsReward = Random.Range(MultipleEnemyMinFangs, MultipleEnemyMaxFangs + 1);
                 }
             }
         }
@@ -144,7 +151,7 @@ public class Map : MonoBehaviour
             Encounter NextEncounter = MapLayout[1, i];
             if (NextEncounter != null)
             {
-                MapLayout[0, 0].NextEncounters.Add(NextEncounter);
+                MapLayout[0, 0].nextEncounters.Add(NextEncounter);
             }
         }
         //ustalanie bezposredniej drogi dla srodka
@@ -158,8 +165,8 @@ public class Map : MonoBehaviour
                     Encounter DirectNextEncounter = MapLayout[i + 1, j];
                     if (DirectNextEncounter != null)
                     {
-                        CurrentEncounter.NextEncounters.Add(DirectNextEncounter);
-                        DirectNextEncounter.PreviousEncounters.Add(CurrentEncounter);
+                        CurrentEncounter.nextEncounters.Add(DirectNextEncounter);
+                        DirectNextEncounter.previousEncounters.Add(CurrentEncounter);
                     }
                     else
                     {
@@ -170,9 +177,9 @@ public class Map : MonoBehaviour
                                 DirectNextEncounter = MapLayout[i + 1, j - a];
                                 if (DirectNextEncounter != null)
                                 {
-                                    CurrentEncounter.NextEncounters.Add(DirectNextEncounter);
-                                    DirectNextEncounter.PreviousEncounters.Add(CurrentEncounter);
-                                    if (CurrentEncounter.NextEncounters.Count > 0)
+                                    CurrentEncounter.nextEncounters.Add(DirectNextEncounter);
+                                    DirectNextEncounter.previousEncounters.Add(CurrentEncounter);
+                                    if (CurrentEncounter.nextEncounters.Count > 0)
                                     {
                                         break;
                                     }
@@ -183,9 +190,9 @@ public class Map : MonoBehaviour
                                 DirectNextEncounter = MapLayout[i + 1, j + a];
                                 if (DirectNextEncounter != null)
                                 {
-                                    CurrentEncounter.NextEncounters.Add(DirectNextEncounter);
-                                    DirectNextEncounter.PreviousEncounters.Add(CurrentEncounter);
-                                    if (CurrentEncounter.NextEncounters.Count > 0)
+                                    CurrentEncounter.nextEncounters.Add(DirectNextEncounter);
+                                    DirectNextEncounter.previousEncounters.Add(CurrentEncounter);
+                                    if (CurrentEncounter.nextEncounters.Count > 0)
                                     {
                                         break;
                                     }
@@ -217,8 +224,8 @@ public class Map : MonoBehaviour
                                 NextEncounter = MapLayout[i + 1, j - a];
                                 if (NextEncounter != null)
                                 {
-                                    CurrentEncounter.NextEncounters.Add(NextEncounter);
-                                    NextEncounter.PreviousEncounters.Add(CurrentEncounter);
+                                    CurrentEncounter.nextEncounters.Add(NextEncounter);
+                                    NextEncounter.previousEncounters.Add(CurrentEncounter);
                                     SetRoads++;
                                     if (SetRoads >= AdditionalRoads)
                                     {
@@ -231,8 +238,8 @@ public class Map : MonoBehaviour
                                 NextEncounter = MapLayout[i + 1, j + a];
                                 if (NextEncounter != null)
                                 {
-                                    CurrentEncounter.NextEncounters.Add(NextEncounter);
-                                    NextEncounter.PreviousEncounters.Add(CurrentEncounter);
+                                    CurrentEncounter.nextEncounters.Add(NextEncounter);
+                                    NextEncounter.previousEncounters.Add(CurrentEncounter);
                                     SetRoads++;
                                     if (SetRoads >= AdditionalRoads)
                                     {
@@ -254,7 +261,7 @@ public class Map : MonoBehaviour
                 Encounter CurrentEncounter = MapLayout[i, j];
                 if (CurrentEncounter != null)
                 {
-                    if (CurrentEncounter.PreviousEncounters.Count == 0)
+                    if (CurrentEncounter.previousEncounters.Count == 0)
                     {
                         Encounter PreviousEncounter;
                         for (int a = 1; a < MaxMapWidth; a++)
@@ -264,9 +271,9 @@ public class Map : MonoBehaviour
                                 PreviousEncounter = MapLayout[i - 1, j - a];
                                 if (PreviousEncounter != null)
                                 {
-                                    CurrentEncounter.PreviousEncounters.Add(PreviousEncounter);
-                                    PreviousEncounter.NextEncounters.Add(CurrentEncounter);
-                                    if (CurrentEncounter.PreviousEncounters.Count > 0)
+                                    CurrentEncounter.previousEncounters.Add(PreviousEncounter);
+                                    PreviousEncounter.nextEncounters.Add(CurrentEncounter);
+                                    if (CurrentEncounter.previousEncounters.Count > 0)
                                     {
                                         break;
                                     }
@@ -277,9 +284,9 @@ public class Map : MonoBehaviour
                                 PreviousEncounter = MapLayout[i - 1, j + a];
                                 if (PreviousEncounter != null)
                                 {
-                                    CurrentEncounter.PreviousEncounters.Add(PreviousEncounter);
-                                    PreviousEncounter.NextEncounters.Add(CurrentEncounter);
-                                    if (CurrentEncounter.PreviousEncounters.Count > 0)
+                                    CurrentEncounter.previousEncounters.Add(PreviousEncounter);
+                                    PreviousEncounter.nextEncounters.Add(CurrentEncounter);
+                                    if (CurrentEncounter.previousEncounters.Count > 0)
                                     {
                                         break;
                                     }
@@ -353,19 +360,19 @@ public class Map : MonoBehaviour
                 Encounter encounter = MapLayout[i, j];
                 if (encounter != null)
                 {
-                    GameObject Node = encounter.Node.gameObject;
+                    GameObject Node = encounter.node.gameObject;
                     LineRenderer Line = Node.GetComponent<LineRenderer>();
-                    int NextEncountersNumber = encounter.NextEncounters.Count;
+                    int NextEncountersNumber = encounter.nextEncounters.Count;
                     Line.positionCount = NextEncountersNumber * 2;
                     for (int k=0; k<NextEncountersNumber; k++)
                     {
                         Line.SetPosition(k * 2, Node.transform.position);
-                        Line.SetPosition(k * 2 + 1, encounter.NextEncounters[k].Node.gameObject.transform.position);
+                        Line.SetPosition(k * 2 + 1, encounter.nextEncounters[k].node.gameObject.transform.position);
                     }
                 }
             }
         }
-        MapLayout[MapHeight - 1, 0].Node.gameObject.GetComponent<LineRenderer>().positionCount = 0;
+        MapLayout[MapHeight - 1, 0].node.gameObject.GetComponent<LineRenderer>().positionCount = 0;
     }
 
     public void CheckCurrentEncounter(Encounter NewCurrentEncounter)
@@ -373,18 +380,18 @@ public class Map : MonoBehaviour
         Encounter CurrentEncounter = RunState.currentEncounter;
         if (CurrentEncounter != null)
         {
-            CurrentEncounter.EncounterState = EncounterStateEnum.Completed;
-            foreach (Encounter Enc in CurrentEncounter.NextEncounters)
+            CurrentEncounter.encounterState = EncounterStateEnum.Completed;
+            foreach (Encounter Enc in CurrentEncounter.nextEncounters)
             {
-                Enc.EncounterState = EncounterStateEnum.Incompleted;
+                Enc.encounterState = EncounterStateEnum.Incompleted;
             }
         }
         RunState.currentEncounter = NewCurrentEncounter;
 
-        NewCurrentEncounter.EncounterState = EncounterStateEnum.Completed;
-        foreach (Encounter Enc in NewCurrentEncounter.NextEncounters)
+        NewCurrentEncounter.encounterState = EncounterStateEnum.Completed;
+        foreach (Encounter Enc in NewCurrentEncounter.nextEncounters)
         {
-            Enc.EncounterState = EncounterStateEnum.Ready;
+            Enc.encounterState = EncounterStateEnum.Ready;
         }
      
     }

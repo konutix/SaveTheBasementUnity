@@ -19,7 +19,7 @@ public class MapNode : MonoBehaviour
         SRenderer = GetComponent<SpriteRenderer>();
         SRenderer.color = NormalColor;
         IsMouseOver = false;
-        switch(Encounter.EncounterState)
+        switch(Encounter.encounterState)
         {
             case EncounterStateEnum.Completed:
                 CompletedOutlineRenderer.enabled = true;
@@ -44,20 +44,20 @@ public class MapNode : MonoBehaviour
     public Encounter SetEncounter<T>() where T : Encounter
     {
         Encounter = (T) Activator.CreateInstance(typeof(T));
-        Encounter.Node = this;
+        Encounter.node = this;
         return Encounter;
     }
 
     public Encounter SetEncounter(Encounter newEncounter)
     {
         Encounter = newEncounter;
-        Encounter.Node = this;
+        Encounter.node = this;
         return Encounter;
     }
 
     private void OnMouseEnter()
     {
-        if(Encounter.EncounterState == EncounterStateEnum.Ready)
+        if(Encounter.encounterState == EncounterStateEnum.Ready)
         {
             SRenderer.color = HighlightColor;
             IsMouseOver = true;
@@ -66,7 +66,7 @@ public class MapNode : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if (Encounter.EncounterState == EncounterStateEnum.Ready)
+        if (Encounter.encounterState == EncounterStateEnum.Ready)
         {
             SRenderer.color = NormalColor;
             IsMouseOver = false;

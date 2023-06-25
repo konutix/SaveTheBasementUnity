@@ -10,7 +10,11 @@ public class ChooseShopReward : ChooseCardReward
 
     private void OnMouseEnter()
     {
-        ChoosePanel.SetActive(true);
+        CardSettingShop shopSetting = (CardSettingShop)cardSetting;
+        if (shopSetting.shop.stopPresentingRewards)
+        {
+            ChoosePanel.SetActive(true);
+        }
     }
 
     private void OnMouseExit()

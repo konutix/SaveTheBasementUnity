@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class Encounter 
 {
-    public EncounterStateEnum EncounterState;
-    public List<Encounter> NextEncounters;
-    public List<Encounter> PreviousEncounters;
-    public MapNode Node;
+    public EncounterStateEnum encounterState;
+    public List<Encounter> nextEncounters;
+    public List<Encounter> previousEncounters;
+    public MapNode node;
+    public int vampireFangsReward;
     // Start is called before the first frame update
     public Encounter()
     {
-        EncounterState = EncounterStateEnum.Incompleted;
-        NextEncounters = new List<Encounter>();
-        PreviousEncounters = new List<Encounter>();
+        encounterState = EncounterStateEnum.Incompleted;
+        nextEncounters = new List<Encounter>();
+        previousEncounters = new List<Encounter>();
     }
 
     public virtual void LaunchEncounter()
