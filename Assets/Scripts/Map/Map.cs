@@ -307,6 +307,19 @@ public class Map : MonoBehaviour
     {
         MapLayout = RunState.currentMap;
         MapHeight = MapLayout.GetLength(0);
+        if(RunState.currentEncounter.encounterState != EncounterStateEnum.Completed)
+        {
+            RunState.currentEncounter.encounterState = EncounterStateEnum.Ready;
+            foreach (Encounter Enc in RunState.currentEncounter.nextEncounters)
+            {
+                Enc.encounterState = EncounterStateEnum.Incompleted;
+            }
+            RunState.currentEncounter = RunState.previousEncounter; 
+            foreach (Encounter Enc in RunState.currentEncounter.nextEncounters)
+            {
+                Enc.encounterState = EncounterStateEnum.Ready;
+            }
+        }
         ShowMap();
     }
 
@@ -386,9 +399,10 @@ public class Map : MonoBehaviour
                 Enc.encounterState = EncounterStateEnum.Incompleted;
             }
         }
+
+        RunState.previousEncounter = RunState.currentEncounter;
         RunState.currentEncounter = NewCurrentEncounter;
 
-        NewCurrentEncounter.encounterState = EncounterStateEnum.Completed;
         foreach (Encounter Enc in NewCurrentEncounter.nextEncounters)
         {
             Enc.encounterState = EncounterStateEnum.Ready;

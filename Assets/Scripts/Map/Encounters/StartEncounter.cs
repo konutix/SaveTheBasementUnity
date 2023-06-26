@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class StartEncounter : Encounter
 {
-    
+    public StartEncounter()
+    {
+        this.encounterState = EncounterStateEnum.Completed;
+    }
 }

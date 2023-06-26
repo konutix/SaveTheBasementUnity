@@ -43,6 +43,7 @@ public static class RunState
 
     public static Encounter[,] currentMap;
     public static Encounter currentEncounter;
+    public static Encounter previousEncounter;
 
     public static List<ShopReward> shopRewards;
     public static SavedReward savedReward;

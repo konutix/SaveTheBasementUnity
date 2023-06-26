@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class EncounterReward : MonoBehaviour
@@ -14,11 +15,12 @@ public class EncounterReward : MonoBehaviour
     [SerializeField] Button returnButton;
     [SerializeField] TextMeshProUGUI BannerText;
     List<GameObject> cards;
+
     // Start is called before the first frame update
     void Start()
     {
         returnButton.interactable = false;
-        BannerText.text = "You got "+ RunState.currentEncounter.vampireFangsReward +"  <sprite index=0> \n Choose Your Reward";
+        BannerText.text = "You earned:"+ RunState.currentEncounter.vampireFangsReward +" <sprite index=0> \n Choose Your Reward";
 
         cards = new List<GameObject>();
         SpriteRenderer rewardPanelSR = rewardPanel.GetComponent<SpriteRenderer>();
@@ -29,27 +31,26 @@ public class EncounterReward : MonoBehaviour
             Card card = cardDictionary.cardDefs[Random.Range(0, cardDictionary.cardDefs.Count)].card;
             cards.Add(Instantiate(cardPrefab, rewardPanel.transform.position + new Vector3(rewardPanelSR.bounds.min.x + (i + 1) * shopPanelCardDistance, 0.0f, 0.0f), Quaternion.Euler(new Vector3(0.0f, 0.0f, 0.0f))));
             cards[i].GetComponent<CardSetting>().SetupCard(card);
-            cards[i].GetComponent<ChooseCardReward>().onRewardGet += RemoveOtherCards;
+            cards[i].GetComponent<ChooseCardReward>().onRewardSet += ChangeSelection;
         }
     }
 
-    void RemoveOtherCards(GameObject gameObject)
+    public void GetReward()
     {
         foreach(GameObject card in cards)
         {
-            if(card != gameObject)
+            ChooseCardReward reward = card.GetComponent<ChooseCardReward>();
+            if (reward.selection.activeSelf)
             {
-                Destroy(card);
+                reward.AddCardToDeck();
             }
         }
-        cards.Clear();
 
         RunState.shopRewards = null;
         RunState.currentEncounter.encounterState = EncounterStateEnum.Completed;
         RunState.vampireFangs += RunState.currentEncounter.vampireFangsReward;
         RunState.savedReward.isAdditionalReward = true;
-        returnButton.interactable = true;
-        Destroy(vampireButton.gameObject);
+        SceneManager.LoadScene("Map");
     }
 
     public void ChooseMoreFangs()
@@ -59,12 +60,30 @@ public class EncounterReward : MonoBehaviour
             Destroy(card);
         }
         cards.Clear();
-        RunState.shopRewards = null;
-        RunState.currentEncounter.encounterState = EncounterStateEnum.Completed;
-        RunState.vampireFangs += RunState.currentEncounter.vampireFangsReward * 2;
-        RunState.savedReward.isAdditionalReward = true;
-        returnButton.interactable = true;
+        RunState.vampireFangs += RunState.currentEncounter.vampireFangsReward;
+        ActiveReturnButton();
         Destroy(vampireButton.gameObject);
+    }
+
+    void ChangeSelection(GameObject gameObject)
+    {
+        foreach (GameObject card in cards)
+        {
+            if(card != gameObject)
+            {
+                ChooseCardReward reward = card.GetComponent<ChooseCardReward>();
+                if (reward.selection.activeSelf)
+                {
+                    reward.RemoveSelection();
+                }
+            }
+        }
+        ActiveReturnButton();
+    }
+
+    void ActiveReturnButton()
+    {
+        returnButton.interactable = true;
     }
 
 }

@@ -8,13 +8,14 @@ public class ChooseCardReward : MonoBehaviour
     [SerializeField] GameObject canvasObject;
     [SerializeField] protected CardSetting cardSetting;
     [SerializeField] ParticleSystem particles;
+    [SerializeField] public GameObject selection;
 
-    public delegate void RewardGet(GameObject gameObject);
-    public RewardGet onRewardGet;
+    public delegate void RewardSet(GameObject gameObject);
+    public RewardSet onRewardSet;
 
     private void Start()
     {
-        onRewardGet += AddCardToDeck;
+        onRewardSet += SetSelection;
     }
 
     private void OnMouseDown()
@@ -24,14 +25,24 @@ public class ChooseCardReward : MonoBehaviour
 
     protected virtual void OnClick()
     {
-        onRewardGet?.Invoke(gameObject);
+        onRewardSet?.Invoke(gameObject);
     }
 
-    public virtual void AddCardToDeck(GameObject gameObject)
+    public virtual void AddCardToDeck()
     {
         boxCollider.enabled = false;
         canvasObject.SetActive(false);
         RunState.deck.Add(cardSetting.cardID);
         particles.Play();
+    }
+
+    public void SetSelection(GameObject gameObject)
+    {
+        selection.SetActive(true);
+    }
+
+    public void RemoveSelection()
+    {
+        selection.SetActive(false);
     }
 }
