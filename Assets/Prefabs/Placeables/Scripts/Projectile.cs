@@ -70,6 +70,16 @@ public class Projectile : MonoBehaviour
         return damage;
     }
 
+    public int CalculateDamage(int baseDamage)
+    {
+        if (stats)
+        {
+            return (int)((baseDamage + stats.strength) * ((stats.weak > 0) ? stats.weakMultiplier : 1.0f));
+        }
+
+        return baseDamage;
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         bouncesCount += 1;
@@ -82,6 +92,11 @@ public class Projectile : MonoBehaviour
         } 
 
         if (isSimulatingTrajectory || !wasLaunched) return;
+
+        if (TryGetComponent<Axe>(out var axe))
+        {
+            this.damage = axe.GetDamage(collision);
+        }
 
         var interaction = collision.gameObject.GetComponent<Interactable>();
         if (interaction != null)

@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3962a36c7710e64bac40dfc63af6045, type: 3}
-  m_Name: BounceBillCard
+  m_Name: AxeCard
   m_EditorClassIdentifier: 
-  id: 0
-  cardName: Bounce Bill
-  description: Gravity defying bullet that can ricochet, deals 5 dmg
+  id: 7
+  cardName: Axe
+  description: Blade deals 10 damage, handle 3. Destroys obstacles.
   type: Weapon
-  art: {fileID: 21300000, guid: 230caa021f482b141a3c3f34ccda8658, type: 3}
-  manaCost: 1
+  art: {fileID: 21300000, guid: 756d74c63bed2494a8d04258638f85e8, type: 3}
+  manaCost: 2
   effectPrefab: {fileID: 9060461344441102324, guid: 23ce03c14375b234dbbb6bae19fa15ea, type: 3}
-  minShopCost: 1
-  maxShopCost: 2
+  minShopCost: 4
+  maxShopCost: 10

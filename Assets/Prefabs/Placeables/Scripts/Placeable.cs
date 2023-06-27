@@ -68,6 +68,11 @@ public class Placeable : MonoBehaviour
     {
         canBePickedUp = false;
 
+        if (TryGetComponent<Axe>(out var axe))
+        {
+            axe.Init();
+        }
+
         var projectile = GetComponent<Projectile>();
         if (projectile)
         {
@@ -100,13 +105,23 @@ public class Placeable : MonoBehaviour
         direction = Vector3.Normalize(transform.position - aimingPos);
         CalculatePull(mag);
 
-        transform.eulerAngles = new Vector3(0, 0, Vector3.SignedAngle(Vector3.right, direction, Vector3.forward));        
+        transform.eulerAngles = new Vector3(0, 0, Vector3.SignedAngle(Vector3.right, direction, Vector3.forward));   
+
+        if (TryGetComponent<Axe>(out var axe))
+        {
+            axe.SetFlip();
+        }     
     }
 
     public void OnAiming(float angle)
     {
         transform.eulerAngles = new Vector3(0, 0, angle);
         direction = transform.right;
+
+        if (TryGetComponent<Axe>(out var axe))
+        {
+            axe.SetFlip();
+        }
     }
 
     public void OnRemove()

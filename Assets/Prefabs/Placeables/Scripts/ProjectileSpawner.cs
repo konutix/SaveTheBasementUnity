@@ -27,6 +27,8 @@ public class ProjectileSpawner : MonoBehaviour
 
     CardPanelScript cardPanel;
 
+    Arm arm;
+
     public event Action launchEvent;
     public event Action simulationStopEvent;
     
@@ -36,6 +38,7 @@ public class ProjectileSpawner : MonoBehaviour
     {
         objectsToLaunch = new List<Placeable>();
         cardPanel = FindObjectOfType<CardPanelScript>();
+        arm = FindObjectOfType<Arm>();
     }
 
     void Update()
@@ -66,6 +69,7 @@ public class ProjectileSpawner : MonoBehaviour
         }
         else
         {
+            if (placingRange.isInRange && isPlacing && arm != null) arm.DoTheThing(mousePos);
             if (Input.GetMouseButtonDown(0))
             {
                 if (placingRange.isInRange && isPlacing)
