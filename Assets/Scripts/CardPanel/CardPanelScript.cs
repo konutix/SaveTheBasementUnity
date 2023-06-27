@@ -271,7 +271,7 @@ public class CardPanelScript : MonoBehaviour
                     {
                         3, 3, 3, 3, 3,
                         0, 1, 2, 1, 0,
-                        6, 6, 6, 6, 6,
+                        8, 8, 8, 8, 8,
                         5, 5, 5, 5, 5,
                     };
                 }

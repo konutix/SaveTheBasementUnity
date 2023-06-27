@@ -98,6 +98,11 @@ public class Projectile : MonoBehaviour
             this.damage = axe.GetDamage(collision);
         }
 
+        if (TryGetComponent<Zap>(out var zap) && (collision.gameObject.layer == 6))
+        {
+            zap.ZappityZap();
+        }
+
         var interaction = collision.gameObject.GetComponent<Interactable>();
         if (interaction != null)
         {

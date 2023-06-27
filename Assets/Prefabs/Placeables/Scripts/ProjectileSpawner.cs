@@ -260,6 +260,7 @@ public class ProjectileSpawner : MonoBehaviour
         {
             if (placeable && placeable.GetComponent<Projectile>())
             {
+                if (placeable.GetComponent<Zap>()) continue;
                 var rb = placeable.GetComponent<Rigidbody2D>();
                 if (!rb || rb.simulated)
                 {
@@ -273,7 +274,7 @@ public class ProjectileSpawner : MonoBehaviour
 
         foreach (var placeable in objectsToLaunch)
         {
-            if (placeable)
+            if (placeable && !placeable.GetComponent<Zap>())
             {
                 Destroy(placeable.gameObject);
             }

@@ -27,3 +27,5 @@ MonoBehaviour:
     card: {fileID: 11400000, guid: dc417b6f88c9c37479c119e7435334a0, type: 2}
   - id: 6
     card: {fileID: 11400000, guid: a4f407f4416a5ab48abc7d5da2f1c9cf, type: 2}
+  - id: 7
+    card: {fileID: 11400000, guid: d2b3b179f4baa3f42bfcdfb86810b13e, type: 2}
