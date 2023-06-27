@@ -29,3 +29,7 @@ MonoBehaviour:
     card: {fileID: 11400000, guid: a4f407f4416a5ab48abc7d5da2f1c9cf, type: 2}
   - id: 7
     card: {fileID: 11400000, guid: d2b3b179f4baa3f42bfcdfb86810b13e, type: 2}
+  - id: 8
+    card: {fileID: 11400000, guid: 9687982487fa2314eb0db2687234b978, type: 2}
+  - id: 9
+    card: {fileID: 11400000, guid: 0566ae7acbb10ad4fa67042408149073, type: 2}

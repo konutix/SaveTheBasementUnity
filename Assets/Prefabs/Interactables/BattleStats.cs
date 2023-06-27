@@ -22,6 +22,14 @@ public class BattleStats : MonoBehaviour, Interactable
 
     public event Action onDeathEvent;
 
+    ProjectileSpawner projectileSpawner;
+
+    void Awake()
+    {
+        projectileSpawner = FindObjectOfType<ProjectileSpawner>();
+        projectileSpawner.simulationStopEvent += OnSimulationLaunch;
+    }
+
     void Start()
     {
         if (healthController)
@@ -113,5 +121,23 @@ public class BattleStats : MonoBehaviour, Interactable
         {
             healthController.UpdateModifiers(this, statsModifier);
         }
+    }
+    
+    void OnSimulationLaunch()
+    {
+        if (strength > 0) strength -= 1;
+        if (weak > 0) weak -= 1;
+        if (vulnerable > 0) vulnerable -= 1;
+        if (vampirism > 0) vampirism -= 1;
+
+        if (healthController)
+        {
+            healthController.UpdateModifiers(this);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (projectileSpawner) projectileSpawner.simulationStopEvent -= OnSimulationLaunch;
     }
 }

@@ -224,7 +224,7 @@ MonoBehaviour:
   weakAmount: 0
   vulnerableAmount: 0
   strengthAmount: 0
-  vampirismAmount: 1
+  vampirismAmount: 2
 --- !u!114 &268714616573463473
 MonoBehaviour:
   m_ObjectHideFlags: 0

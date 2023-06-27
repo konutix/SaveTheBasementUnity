@@ -27,7 +27,7 @@ public class HealthController : MonoBehaviour
         healthText.text = stats.currentHealth + "/" + stats.maxHealth;
     }
 
-    public void UpdateModifiers(BattleStats stats, ApplyStatsModifier modifier)
+    public void UpdateModifiers(BattleStats stats, ApplyStatsModifier modifier = null)
     {
         strengthText.text = stats.strength.ToString();
         strengthText.transform.parent.gameObject.SetActive(stats.strength != 0);
@@ -41,6 +41,7 @@ public class HealthController : MonoBehaviour
         vampirismText.text = stats.vampirism.ToString();
         vampirismText.transform.parent.gameObject.SetActive(stats.vampirism != 0);
 
+        if (modifier == null) return;
         if (modifier.strengthAmount > 0) powerUpParticles.Play();
         if (modifier.weakAmount > 0 || modifier.vulnerableAmount > 0) powerDownParticles.Play();
     }

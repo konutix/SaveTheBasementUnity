@@ -29,6 +29,11 @@ public class Highlight : MonoBehaviour
         maxPriority = priority;
 
         rendererToHighlight.color = highlight ? highlightColor : defaultColor;
+        
+        foreach (var r in rendererToHighlight.GetComponentsInChildren<SpriteRenderer>())
+        {
+            r.color = rendererToHighlight.color;
+        }
     }
 
     public void SetHighlightAndResize(bool highlight, int priority = 0)
@@ -38,5 +43,10 @@ public class Highlight : MonoBehaviour
 
         rendererToHighlight.color = highlight ? highlightColor : defaultColor;
         rendererToHighlight.transform.localScale = defaultScale * (highlight ? 1.4f : 1.0f);
+
+        foreach (var r in rendererToHighlight.GetComponentsInChildren<SpriteRenderer>())
+        {
+            r.color = rendererToHighlight.color;
+        }
     }
 }

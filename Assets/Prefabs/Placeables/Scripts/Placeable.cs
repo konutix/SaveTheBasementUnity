@@ -73,6 +73,11 @@ public class Placeable : MonoBehaviour
             axe.Init();
         }
 
+        if (TryGetComponent<Beam>(out var beam))
+        {
+            beam.Init();
+        }
+
         var projectile = GetComponent<Projectile>();
         if (projectile)
         {
