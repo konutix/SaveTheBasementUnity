@@ -7,6 +7,9 @@ public class Arm : MonoBehaviour
     public Transform anchor;
     public Transform head;
 
+    public float anchorLength = 1.8f;
+    public float headLength = 1.2f;
+
     Vector3 targetPos;
     float invert = 1.0f;
     
@@ -23,7 +26,7 @@ public class Arm : MonoBehaviour
     {
         anchor.rotation = Quaternion.RotateTowards(anchor.rotation, targetAnchorRotation, smoothFactor * Time.deltaTime);
 
-        Vector3 target = anchor.position + anchor.right * 1.8f;
+        Vector3 target = anchor.position + anchor.right * anchorLength;
         head.position = target;
         Vector3 relative = targetPos - target;
         head.eulerAngles = new Vector3(0.0f, 0.0f, Vector3.SignedAngle(Vector3.right, relative, Vector3.forward));
@@ -38,7 +41,7 @@ public class Arm : MonoBehaviour
         targetPos = mouse;
         targetPos.z = 0.0f;
 
-        ElbowPos(1.8f, 1.2f, targetPos - transform.position);
+        ElbowPos(anchorLength, headLength, targetPos - transform.position);
     }
 
     void ElbowPos(float l1, float l2, Vector3 target)
