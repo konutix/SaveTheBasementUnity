@@ -6,6 +6,6 @@ public class StartEncounter : Encounter
 {
     public StartEncounter()
     {
-        this.encounterState = EncounterStateEnum.Completed;
+        encounterState = EncounterStateEnum.Completed;
     }
 }

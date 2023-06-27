@@ -102,12 +102,18 @@ public class CardPanelScript : MonoBehaviour
 
     //cards in deck during play
     public List<int> currentDeck;
+    [SerializeField] ShowCards currentDeckPanel;
+    [SerializeField] ClickDeck currentDeckClick;
+    bool isCurrentDeckPanelOn;
 
     //cards in hand
     public List<HandCard> cards;
 
     //deck card ids
     public List<int> discarded;
+    [SerializeField] ShowCards discardedDeckPanel;
+    [SerializeField] ClickDeck discardedDeckClick;
+    bool isDiscardedDeckPanelOn;
 
     // Start is called before the first frame update
     void Start()
@@ -137,11 +143,24 @@ public class CardPanelScript : MonoBehaviour
         simulationTimer = 0.0f;
 
         currentMana = maxMana;
+
+        currentDeckPanel.GetComponent<Canvas>().worldCamera = Camera.main;
+        discardedDeckPanel.GetComponent<Canvas>().worldCamera = Camera.main;
+
+        currentDeckClick.onClicked += OnCurrentDeckClick;
+        discardedDeckClick.onClicked += OnDiscardedDeckClick;
+        isCurrentDeckPanelOn = false;
+        isDiscardedDeckPanelOn = false;
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
+        if(Input.GetMouseButtonDown(0))
+        {
+            DisableCurrentDeck();
+            DisableDiscardedDeck();
+        }
         //basing card speed on delta time
         float drawEaseIn = baseDrawEaseIn * Time.deltaTime * 300.0f;
 
@@ -300,6 +319,8 @@ public class CardPanelScript : MonoBehaviour
             //Setup the card panel
             case PanelState.dealHand:
 
+                DisableCurrentDeck();
+                DisableDiscardedDeck();
                 if (drawTimer > 0)
                 {
                     drawTimer -= Time.deltaTime;
@@ -577,6 +598,8 @@ public class CardPanelScript : MonoBehaviour
             //During simulation
             case PanelState.simulation:
 
+                DisableCurrentDeck();
+                DisableDiscardedDeck();
                 if (cards.Count > 0)
                 {
                     //add cards to discard pile
@@ -668,5 +691,47 @@ public class CardPanelScript : MonoBehaviour
     public void StartSimulation()
     {
         shouldStartSimulation = true;
+    }
+
+    void OnCurrentDeckClick()
+    {
+        if (isCurrentDeckPanelOn)
+        {
+            currentDeckPanel.Deactivate();
+        }
+        else
+        {
+            StartCoroutine(currentDeckPanel.Show());
+        }
+        isCurrentDeckPanelOn = !isCurrentDeckPanelOn;
+    }
+    void OnDiscardedDeckClick()
+    {
+        if (isDiscardedDeckPanelOn)
+        {
+            discardedDeckPanel.Deactivate();
+        }
+        else
+        {
+            StartCoroutine(discardedDeckPanel.Show());
+        }
+        isDiscardedDeckPanelOn = !isDiscardedDeckPanelOn;
+    }
+
+    void DisableCurrentDeck()
+    {
+        if((!currentDeckPanel.hovered && !currentDeckClick.hovered) || panelState == PanelState.simulation || panelState == PanelState.dealHand)
+        {
+            currentDeckPanel.Deactivate();
+            isCurrentDeckPanelOn = false;
+        }
+    }
+    void DisableDiscardedDeck()
+    {
+        if ((!discardedDeckPanel.hovered && !discardedDeckClick.hovered) || panelState == PanelState.simulation || panelState == PanelState.dealHand)
+        {
+            discardedDeckPanel.Deactivate();
+            isDiscardedDeckPanelOn = false;
+        }
     }
 }

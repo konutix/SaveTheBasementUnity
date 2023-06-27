@@ -983,42 +983,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 70490620897150423, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 70490620897150423, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 70490620897150423, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 70490620897150423, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 70490620897150423, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 70490620897150423, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 70490620897150423, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 484956224099970804, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2071199516293310704, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
-      propertyPath: m_Layer
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 4017132758189367544, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -1063,10 +1027,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4957941381076253913, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 546429087, guid: b9d260d430e91a84686ebf9d53c59684, type: 3}
     - target: {fileID: 6845397734865602973, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
       propertyPath: m_Camera
       value: 
@@ -1074,10 +1034,6 @@ PrefabInstance:
     - target: {fileID: 7713205343176399199, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
       propertyPath: m_Name
       value: VampireFangsIcon
-      objectReference: {fileID: 0}
-    - target: {fileID: 8680574028856143439, guid: 91211cfe7ae929947a8282be89f40815, type: 3}
-      propertyPath: m_Layer
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91211cfe7ae929947a8282be89f40815, type: 3}

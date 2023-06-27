@@ -37,7 +37,8 @@ public class Map : MonoBehaviour
 
     [Tooltip("Which layers should have chests only on show (starting from layer 1, as 0 is start)")]
     [SerializeField] List<int> ChestMapLayerLimit;
-
+    [Space]
+    [SerializeField] ShowCards showCards;
     Encounter[,] MapLayout;
     int MapHeight;
 
@@ -51,6 +52,7 @@ public class Map : MonoBehaviour
         {
             LoadMap();
         }
+        StartCoroutine(showCards.Show());
     }
 
     void GenerateMap()

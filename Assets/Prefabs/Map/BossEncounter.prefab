@@ -368,6 +368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef510b26255e6e246a59da639404fa2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  map: {fileID: 0}
   NormalColor: {r: 0, g: 0, b: 0, a: 1}
   HighlightColor: {r: 1, g: 0.2882928, b: 0, a: 1}
   CompletedOutlineRenderer: {fileID: 2619790976456453188}
