@@ -6,6 +6,7 @@ using UnityEngine;
 public class MapNode : MonoBehaviour
 {
     Encounter Encounter;
+    public Map map;
     SpriteRenderer SRenderer;
     bool IsMouseOver;
     [SerializeField] Color NormalColor;
@@ -48,10 +49,11 @@ public class MapNode : MonoBehaviour
         return Encounter;
     }
 
-    public Encounter SetEncounter(Encounter newEncounter)
+    public Encounter SetEncounter(Encounter newEncounter, Map map)
     {
         Encounter = newEncounter;
         Encounter.node = this;
+        this.map = map;
         return Encounter;
     }
 
@@ -76,7 +78,7 @@ public class MapNode : MonoBehaviour
     {
         if(IsMouseOver)
         {
-            transform.parent.GetComponent<Map>().CheckCurrentEncounter(Encounter);
+            map.GetComponent<Map>().CheckCurrentEncounter(Encounter);
             Encounter.LaunchEncounter();
         }
     }

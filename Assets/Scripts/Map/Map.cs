@@ -152,6 +152,7 @@ public class Map : MonoBehaviour
             if (NextEncounter != null)
             {
                 MapLayout[0, 0].nextEncounters.Add(NextEncounter);
+                NextEncounter.previousEncounters.Add(MapLayout[0, 0]);
             }
         }
         //ustalanie bezposredniej drogi dla srodka
@@ -329,9 +330,9 @@ public class Map : MonoBehaviour
         Bounds MapBounds = SRenderer.bounds;
         float YDistance = MapBounds.size.y / (MapHeight + 1);
         float XDistance = MapBounds.size.x / (MaxMapWidth + 1);
-        CurrentEncounterObject = Instantiate(StartEncounterObject, new Vector2(MapBounds.center.x, MapBounds.max.y - YDistance), new Quaternion(), transform);
+        CurrentEncounterObject = Instantiate(StartEncounterObject, new Vector2(MapBounds.center.x, MapBounds.max.y - YDistance), new Quaternion());
 
-        CurrentEncounterObject.GetComponent<MapNode>().SetEncounter(MapLayout[0, 0]);
+        CurrentEncounterObject.GetComponent<MapNode>().SetEncounter(MapLayout[0, 0], this);
         for (int i = 1; i < MapHeight - 1; i++)
         {
             for (int j = 0; j < MaxMapWidth; j++)
@@ -341,30 +342,31 @@ public class Map : MonoBehaviour
                 {
                     if(encounter.GetType().Equals(typeof(SingleEnemyEncounter)))
                     {
-                        CurrentEncounterObject = Instantiate(SingleEnemyEncounterObject, new Vector2(MapBounds.min.x + XDistance * (j + 1), MapBounds.max.y - YDistance * (i + 1)), new Quaternion(), transform);
-                        CurrentEncounterObject.GetComponent<MapNode>().SetEncounter(encounter);
+                        CurrentEncounterObject = Instantiate(SingleEnemyEncounterObject, new Vector2(MapBounds.min.x + XDistance * (j + 1), MapBounds.max.y - YDistance * (i + 1)), new Quaternion());
+                        MapNode node = CurrentEncounterObject.GetComponent<MapNode>();
+                        node.SetEncounter(encounter, this);
                         
                     }
                     else if(encounter.GetType().Equals(typeof(MultipleEnemyEncounter)))
                     {
-                        CurrentEncounterObject = Instantiate(MultipleEnemyEncounterObject, new Vector2(MapBounds.min.x + XDistance * (j + 1), MapBounds.max.y - YDistance * (i + 1)), new Quaternion(), transform);
-                        CurrentEncounterObject.GetComponent<MapNode>().SetEncounter(encounter);
+                        CurrentEncounterObject = Instantiate(MultipleEnemyEncounterObject, new Vector2(MapBounds.min.x + XDistance * (j + 1), MapBounds.max.y - YDistance * (i + 1)), new Quaternion());
+                        CurrentEncounterObject.GetComponent<MapNode>().SetEncounter(encounter, this);
                     }
                     else if (encounter.GetType().Equals(typeof(UpgradeEncounter)))
                     {
-                        CurrentEncounterObject = Instantiate(UpgradeEncounterObject, new Vector2(MapBounds.min.x + XDistance * (j + 1), MapBounds.max.y - YDistance * (i + 1)), new Quaternion(), transform);
-                        CurrentEncounterObject.GetComponent<MapNode>().SetEncounter(encounter);
+                        CurrentEncounterObject = Instantiate(UpgradeEncounterObject, new Vector2(MapBounds.min.x + XDistance * (j + 1), MapBounds.max.y - YDistance * (i + 1)), new Quaternion());
+                        CurrentEncounterObject.GetComponent<MapNode>().SetEncounter(encounter, this);
                     }
                     else if (encounter.GetType().Equals(typeof(ChestEncounter)))
                     {
-                        CurrentEncounterObject = Instantiate(ChestEncounterObject, new Vector2(MapBounds.min.x + XDistance * (j + 1), MapBounds.max.y - YDistance * (i + 1)), new Quaternion(), transform);
-                        CurrentEncounterObject.GetComponent<MapNode>().SetEncounter(encounter);
+                        CurrentEncounterObject = Instantiate(ChestEncounterObject, new Vector2(MapBounds.min.x + XDistance * (j + 1), MapBounds.max.y - YDistance * (i + 1)), new Quaternion());
+                        CurrentEncounterObject.GetComponent<MapNode>().SetEncounter(encounter, this);
                     }
                 }
             }
         }
-        CurrentEncounterObject = Instantiate(BossEncounterObject, new Vector2(MapBounds.center.x, MapBounds.max.y - YDistance * MapHeight), new Quaternion(), transform);
-        CurrentEncounterObject.GetComponent<MapNode>().SetEncounter(MapLayout[MapHeight - 1, 0]);
+        CurrentEncounterObject = Instantiate(BossEncounterObject, new Vector2(MapBounds.center.x, MapBounds.max.y - YDistance * MapHeight), new Quaternion());
+        CurrentEncounterObject.GetComponent<MapNode>().SetEncounter(MapLayout[MapHeight - 1, 0], this);
 
         for (int i = 0; i < MapHeight - 1; i++)
         {
