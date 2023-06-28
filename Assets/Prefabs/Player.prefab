@@ -143,6 +143,7 @@ MonoBehaviour:
   vulnerable: 0
   vulnerableMultiplier: 1.5
   vampirism: 0
+  canBeTeleported: 1
   gettingDamageParticles: {fileID: 2233082491144929757}
 --- !u!61 &8483888858752144362
 BoxCollider2D:

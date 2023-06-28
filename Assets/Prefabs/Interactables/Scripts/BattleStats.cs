@@ -18,6 +18,9 @@ public class BattleStats : MonoBehaviour, Interactable
     public int vampirism = 0;
 
     [Space]
+    public bool canBeTeleported = false;
+
+    [Space]
     [SerializeField] ParticleSystem gettingDamageParticles;
 
     public event Action onDeathEvent;
