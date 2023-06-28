@@ -10,6 +10,9 @@ public class Arm : MonoBehaviour
     public float anchorLength = 1.8f;
     public float headLength = 1.2f;
 
+    [Space]
+    public LayerMask ignoreCollision;
+
     [HideInInspector] public Vector3 currentHookLocation = Vector3.zero;
 
     Vector3 targetPos;
@@ -42,8 +45,17 @@ public class Arm : MonoBehaviour
 
     public void DoTheThing(Vector3 mouse)
     {
-        targetPos = mouse;
-        targetPos.z = 0.0f;
+        Vector3 dir = mouse - transform.position;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, dir.magnitude, ~ignoreCollision);
+        if (hit.collider != null)
+        {
+            print(hit.collider.gameObject);
+            targetPos = hit.point;
+        }
+        else
+        {
+            targetPos = mouse;
+        }
 
         ElbowPos(anchorLength, headLength, targetPos - transform.position);
     }

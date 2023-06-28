@@ -622,4 +622,7 @@ MonoBehaviour:
   head: {fileID: 2355751292408285740}
   anchorLength: 1.5
   headLength: 1.5
+  ignoreCollision:
+    serializedVersion: 2
+    m_Bits: 548
   currentHookLocation: {x: 0, y: 0, z: 0}
