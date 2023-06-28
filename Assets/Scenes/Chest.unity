@@ -1054,6 +1054,7 @@ MonoBehaviour:
   cardDictionary: {fileID: 11400000, guid: 0ea9b28efd82b804da4a64cad9370766, type: 2}
   cardPrefab: {fileID: 13305087574292875, guid: e730a408c7af2b24f85b01c5167e176b, type: 3}
   rewardPanel: {fileID: 200613986}
+  spriteObject: {fileID: 1579012869}
   particles: {fileID: 1520849383}
   rewardsNumber: 1
   returnButton: {fileID: 2070016349}

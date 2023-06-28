@@ -8,10 +8,12 @@ public class Chest : MonoBehaviour
     [SerializeField] CardDictionary cardDictionary;
     [SerializeField] GameObject cardPrefab;
     [SerializeField] GameObject rewardPanel;
+    [SerializeField] GameObject spriteObject;
     [SerializeField] ParticleSystem particles;
     [SerializeField] int rewardsNumber;
     [SerializeField] Button returnButton;
     bool rewardTaken;
+    float timePassed;
 
     private void Start()
     {
@@ -40,5 +42,20 @@ public class Chest : MonoBehaviour
             RunState.currentEncounter.encounterState = EncounterStateEnum.Completed;
         }
         
+    }
+    private void OnMouseEnter()
+    {
+        timePassed = 0;
+    }
+
+    private void OnMouseOver()
+    {
+        timePassed += Time.deltaTime;
+        spriteObject.transform.Rotate(new Vector3(0, 0, 1), Mathf.Cos(timePassed*12));
+    }
+
+    private void OnMouseExit()
+    {
+        spriteObject.transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 }
