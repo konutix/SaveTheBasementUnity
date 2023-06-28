@@ -86,7 +86,7 @@ public class Projectile : MonoBehaviour
 
         var bs = collision.gameObject.GetComponent<BattleStats>();
         var shield = collision.gameObject.GetComponent<Shield>();
-        if (bs || (shield && shield.shouldDestroyProjectile))
+        if (bs || (shield && shield.shouldDestroyProjectile) || collision.gameObject.GetComponent<Teleporter>())
         {
             bouncesCount = 9999;
         } 
@@ -121,6 +121,7 @@ public class Projectile : MonoBehaviour
         if (isSimulatingTrajectory || !wasLaunched) return;
         
         try {
+            if (collision.gameObject.GetComponent<Teleporter>()) return;
             collision.gameObject.GetComponent<Interactable>().OnInteractWithProjectile(this);
         } catch { }
     }
