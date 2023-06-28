@@ -16,7 +16,7 @@ MonoBehaviour:
   cardName: Zap
   description: Zap description.
   type: Weapon
-  art: {fileID: 21300000, guid: d0132b41c0101cc4380d22fb98e66264, type: 3}
+  art: {fileID: 21300000, guid: 1bc9ccdcaecd2b145b83233d40215dda, type: 3}
   manaCost: 2
   effectPrefab: {fileID: 9060461344441102324, guid: 2c113693948451f458805300e9f022d4, type: 3}
   minShopCost: 4
