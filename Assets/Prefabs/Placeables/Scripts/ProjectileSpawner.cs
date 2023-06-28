@@ -191,7 +191,7 @@ public class ProjectileSpawner : MonoBehaviour
             if (placeablesArms.TryGetValue(currentObject, out currentArm))
             {
                 placeablesArms.Remove(currentObject);
-                Destroy(currentArm.gameObject);
+                currentArm.OnRemove();
                 currentArm = null;
             }
 
@@ -201,7 +201,7 @@ public class ProjectileSpawner : MonoBehaviour
         }
         else if (currentArm)
         {
-            Destroy(currentArm.gameObject);
+            currentArm.OnRemove();
             currentArm = null;
         }
     }
@@ -220,7 +220,7 @@ public class ProjectileSpawner : MonoBehaviour
 
         foreach(var arm in placeablesArms.Values)
         {
-            Destroy(arm.gameObject);
+            arm.OnRemove();
         }
         placeablesArms = new Dictionary<Placeable, Arm>();
     }
@@ -243,7 +243,7 @@ public class ProjectileSpawner : MonoBehaviour
         if (placeablesArms.TryGetValue(placeable, out currentArm))
         {
             placeablesArms.Remove(placeable);
-            Destroy(currentArm.gameObject);
+            currentArm.OnRemove();
             currentArm = null;
         }
     }
@@ -285,7 +285,7 @@ public class ProjectileSpawner : MonoBehaviour
                 if (placeablesArms.TryGetValue(currentObject, out currentArm))
                 {
                     placeablesArms.Remove(currentObject);
-                    Destroy(currentArm.gameObject);
+                    currentArm.OnRemove();
                     currentArm = null;
                 }
 
@@ -311,7 +311,7 @@ public class ProjectileSpawner : MonoBehaviour
                 if (placeablesArms.TryGetValue(placeable, out currentArm))
                 {
                     placeablesArms.Remove(placeable);
-                    Destroy(currentArm.gameObject);
+                    currentArm.OnRemove();
                     currentArm = null;
                 }
 
