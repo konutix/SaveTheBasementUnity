@@ -63,7 +63,6 @@ public class Arm : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, dir.magnitude, ~ignoreCollision);
         if (hit.collider != null)
         {
-            print(hit.collider.gameObject);
             targetPos = hit.point;
         }
         else

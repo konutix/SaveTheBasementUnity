@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class MapNode : MonoBehaviour
 {
@@ -14,6 +15,11 @@ public class MapNode : MonoBehaviour
     [Space]
     [SerializeField] SpriteRenderer CompletedOutlineRenderer;
     [SerializeField] SpriteRenderer ReadyOutlineRenderer;
+    [SerializeField] GameObject SummaryObject;
+    [SerializeField] TextMeshProUGUI SummaryText;
+    [SerializeField] TextMeshProUGUI RewardText;
+    [SerializeField] string Summary;
+    [SerializeField] string Reward;
 
     private void Start()
     {
@@ -39,7 +45,9 @@ public class MapNode : MonoBehaviour
                 ReadyOutlineRenderer.enabled = false;
                 break;
 
-        }
+        };
+        SummaryText.text = Summary;
+        RewardText.text = TextReplace.Replace(Reward, Encounter.vampireFangsReward);
     }
 
     public Encounter SetEncounter<T>() where T : Encounter
@@ -59,19 +67,30 @@ public class MapNode : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if(Encounter.encounterState == EncounterStateEnum.Ready)
+        EncounterStateEnum state = Encounter.encounterState;
+        if (state == EncounterStateEnum.Ready)
         {
             SRenderer.color = HighlightColor;
             IsMouseOver = true;
         }
+        if(state == EncounterStateEnum.Incompleted || state == EncounterStateEnum.Ready)
+        {
+            SummaryObject.SetActive(true);
+        }
+
     }
 
     private void OnMouseExit()
     {
-        if (Encounter.encounterState == EncounterStateEnum.Ready)
+        EncounterStateEnum state = Encounter.encounterState;
+        if (state == EncounterStateEnum.Ready)
         {
             SRenderer.color = NormalColor;
             IsMouseOver = false;
+        }
+        if (state == EncounterStateEnum.Incompleted || state == EncounterStateEnum.Ready)
+        {
+            SummaryObject.SetActive(false);
         }
     }
     private void OnMouseDown()
