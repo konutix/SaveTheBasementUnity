@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3962a36c7710e64bac40dfc63af6045, type: 3}
+  m_Name: ShieldMultDamage
+  m_EditorClassIdentifier: 
+  id: 10
+  cardName: Angry Shield
+  description: Place a shield that reflects 1 projectile and multiplies its damage
+  type: Structure
+  art: {fileID: 21300000, guid: baf9546af73c16d43ba02b054252bbe0, type: 3}
+  manaCost: 3
+  effectPrefab: {fileID: 8309556347256184467, guid: ae2f67b9d250ff043aac86fed7ba5ca6, type: 3}
+  minShopCost: 4
+  maxShopCost: 9

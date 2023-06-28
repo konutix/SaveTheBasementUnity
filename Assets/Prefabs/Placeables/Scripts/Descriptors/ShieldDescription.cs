@@ -21,6 +21,11 @@ public class ShieldDescription : MonoBehaviour, ObjectDescription
         sb.AppendFormat("{0} incoming projectiles. {1} durability.", 
                         (shield.shouldDestroyProjectile) ? "Destroys" : "Reflects",
                         (shield.evnironmentalHealth < 2) ? "Low" : "High");
+
+        if (shield.damageMultiplier > 1.0f) 
+        {
+            sb.AppendFormat(" Increases damage {0}X times.", shield.damageMultiplier.ToString());
+        }
         
         return sb.ToString();
     }

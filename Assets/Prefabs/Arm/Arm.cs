@@ -10,6 +10,8 @@ public class Arm : MonoBehaviour
     public float anchorLength = 1.8f;
     public float headLength = 1.2f;
 
+    [HideInInspector] public Vector3 currentHookLocation = Vector3.zero;
+
     Vector3 targetPos;
     float invert = 1.0f;
     
@@ -30,6 +32,8 @@ public class Arm : MonoBehaviour
         head.position = target;
         Vector3 relative = targetPos - target;
         head.eulerAngles = new Vector3(0.0f, 0.0f, Vector3.SignedAngle(Vector3.right, relative, Vector3.forward));
+
+        currentHookLocation = head.position + head.right * headLength;
 
 
         if (targetPos.x < transform.position.x) invert = -1.0f;

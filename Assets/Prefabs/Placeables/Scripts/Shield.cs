@@ -7,6 +7,8 @@ public class Shield : MonoBehaviour, Interactable
     public bool shouldDestroyProjectile = false;
     public int evnironmentalHealth = 1;
 
+    public float damageMultiplier = 1.0f;
+
     public void Remove()
     {
         var trajectory = FindObjectOfType<TrajectoryManager>();
@@ -28,6 +30,8 @@ public class Shield : MonoBehaviour, Interactable
         {
             Destroy(projectile.gameObject);
         }
+
+        projectile.damage = (int)(projectile.damage * damageMultiplier);
 
         if (evnironmentalHealth == 0 || damage < 1) return;
 

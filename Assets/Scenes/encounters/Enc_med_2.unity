@@ -178,7 +178,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 61840988}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -1189,6 +1189,7 @@ MonoBehaviour:
   trajectoryManager: {fileID: 671793483}
   placingRange: {fileID: 61840989}
   player: {fileID: 1176963808}
+  armPrefab: {fileID: 2355751293603578593, guid: 012f7fc842ed6c44590e7edbf5bb87cf, type: 3}
 --- !u!1 &834105787
 GameObject:
   m_ObjectHideFlags: 0
@@ -1374,6 +1375,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 369524472}
     m_Modifications:
+    - target: {fileID: 424140355095350010, guid: 5ccf89e8fab01af4eb2eab849dffeef8, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8483888858752144360, guid: 5ccf89e8fab01af4eb2eab849dffeef8, type: 3}
       propertyPath: m_Name
       value: Player

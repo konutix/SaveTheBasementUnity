@@ -9,6 +9,7 @@ public class ProjectileSpawner : MonoBehaviour
     Placeable currentObject;
     [HideInInspector]
     public List<Placeable> objectsToLaunch;
+    Dictionary<Placeable, Arm> placeablesArms;
 
     Placeable ghost;
 
@@ -18,6 +19,7 @@ public class ProjectileSpawner : MonoBehaviour
     [HideInInspector] public bool isAiming  = false;
     [HideInInspector] public bool isPlacing = false;
     Vector3 mousePos = Vector3.zero;
+    Vector3 placingPos = Vector3.zero;
 
     public TrajectoryManager trajectoryManager;
 
@@ -27,7 +29,9 @@ public class ProjectileSpawner : MonoBehaviour
 
     CardPanelScript cardPanel;
 
-    Arm arm;
+    [Space]
+    public Arm armPrefab;
+    Arm currentArm = null;
 
     public event Action launchEvent;
     public event Action simulationStopEvent;
@@ -37,8 +41,8 @@ public class ProjectileSpawner : MonoBehaviour
     void Start()
     {
         objectsToLaunch = new List<Placeable>();
+        placeablesArms = new Dictionary<Placeable, Arm>();
         cardPanel = FindObjectOfType<CardPanelScript>();
-        arm = FindObjectOfType<Arm>();
     }
 
     void Update()
@@ -48,14 +52,46 @@ public class ProjectileSpawner : MonoBehaviour
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos.z = 0.0f;
 
+        if (currentArm != null)
+        {
+            if (isPlacing) currentArm.DoTheThing(mousePos);
+
+            placingPos = currentArm.currentHookLocation;
+        }
+        else
+        {
+            placingPos = mousePos;
+        }
+
+
+        // sort arms for rendering
+        float offset = 0.05f;
+        foreach(var arm in placeablesArms.Values)
+        {
+            Vector3 pos = arm.transform.position;
+
+            if (arm == currentArm)
+            {
+                pos.z = 0.0f;
+            }
+            else
+            {
+                pos.z = offset;
+                offset += 0.05f;
+            }
+
+            arm.transform.position = pos;
+        }
+        
+
         if (tempCheckPrefabChange != prefabToSpawn)
         {
             tempCheckPrefabChange = prefabToSpawn;
             CreateGhost(prefabToSpawn);
         }
 
-        ghost.transform.position = mousePos;
-        ghost.gameObject.SetActive(placingRange.isInRange && isPlacing);
+        ghost.transform.position = placingPos;
+        ghost.gameObject.SetActive(/*placingRange.isInRange &&*/ isPlacing);
 
         if (isAiming)
         {
@@ -69,10 +105,11 @@ public class ProjectileSpawner : MonoBehaviour
         }
         else
         {
-            if (placingRange.isInRange && isPlacing && arm != null) arm.DoTheThing(mousePos);
+            // if (placingRange.isInRange && isPlacing && arm != null) arm.DoTheThing(mousePos);
+            
             if (Input.GetMouseButtonDown(0))
             {
-                if (placingRange.isInRange && isPlacing)
+                if (/*placingRange.isInRange &&*/ isPlacing)
                 {
                     OnStartedPlacing();
                 }
@@ -103,6 +140,8 @@ public class ProjectileSpawner : MonoBehaviour
         prefabToSpawn = placeable;
         isPlacing = true;
         CreateGhost(prefabToSpawn);
+
+        currentArm = Instantiate(armPrefab, player.transform.position, Quaternion.identity);
     }
 
     public void StartSimulation()
@@ -117,12 +156,13 @@ public class ProjectileSpawner : MonoBehaviour
 
         if (!currentObject)
         {
-            currentObject = Instantiate(prefabToSpawn, mousePos, Quaternion.identity);
+            currentObject = Instantiate(prefabToSpawn, placingPos, Quaternion.identity);
             currentObject.owner = player;
+            placeablesArms.Add(currentObject, currentArm);
         } 
         else
         {
-            currentObject.transform.position = mousePos;
+            currentObject.transform.position = placingPos;
         }
         
         currentObject.canBePickedUp = true;
@@ -148,9 +188,21 @@ public class ProjectileSpawner : MonoBehaviour
 
         if (currentObject)
         {
+            if (placeablesArms.TryGetValue(currentObject, out currentArm))
+            {
+                placeablesArms.Remove(currentObject);
+                Destroy(currentArm.gameObject);
+                currentArm = null;
+            }
+
             objectsToLaunch.Remove(currentObject);
             Destroy(currentObject.gameObject);
             currentObject = null;
+        }
+        else if (currentArm)
+        {
+            Destroy(currentArm.gameObject);
+            currentArm = null;
         }
     }
 
@@ -165,6 +217,12 @@ public class ProjectileSpawner : MonoBehaviour
         GetComponent<LineRenderer>().positionCount = 0;
 
         if (launchEvent != null) launchEvent();
+
+        foreach(var arm in placeablesArms.Values)
+        {
+            Destroy(arm.gameObject);
+        }
+        placeablesArms = new Dictionary<Placeable, Arm>();
     }
 
     public bool CanLaunch()
@@ -181,6 +239,13 @@ public class ProjectileSpawner : MonoBehaviour
     {
         objectsToLaunch.Remove(placeable);
         Destroy(placeable.gameObject);
+
+        if (placeablesArms.TryGetValue(placeable, out currentArm))
+        {
+            placeablesArms.Remove(placeable);
+            Destroy(currentArm.gameObject);
+            currentArm = null;
+        }
     }
     
     void TryPickupPlaced()
@@ -203,6 +268,8 @@ public class ProjectileSpawner : MonoBehaviour
 
                 cardPanel.PickupPlayedCard(placeable);
 
+                placeablesArms.TryGetValue(currentObject, out currentArm);
+
                 return;
             }
         }
@@ -210,10 +277,18 @@ public class ProjectileSpawner : MonoBehaviour
 
     void TryCancelPlaced()
     {
+        // cancel unplaced
         if (isPlacing)
         {
             if (currentObject)
             {
+                if (placeablesArms.TryGetValue(currentObject, out currentArm))
+                {
+                    placeablesArms.Remove(currentObject);
+                    Destroy(currentArm.gameObject);
+                    currentArm = null;
+                }
+
                 if (cardPanel != null) cardPanel.CancelPlayedCard(currentObject);
 
                 currentObject.OnRemove();
@@ -228,10 +303,18 @@ public class ProjectileSpawner : MonoBehaviour
             return;
         }
 
+        // cancel already placed
         foreach (var placeable in objectsToLaunch)
         {
             if (placeable.isMouseOver)
             {
+                if (placeablesArms.TryGetValue(placeable, out currentArm))
+                {
+                    placeablesArms.Remove(placeable);
+                    Destroy(currentArm.gameObject);
+                    currentArm = null;
+                }
+
                 if (cardPanel != null) cardPanel.CancelPlayedCard(placeable);
                 
                 placeable.OnRemove();

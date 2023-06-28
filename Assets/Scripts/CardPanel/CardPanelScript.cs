@@ -486,6 +486,7 @@ public class CardPanelScript : MonoBehaviour
                 //cancel hovered, played card
                 if (Input.GetMouseButtonDown(1) && hovered != -1 && cards[hovered].played && !simultaing)
                 {
+                    lastSelectedIndex = hovered;
                     projSpawner.RemovePlaceable(cards[hovered].spawnedPlaceableInstance);
                     CancelPlayedCard(cards[hovered].spawnedPlaceableInstance);
                 }
@@ -573,7 +574,9 @@ public class CardPanelScript : MonoBehaviour
                 if (lastSelectedIndex != -1)
                 {
                     if (cards[lastSelectedIndex].spawnedPlaceableInstance != null)
+                    {
                         panelState = PanelState.cardPick;
+                    }
                 }
 
                 //release
@@ -660,13 +663,17 @@ public class CardPanelScript : MonoBehaviour
             var card = cards[j];
             if (card.spawnedPlaceableInstance == placeable)
             {
+                lastSelectedIndex = j;
                 card.spawnedPlaceableInstance = null;
                 card.cardInstance.GetComponent<CardSetting>().SetOpacity(1.0f);
                 card.played = false;
-                
                 return;
             }
         }
+
+        cards[lastSelectedIndex].spawnedPlaceableInstance = null;
+        cards[lastSelectedIndex].cardInstance.GetComponent<CardSetting>().SetOpacity(1.0f);
+        cards[lastSelectedIndex].played = false;
     }
 
     public void PickupPlayedCard(Placeable placeable)
@@ -676,12 +683,13 @@ public class CardPanelScript : MonoBehaviour
             var card = cards[j];
             if (card.spawnedPlaceableInstance == placeable)
             {
-                // lastSelectedIndex = -1;
-                
-                card.spawnedPlaceableInstance = null;
-                card.hovered = true;
-
                 panelState = PanelState.placing;
+                lastSelectedIndex = j;
+
+                card.hovered = true;
+                card.selected = false;
+                card.spawnedPlaceableInstance = null;
+                card.cardInstance.GetComponent<CardSetting>().SetOpacity(1.0f);
 
                 return;
             }

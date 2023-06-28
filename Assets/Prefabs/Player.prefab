@@ -330,7 +330,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8096920794944741143, guid: 8ffa6ced5ffb83447b52fdbc604945e4, type: 3}
       propertyPath: m_SortingOrder
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8096920794944741146, guid: 8ffa6ced5ffb83447b52fdbc604945e4, type: 3}
       propertyPath: m_AnchoredPosition.y
