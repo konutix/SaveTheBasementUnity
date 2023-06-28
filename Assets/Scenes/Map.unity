@@ -512,8 +512,8 @@ MonoBehaviour:
   MaxUpgradeNumber: 0
   UpgradeMapLayerLimit: 02000000
   ChestEncounterObject: {fileID: 3777019437030148375, guid: 3c206a4e919fce749ae863abf733664d, type: 3}
-  MinChestNumber: 0
-  MaxChestNumber: 0
+  MinChestNumber: 9
+  MaxChestNumber: 9
   ChestMapLayerLimit: 05000000
   showCards: {fileID: 2418430664313781383}
 --- !u!212 &1149355079

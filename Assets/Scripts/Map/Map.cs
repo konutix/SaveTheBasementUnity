@@ -76,7 +76,7 @@ public class Map : MonoBehaviour
                     EncounterIndex = Random.Range(0, MaxMapWidth);
                 }
                 UsedIndexes.Add(EncounterIndex);
-                EncountersCoords.Add(new Vector2Int(i, j));
+                EncountersCoords.Add(new Vector2Int(i, EncounterIndex));
                 int EncounterType = Random.Range(0, 2);
                 if (EncounterType == 0)
                 {
