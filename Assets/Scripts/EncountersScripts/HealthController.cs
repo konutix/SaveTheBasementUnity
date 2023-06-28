@@ -21,10 +21,15 @@ public class HealthController : MonoBehaviour
 
     float targetFillAmount = 1.0f;
 
-    public void UpdateHealth(BattleStats stats)
+    public void UpdateHealth(BattleStats stats, bool immediate = false)
     {
         targetFillAmount = (float) stats.currentHealth / stats.maxHealth;
         healthText.text = stats.currentHealth + "/" + stats.maxHealth;
+
+        if (immediate)
+        {
+            healthBar.fillAmount = targetFillAmount;
+        }
     }
 
     public void UpdateModifiers(BattleStats stats, ApplyStatsModifier modifier = null)

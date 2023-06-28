@@ -41,6 +41,17 @@ public class BattleStats : MonoBehaviour, Interactable
         }
     }
 
+    public void SetupProperties(int _currentHealth, int _maxHealth)
+    {
+        maxHealth = _maxHealth;
+        currentHealth = _currentHealth;
+
+        if (healthController)
+        {
+            healthController.UpdateHealth(this, true);
+        }
+    }
+
     public void OnInteractWithProjectile(Projectile projectile)
     {
         if (currentHealth <= 0) return;

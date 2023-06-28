@@ -31,8 +31,8 @@ public struct ShopReward
 
 public static class RunState
 {
-    public static float maxPlayerHealth;
-    public static float currentPlayerHealth;
+    public static float maxPlayerHealth = 70;
+    public static float currentPlayerHealth = 70;
 
     public static int Mana;
 
@@ -50,8 +50,8 @@ public static class RunState
 
     public static void ResetData()
     {
-        maxPlayerHealth = 0;
-        currentPlayerHealth = 0;
+        maxPlayerHealth = 70;
+        currentPlayerHealth = 70;
         Mana = 0;
         deck = null;
         cardsDrawn = 0;

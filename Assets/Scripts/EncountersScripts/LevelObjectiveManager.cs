@@ -53,6 +53,7 @@ public class LevelObjectiveManager : MonoBehaviour
         }
         else
         {
+            RunState.currentPlayerHealth = (float)FindObjectOfType<ProjectileSpawner>().player.currentHealth;
             SceneManager.LoadScene("WinScene", LoadSceneMode.Additive);
         }
     }
