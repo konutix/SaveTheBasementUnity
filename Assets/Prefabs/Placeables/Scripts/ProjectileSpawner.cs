@@ -43,6 +43,8 @@ public class ProjectileSpawner : MonoBehaviour
         objectsToLaunch = new List<Placeable>();
         placeablesArms = new Dictionary<Placeable, Arm>();
         cardPanel = FindObjectOfType<CardPanelScript>();
+
+        player.SetupProperties((int)RunState.currentPlayerHealth, (int)RunState.maxPlayerHealth);
     }
 
     void Update()
