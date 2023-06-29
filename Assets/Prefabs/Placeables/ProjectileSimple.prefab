@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3658093765086996664}
   - component: {fileID: 6424795813594747789}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GFX Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   - component: {fileID: 7497032781060939431}
   - component: {fileID: 6509973733531201088}
   - component: {fileID: 157600687329022078}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ProjectileSimple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,6 +163,7 @@ MonoBehaviour:
   isTriggerByDefault: 0
   isMouseOver: 0
   canBePickedUp: 0
+  projectileSpawner: {fileID: 0}
   pull: 1
   owner: {fileID: 0}
 --- !u!58 &7497032781060939430
@@ -323,7 +324,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1615294454057227743}
   - component: {fileID: 102476934896952103}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GFX Placing
   m_TagString: Untagged
   m_Icon: {fileID: 0}

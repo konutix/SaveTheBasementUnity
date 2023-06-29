@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7142662923807884448}
   - component: {fileID: 5573089351708359995}
   - component: {fileID: 7561627860028742944}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ShieldMultDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,7 +137,7 @@ GameObject:
   m_Component:
   - component: {fileID: 198128231894510237}
   - component: {fileID: 8843886391220126044}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GFX Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -221,7 +221,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2460939295361081004}
   - component: {fileID: 3184137964580574164}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GFX Placing
   m_TagString: Untagged
   m_Icon: {fileID: 0}

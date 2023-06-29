@@ -105,7 +105,7 @@ public class ProjectileSpawner : MonoBehaviour
                 OnStoppedPlacing();
             }
         }
-        else
+        else if (cardPanel.panelState != PanelState.dragging)
         {
             // if (placingRange.isInRange && isPlacing && arm != null) arm.DoTheThing(mousePos);
             
@@ -229,7 +229,7 @@ public class ProjectileSpawner : MonoBehaviour
 
     public bool CanLaunch()
     {
-        return (!isAiming && !isPlacing);
+        return !isAiming && !isPlacing && (cardPanel.panelState != PanelState.dragging);
     }
 
     public void AddPlaceable(Placeable placeable)

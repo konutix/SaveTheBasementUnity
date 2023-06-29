@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5589053193708108136}
   - component: {fileID: 7007290521297629954}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GFX Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3839257750466280579}
   - component: {fileID: 2769085753783282243}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GFX Placing (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7708871044470480088}
   - component: {fileID: 4450014896828936238}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GFX Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,7 +264,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2489889959279100237}
   - component: {fileID: 4321085247271634541}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GFX Placing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +350,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2065274056510503765}
   - component: {fileID: 2525727972752425404}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GFX Main (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -442,7 +442,7 @@ GameObject:
   - component: {fileID: 1424790654439578167}
   - component: {fileID: 660527726784633859}
   - component: {fileID: 5814249338670762476}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ProjectileBeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -720,7 +720,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8791874106966911272}
   - component: {fileID: 4030189853735327120}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GFX Placing
   m_TagString: Untagged
   m_Icon: {fileID: 0}

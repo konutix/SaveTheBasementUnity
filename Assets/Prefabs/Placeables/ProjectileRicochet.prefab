@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5444235215438247659}
   - component: {fileID: 2069129919593716253}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GFX Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 286959287317556094}
   - component: {fileID: 1909863144321576030}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GFX Placing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 6780844077930414401}
   - component: {fileID: 4773734436623074029}
   - component: {fileID: 1971629336050512792}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: ProjectileRicochet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

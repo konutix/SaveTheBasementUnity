@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6937994833983067886}
   - component: {fileID: 3131396849439146484}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,7 +68,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3529491084359920550}
   - component: {fileID: 3701828361024244241}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Blade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4265363866682933187}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: gfx holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3846690372488091780}
   - component: {fileID: 6813785321465897905}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GFX Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -244,7 +244,7 @@ GameObject:
   - component: {fileID: 1012342635391289988}
   - component: {fileID: 8393836635341463854}
   - component: {fileID: 2154062754766394215}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Axe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -621,7 +621,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1282599941528151523}
   - component: {fileID: 489214900652053275}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GFX Placing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
