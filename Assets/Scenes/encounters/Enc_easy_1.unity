@@ -688,6 +688,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 845084525780875389, guid: ed89452f1ab801f468da4e20c52ef2e4, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 845084525780875389, guid: ed89452f1ab801f468da4e20c52ef2e4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 845084525780875389, guid: ed89452f1ab801f468da4e20c52ef2e4, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4911185393060593023, guid: ed89452f1ab801f468da4e20c52ef2e4, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4911185393060593023, guid: ed89452f1ab801f468da4e20c52ef2e4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6322951725486865226, guid: ed89452f1ab801f468da4e20c52ef2e4, type: 3}
       propertyPath: m_Name
       value: CardPanel
@@ -1657,6 +1677,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 369524472}
     m_Modifications:
+    - target: {fileID: 6022634542882166318, guid: e28801c904ecd8d4a8ebcaae5f8298be, type: 3}
+      propertyPath: angle
+      value: -45
+      objectReference: {fileID: 0}
     - target: {fileID: 6022634543106360163, guid: e28801c904ecd8d4a8ebcaae5f8298be, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1704,6 +1728,10 @@ PrefabInstance:
     - target: {fileID: 6022634543106360167, guid: e28801c904ecd8d4a8ebcaae5f8298be, type: 3}
       propertyPath: m_Name
       value: EnemyBasic
+      objectReference: {fileID: 0}
+    - target: {fileID: 6022634544103284245, guid: e28801c904ecd8d4a8ebcaae5f8298be, type: 3}
+      propertyPath: angle
+      value: 26
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e28801c904ecd8d4a8ebcaae5f8298be, type: 3}

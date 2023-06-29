@@ -29,7 +29,10 @@ public class Teleporter : MonoBehaviour, Interactable
 
             foreach (var tp in AllTeleporters)
             {
-                tp.GetComponent<Collider2D>().enabled = true;
+                if (tp != null)
+                {
+                    tp.GetComponent<Collider2D>().enabled = true;
+                }
             }
             GetComponent<Collider2D>().enabled = false;
         }
