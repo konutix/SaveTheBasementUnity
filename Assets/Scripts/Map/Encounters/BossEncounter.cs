@@ -8,6 +8,6 @@ public class BossEncounter : Encounter
     public override void LaunchEncounter()
     {
         base.LaunchEncounter();
-        SceneManager.LoadScene("Boss");
+        SceneManager.LoadScene("Enc_boss");
     }
 }

@@ -10,7 +10,7 @@ public class SingleEnemyEncounter : Encounter
     public SingleEnemyEncounter()
     {
         //wiêksza liczba musi byæ o 1 wiêksza od numeru ostatniego poziomu tego typu
-        level = Random.Range(1, 3);
+        level = Random.Range(1, 4);
     }
 
     public override void LaunchEncounter()

@@ -510,14 +510,16 @@ MonoBehaviour:
   MinMapHeight: 8
   MaxMapHeight: 10
   MaxAdditionalRoads: 1
+  MinNodePositionVariance: {x: -0.1, y: -0.1}
+  MaxNodePositionVariance: {x: 0.1, y: 0.1}
   StartEncounterObject: {fileID: 3777019437030148375, guid: 81565852b57e0d84ba86a3c500dfb253, type: 3}
   SingleEnemyEncounterObject: {fileID: 3777019437030148375, guid: fe24814b8ad15494cb7f1209c4433b5d, type: 3}
   MultipleEnemyEncounterObject: {fileID: 3777019437030148375, guid: b88486178fd895a41af185f81f486dc6, type: 3}
   BossEncounterObject: {fileID: 3777019437030148375, guid: 98ea7d4fe8f5f9544b662a6108a852b1, type: 3}
   SingleEnemyMinFangs: 2
   SingleEnemyMaxFangs: 4
-  MultipleEnemyMinFangs: 2
-  MultipleEnemyMaxFangs: 4
+  MultipleEnemyMinFangs: 4
+  MultipleEnemyMaxFangs: 6
   UpgradeEncounterObject: {fileID: 3777019437030148375, guid: 0a1e28354012c414f91f7d706f568d13, type: 3}
   MinUpgradeNumber: 0
   MaxUpgradeNumber: 0
@@ -986,8 +988,8 @@ Canvas:
   m_GameObject: {fileID: 1825081577}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 1837282308}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -996,7 +998,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!224 &1825081581
 RectTransform:
@@ -1142,7 +1144,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: -34.31}
+  m_AnchoredPosition: {x: 0, y: -34.309998}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1889595483

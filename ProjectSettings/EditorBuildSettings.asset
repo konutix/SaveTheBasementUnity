@@ -59,4 +59,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BossWInScene.unity
     guid: c1b11a232add3a243a503671e97f757a
+  - enabled: 1
+    path: Assets/Scenes/encounters/Enc_boss.unity
+    guid: 53c798bc0d08b264b812dc785bfd035d
+  - enabled: 1
+    path: Assets/Scenes/encounters/Enc_easy_3.unity
+    guid: 450732f899e82074d8073da030d195d3
+  - enabled: 1
+    path: Assets/Scenes/encounters/Enc_med_3.unity
+    guid: f796269c54018c0468f48f7058d5d042
   m_configObjects: {}

@@ -9,7 +9,8 @@ public class Encounter
     public List<Encounter> previousEncounters;
     public MapNode node;
     public int vampireFangsReward;
-    // Start is called before the first frame update
+    public Vector2 positionVariance;
+
     public Encounter()
     {
         encounterState = EncounterStateEnum.Incompleted;
