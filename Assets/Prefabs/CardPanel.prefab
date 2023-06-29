@@ -38,8 +38,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -202, y: 124.1}
-  m_SizeDelta: {x: 100, y: 40}
+  m_AnchoredPosition: {x: -178, y: 107}
+  m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 1, y: 1}
 --- !u!222 &112818775445683123
 CanvasRenderer:
@@ -999,7 +999,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 50
+  m_SortingOrder: 20
   m_TargetDisplay: 0
 --- !u!114 &7454825500300193235
 MonoBehaviour:
@@ -3652,7 +3652,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2418430663471775243, guid: 9f480d89562e44a42a7902024f9a9962, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000091552734
+      value: 0.000030517578
       objectReference: {fileID: 0}
     - target: {fileID: 2418430663712764842, guid: 9f480d89562e44a42a7902024f9a9962, type: 3}
       propertyPath: m_Pivot.x
@@ -3756,7 +3756,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2418430664351518490, guid: 9f480d89562e44a42a7902024f9a9962, type: 3}
       propertyPath: m_Value
-      value: 1.0476191
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2418430664386901337, guid: 9f480d89562e44a42a7902024f9a9962, type: 3}
       propertyPath: m_AnchorMax.x

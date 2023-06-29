@@ -16,7 +16,7 @@ MonoBehaviour:
   cardName: Angry Shield
   description: Place a shield that reflects 1 projectile and multiplies its damage
   type: Structure
-  art: {fileID: 21300000, guid: baf9546af73c16d43ba02b054252bbe0, type: 3}
+  art: {fileID: 21300000, guid: 96c82c661e2f5db49ba9354b64c440b9, type: 3}
   manaCost: 3
   effectPrefab: {fileID: 8309556347256184467, guid: ae2f67b9d250ff043aac86fed7ba5ca6, type: 3}
   minShopCost: 4

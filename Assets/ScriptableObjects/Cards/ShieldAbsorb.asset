@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 4
   cardName: Absorb Shield
-  description: Place a  shield that absorbs up to 2 projectiles
+  description: Place a  shield that absorbs projectiles
   type: Structure
   art: {fileID: 21300000, guid: b98c447e316ddb14883759a21de63c1a, type: 3}
   manaCost: 2

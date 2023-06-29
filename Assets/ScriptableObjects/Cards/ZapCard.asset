@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 8
   cardName: Zap
-  description: Zap description.
+  description: Persistant projectile that sticks to walls.   On landing it sends
+    sparks to all other zappers dealing 5 dmg each
   type: Weapon
   art: {fileID: 21300000, guid: 1bc9ccdcaecd2b145b83233d40215dda, type: 3}
   manaCost: 2
