@@ -39,4 +39,22 @@ public class Teleporter : MonoBehaviour, Interactable
 
         Destroy(projectile.gameObject);        
     }
+
+    private void OnMouseEnter()
+    {
+        var description = GetComponent<ObjectDescription>();
+        if (description != null)
+        {
+            description.Display(true);
+        }
+    }
+
+    private void OnMouseExit() 
+    {
+        var description = GetComponent<ObjectDescription>();
+        if (description != null)
+        {
+            description.Display(false);
+        }
+    }
 }
