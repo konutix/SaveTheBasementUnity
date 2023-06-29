@@ -67,7 +67,7 @@ public class EnemyBasic : MonoBehaviour
             currentProjectile.owner = battleStats;
 
             var projectile = currentProjectile.GetComponent<Projectile>();
-            if (projectile)
+            if (projectile && !currentProjectile.GetComponent<SplittingProjectile>())
             {
                 projectile.simulatedBouncesCount = 3;
             }
