@@ -148,6 +148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonText: {fileID: 3586916193232738161}
+  activeColor: {r: 0.9245283, g: 0.8534263, b: 0.763172, a: 1}
+  inactiveColor: {r: 0.7075472, g: 0.41405097, b: 0.29036137, a: 1}
 --- !u!1 &666424557651394254
 GameObject:
   m_ObjectHideFlags: 0
