@@ -378,7 +378,7 @@ MonoBehaviour:
   SummaryText: {fileID: 3731942237158683127}
   RewardText: {fileID: 24156629594992366}
   Summary: Boss
-  Reward: 'Rewards: Satisfaction'
+  Reward: 'Reward: Satisfaction'
 --- !u!58 &7801592677802711910
 CircleCollider2D:
   m_ObjectHideFlags: 0

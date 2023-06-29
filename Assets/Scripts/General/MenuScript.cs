@@ -26,7 +26,7 @@ public class MenuScript : MonoBehaviour
         RunState.currentMap = null;
         RunState.currentEncounter = null;
         RunState.deck = deck.deck;
-        RunState.vampireFangs = 10;
+        RunState.vampireFangs = 0;
         RunState.shopRewards = null;
 
         SceneManager.LoadScene(sceneName);

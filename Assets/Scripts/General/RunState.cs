@@ -39,7 +39,7 @@ public static class RunState
     public static List<int> deck;
     public static int cardsDrawn;
     
-    public static int vampireFangs = 10;
+    public static int vampireFangs = 0;
 
     public static Encounter[,] currentMap;
     public static Encounter currentEncounter;
@@ -55,7 +55,7 @@ public static class RunState
         Mana = 0;
         deck = null;
         cardsDrawn = 0;
-        vampireFangs = 10;
+        vampireFangs = 0;
         currentMap = null;
         currentEncounter = null;
         shopRewards = null;
