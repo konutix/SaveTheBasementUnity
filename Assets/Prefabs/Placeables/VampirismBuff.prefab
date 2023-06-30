@@ -240,6 +240,7 @@ MonoBehaviour:
   gfxMain: {fileID: 210434932117416527}
   gfxPlacing: {fileID: 1182011890206887560}
   lifeTime: 5
+  canBeRotated: 0
   direction: {x: 0, y: 0, z: 0}
   isTriggerByDefault: 0
   isMouseOver: 0

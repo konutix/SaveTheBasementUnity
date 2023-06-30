@@ -100,7 +100,7 @@ public class ProjectileSpawner : MonoBehaviour
             currentObject.OnAiming(mousePos);
             currentObject.CalculateTrajectory();
 
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonDown(0) || !currentObject.canBeRotated)
             {
                 OnStoppedPlacing();
             }

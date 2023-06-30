@@ -8,6 +8,7 @@ public class Placeable : MonoBehaviour
     public GameObject gfxPlacing;
 
     public float lifeTime = 5.0f;
+    public bool canBeRotated = true;
 
     [HideInInspector]
     public Vector3 direction;
