@@ -16,7 +16,7 @@ public class SplittingProjectile : MonoBehaviour
         Vector2 velocity = GetComponent<Rigidbody2D>().velocity.normalized;
         Vector2 normal = collision.GetContact(0).normal;
 
-        Vector2 ref0 = Vector2.Reflect(velocity, normal);
+        Vector2 ref0 = velocity; // should be already reflected by physics engine //Vector2.Reflect(velocity, normal);
         Vector2 ref1 = Quaternion.AngleAxis(-angle, Vector3.forward) * ref0;
         Vector2 ref2 = Quaternion.AngleAxis( angle, Vector3.forward) * ref0;
 
