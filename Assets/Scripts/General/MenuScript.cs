@@ -28,6 +28,7 @@ public class MenuScript : MonoBehaviour
         RunState.deck = deck.deck;
         RunState.vampireFangs = 0;
         RunState.shopRewards = null;
+        RunState.currentPlayerHealth = RunState.maxPlayerHealth;
 
         SceneManager.LoadScene(sceneName);
     }

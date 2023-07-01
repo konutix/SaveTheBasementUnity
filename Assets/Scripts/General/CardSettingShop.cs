@@ -16,8 +16,15 @@ public class CardSettingShop : CardSetting
         shopCost.text = cardCost.ToString();
         RunState.shopRewards.Add(new ShopReward(cardID, cardCost));
     }
-
     public void SetupCard(Card card, int cardCost)
+    {
+        base.SetupCard(card);
+        this.cardCost = cardCost;
+        shopCost.text = this.cardCost.ToString();
+        RunState.shopRewards.Add(new ShopReward(cardID, cardCost));
+    }
+
+    public void SetupExitstingCard(Card card, int cardCost)
     {
         base.SetupCard(card);
         this.cardCost = cardCost;
