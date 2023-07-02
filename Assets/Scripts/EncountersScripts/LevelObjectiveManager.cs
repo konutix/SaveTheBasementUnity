@@ -28,7 +28,7 @@ public class LevelObjectiveManager : MonoBehaviour
         objectivesCount -= 1;
         if (objectivesCount <= 0 && !alreadyCompleted)
         {
-            OnAllObjectivesCompleted();
+            Invoke("OnAllObjectivesCompleted", 0.1f);
         }
     }
 

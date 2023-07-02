@@ -1016,6 +1016,54 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 845084525780875389, guid: ed89452f1ab801f468da4e20c52ef2e4, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 845084525780875389, guid: ed89452f1ab801f468da4e20c52ef2e4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 845084525780875389, guid: ed89452f1ab801f468da4e20c52ef2e4, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 845084526995099241, guid: ed89452f1ab801f468da4e20c52ef2e4, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 845084526995099241, guid: ed89452f1ab801f468da4e20c52ef2e4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 845084526995099241, guid: ed89452f1ab801f468da4e20c52ef2e4, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4911185392631445037, guid: ed89452f1ab801f468da4e20c52ef2e4, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.000030517578
+      objectReference: {fileID: 0}
+    - target: {fileID: 4911185393060593023, guid: ed89452f1ab801f468da4e20c52ef2e4, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4911185393060593023, guid: ed89452f1ab801f468da4e20c52ef2e4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4911185394002250603, guid: ed89452f1ab801f468da4e20c52ef2e4, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4911185394002250603, guid: ed89452f1ab801f468da4e20c52ef2e4, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4911185394002250603, guid: ed89452f1ab801f468da4e20c52ef2e4, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6322951725486865226, guid: ed89452f1ab801f468da4e20c52ef2e4, type: 3}
       propertyPath: m_Name
       value: CardPanel

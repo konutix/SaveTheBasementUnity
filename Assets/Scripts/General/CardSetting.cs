@@ -32,4 +32,19 @@ public class CardSetting : MonoBehaviour
     {
         canvasGroup.alpha = alpha;
     }
+
+    public enum ManaType {
+        Normal, TooExpensive, //CostReduced
+    }
+
+    public void SetManaType(ManaType type)
+    {
+        mana.color = type switch {
+            
+            ManaType.Normal       => Color.white,
+            ManaType.TooExpensive => Color.red,
+
+            _ => Color.white
+        };
+    }
 }

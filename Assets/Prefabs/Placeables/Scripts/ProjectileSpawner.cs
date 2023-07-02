@@ -197,6 +197,7 @@ public class ProjectileSpawner : MonoBehaviour
                 currentArm = null;
             }
 
+            currentObject.OnRemove();
             objectsToLaunch.Remove(currentObject);
             Destroy(currentObject.gameObject);
             currentObject = null;

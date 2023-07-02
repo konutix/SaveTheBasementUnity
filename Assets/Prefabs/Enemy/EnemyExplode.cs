@@ -10,6 +10,7 @@ public class EnemyExplode : MonoBehaviour
 
     [Space]
     [SerializeField] TMP_Text turnsRemainingText;
+    public ParticleSystem explosionParticles;
 
 
     BattleStats battleStats;
@@ -19,16 +20,9 @@ public class EnemyExplode : MonoBehaviour
     {
         battleStats = GetComponent<BattleStats>();
 
-        FindObjectOfType<ProjectileSpawner>().launchEvent += OnLaunch;
-        
-        foreach (var stats in FindObjectsOfType<BattleStats>())
-        {
-            if (!stats.GetComponent<EnemyBasic>() && !stats.GetComponent<EnemyExplode>())
-            {
-                player = stats;
-                break;
-            }
-        }
+        var projectileSpawner = FindObjectOfType<ProjectileSpawner>();
+        projectileSpawner.launchEvent += OnLaunch;
+        player = projectileSpawner.player;
 
         turnsRemainingText.transform.parent.gameObject.SetActive(true);
         turnsRemainingText.text = turnsToExplode.ToString();
@@ -42,12 +36,17 @@ public class EnemyExplode : MonoBehaviour
 
         if (turnsToExplode < 0)
         {
+            Instantiate(explosionParticles, transform.position, Quaternion.identity);
+            var sprite = GetComponentInChildren<SpriteRenderer>();
+            if (sprite) sprite.enabled = false;
+
             player.TakeDamage(explodeDamage);
             battleStats.TakeDamage(9999);
         }
         else
         {
             turnsRemainingText.text = turnsToExplode.ToString();
+            turnsRemainingText.GetComponent<Animator>().SetTrigger("DoScale");
         }
     }
 

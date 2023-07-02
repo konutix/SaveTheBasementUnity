@@ -52,7 +52,7 @@ public static class RunState
     {
         maxPlayerHealth = 70;
         currentPlayerHealth = 70;
-        Mana = 0;
+        Mana = 4;
         deck = null;
         cardsDrawn = 0;
         vampireFangs = 0;

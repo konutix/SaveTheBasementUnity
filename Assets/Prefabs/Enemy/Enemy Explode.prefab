@@ -84,6 +84,7 @@ MonoBehaviour:
   explodeDamage: 20
   turnsToExplode: 3
   turnsRemainingText: {fileID: 3876642543761803876}
+  explosionParticles: {fileID: 44370768188506870, guid: 3470a8614d00973459f0dac55036423e, type: 3}
 --- !u!114 &908280589399205974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -105,6 +106,7 @@ MonoBehaviour:
   vulnerable: 0
   vulnerableMultiplier: 1.5
   vampirism: 0
+  canBeTeleported: 0
   gettingDamageParticles: {fileID: 7483732591726429019}
 --- !u!61 &908280589399205973
 BoxCollider2D:

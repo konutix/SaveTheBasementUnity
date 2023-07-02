@@ -60,7 +60,7 @@ public class CardPanelScript : MonoBehaviour
     [Space]
 
     //mana
-    public int maxMana = 4;
+    public int maxMana = RunState.Mana;
     public int currentMana = 0;
 
     //default draw amount
@@ -142,7 +142,7 @@ public class CardPanelScript : MonoBehaviour
 
         simulationTimer = 0.0f;
 
-        currentMana = maxMana;
+        currentMana = RunState.Mana;
 
         currentDeckPanel.GetComponent<Canvas>().worldCamera = Camera.main;
         discardedDeckPanel.GetComponent<Canvas>().worldCamera = Camera.main;
@@ -185,6 +185,15 @@ public class CardPanelScript : MonoBehaviour
         int i = 0;
         foreach(HandCard cd in cards)
         {
+            if (!cd.played && cd.manaCost > currentMana)
+            {
+                cd.cardInstance.GetComponent<CardSetting>().SetManaType(CardSetting.ManaType.TooExpensive);
+            }
+            else
+            {
+                cd.cardInstance.GetComponent<CardSetting>().SetManaType(CardSetting.ManaType.Normal);
+            }
+
             //default
             Vector3 cardPlace = new Vector3(0,0,0);
 
