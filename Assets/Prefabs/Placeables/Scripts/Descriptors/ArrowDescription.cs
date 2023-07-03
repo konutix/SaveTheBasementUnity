@@ -25,7 +25,7 @@ public class ArrowDescription : MonoBehaviour, ObjectDescription
     {
         if (display)
         {
-            placeableInfo.ShowInfo(GetDescription());
+            placeableInfo.ShowInfo(GetDescription(), transform.position);
         }
         else
         {

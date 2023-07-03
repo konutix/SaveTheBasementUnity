@@ -170,6 +170,11 @@ public class TrajectoryManager : MonoBehaviour
         
         go = Instantiate(shield, shield.transform.position, shield.transform.rotation).gameObject;
         go.GetComponentInChildren<Collider2D>().isTrigger = false;
+        foreach (var sr in go.GetComponentsInChildren<SpriteRenderer>())
+        {
+            sr.enabled = false;
+        }
+        
         dynamicObjects.Add(shield.gameObject, go);
         SceneManager.MoveGameObjectToScene(go, simulationScene);
     }

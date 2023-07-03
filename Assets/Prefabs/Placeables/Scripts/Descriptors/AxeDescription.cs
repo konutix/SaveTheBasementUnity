@@ -28,7 +28,7 @@ public class AxeDescription : MonoBehaviour, ObjectDescription
     {
         if (display)
         {
-            placeableInfo.ShowInfo(GetDescription());
+            placeableInfo.ShowInfo(GetDescription(), transform.position);
         }
         else
         {

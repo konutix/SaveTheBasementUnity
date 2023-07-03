@@ -30,19 +30,19 @@ public class MapNode : MonoBehaviour
         {
             case EncounterStateEnum.Completed:
                 CompletedOutlineRenderer.enabled = true;
-                ReadyOutlineRenderer.enabled = false;
+                ReadyOutlineRenderer.gameObject.SetActive(false);
                 break;
             case EncounterStateEnum.Failed:
                 CompletedOutlineRenderer.enabled = true;
-                ReadyOutlineRenderer.enabled = false;
+                ReadyOutlineRenderer.gameObject.SetActive(false);
                 break;
             case EncounterStateEnum.Ready:
                 CompletedOutlineRenderer.enabled = false;
-                ReadyOutlineRenderer.enabled = true;
+                ReadyOutlineRenderer.gameObject.SetActive(true);
                 break;
             case EncounterStateEnum.Incompleted:
                 CompletedOutlineRenderer.enabled = false;
-                ReadyOutlineRenderer.enabled = false;
+                ReadyOutlineRenderer.gameObject.SetActive(false);
                 break;
 
         };

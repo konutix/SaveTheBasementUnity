@@ -25,7 +25,7 @@ public class RicochetDescription : MonoBehaviour, ObjectDescription
     {
         if (display)
         {
-            placeableInfo.ShowInfo(GetDescription());
+            placeableInfo.ShowInfo(GetDescription(), transform.position);
         }
         else
         {
