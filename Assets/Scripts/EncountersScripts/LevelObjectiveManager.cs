@@ -23,6 +23,15 @@ public class LevelObjectiveManager : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        // cheat code
+        if (Input.GetKeyDown("0"))
+        {
+            OnAllObjectivesCompleted();
+        }
+    }
+
     public void OnObjectiveCompleted()
     {
         objectivesCount -= 1;

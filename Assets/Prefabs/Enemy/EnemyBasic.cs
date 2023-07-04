@@ -74,6 +74,7 @@ public class EnemyBasic : MonoBehaviour
             
             currentProjectile.OnAiming(shootAngle + Random.Range(-randomAngleSpread, randomAngleSpread));
             currentProjectile.CalculateTrajectory();
+            currentProjectile.OnStoppedPlacing();
             FindObjectOfType<ProjectileSpawner>().AddPlaceable(currentProjectile);
         }
     }

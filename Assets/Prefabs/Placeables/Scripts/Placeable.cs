@@ -49,6 +49,17 @@ public class Placeable : MonoBehaviour
         {
             col.isTrigger = true;
         }
+
+        if (TryGetComponent<LineRenderer>(out var lineRenderer))
+        {
+            var col1 = lineRenderer.startColor;
+            var col2 = lineRenderer.endColor;
+            col1.a = 1.0f;
+            col2.a = 1.0f;
+            
+            lineRenderer.startColor = col1;
+            lineRenderer.endColor = col2;
+        }
     }
 
     public void OnStoppedPlacing()
@@ -60,6 +71,17 @@ public class Placeable : MonoBehaviour
         if (col)
         {
             col.isTrigger = isTriggerByDefault;
+        }
+
+        if (TryGetComponent<LineRenderer>(out var lineRenderer))
+        {
+            var col1 = lineRenderer.startColor;
+            var col2 = lineRenderer.endColor;
+            col1.a = 0.3f;
+            col2.a = 0.3f;
+            
+            lineRenderer.startColor = col1;
+            lineRenderer.endColor = col2;
         }
 
         OnMouseExit();
@@ -160,6 +182,17 @@ public class Placeable : MonoBehaviour
         {
             description.Display(true);
         }
+
+        if (TryGetComponent<LineRenderer>(out var lineRenderer))
+        {
+            var col1 = lineRenderer.startColor;
+            var col2 = lineRenderer.endColor;
+            col1.a = 1.0f;
+            col2.a = 1.0f;
+            
+            lineRenderer.startColor = col1;
+            lineRenderer.endColor = col2;
+        }
     }
 
     private void OnMouseOver() 
@@ -182,8 +215,21 @@ public class Placeable : MonoBehaviour
         {
             description.Display(false);
         }
+
+        if (!projectileSpawner.CanLaunch()) return;
+
+        if (TryGetComponent<LineRenderer>(out var lineRenderer))
+        {
+            var col1 = lineRenderer.startColor;
+            var col2 = lineRenderer.endColor;
+            col1.a = 0.3f;
+            col2.a = 0.3f;
+            
+            lineRenderer.startColor = col1;
+            lineRenderer.endColor = col2;
+        }
         
-        if(!canBePickedUp || !projectileSpawner.CanLaunch()) return;
+        if (!canBePickedUp) return;
 
         isMouseOver = false;
 
